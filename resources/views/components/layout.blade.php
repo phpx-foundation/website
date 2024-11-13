@@ -67,5 +67,8 @@
 	@endisset
 
 </div>
+
+<!-- Host: {{ config('app.hostname') }} -->
+
 </body>
 </html>
