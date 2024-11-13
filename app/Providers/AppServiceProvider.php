@@ -35,11 +35,15 @@ class AppServiceProvider extends ServiceProvider
 	protected function sharePhpxNetwork()
 	{
 		$network = Cache::remember('phpx-network', now()->addWeek(), function() {
-			return Group::query()
-				->select('domain', 'name', 'region')
-				->get()
-				->mapWithKeys(fn(Group $group) => [$group->domain => $group->label()])
-				->toArray();
+			try {
+				return Group::query()
+					->select('domain', 'name', 'region')
+					->get()
+					->mapWithKeys(fn(Group $group) => [$group->domain => $group->label()])
+					->toArray();
+			} catch (Throwable) {
+				return [];
+			}
 		});
 		
 		$external = Cache::remember('phpx-network-external', now()->addWeek(), function() {
