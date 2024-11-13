@@ -24,6 +24,19 @@ class Meetup extends Model implements Htmlable
 		'ends_at' => 'datetime',
 	];
 	
+	protected $visible = [
+		'id',
+		'group',
+		'description',
+		'location',
+		'capacity',
+		'rsvp_url',
+		'date_day',
+		'date_range',
+		'starts_at',
+		'ends_at',
+	];
+	
 	protected $appends = [
 		'rsvp_url',
 		'date_day',

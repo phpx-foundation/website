@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use App\Actions\Concerns\RoutesScopedToGroup;
 use App\Actions\Emails\SendRsvpReceipt;
 use App\Models\Meetup;
 use App\Models\User;
@@ -14,6 +15,7 @@ use Lorisleiva\Actions\Concerns\AsAction;
 class RsvpToMeetup
 {
 	use AsAction;
+	use RoutesScopedToGroup;
 	
 	public static function routes(Router $router): void
 	{

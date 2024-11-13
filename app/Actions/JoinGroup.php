@@ -2,6 +2,7 @@
 
 namespace App\Actions;
 
+use App\Actions\Concerns\RoutesScopedToGroup;
 use App\Models\Group;
 use App\Models\User;
 use Illuminate\Console\Command;
@@ -16,6 +17,7 @@ use Lorisleiva\Actions\Concerns\AsAction;
 class JoinGroup
 {
 	use AsAction;
+	use RoutesScopedToGroup;
 	
 	public static function routes(Router $router): void
 	{
@@ -36,7 +38,7 @@ class JoinGroup
 		$user->groups()->syncWithoutDetaching([$group->getKey() => ['is_subscribed' => $subscribe]]);
 		
 		$user->update([
-			'current_group_id' => $group->getKey(), 
+			'current_group_id' => $group->getKey(),
 			'is_potential_speaker' => $speaker,
 		]);
 		

@@ -2,20 +2,18 @@
 
 namespace App\Actions;
 
-use App\Actions\Emails\SendRsvpReceipt;
+use App\Actions\Concerns\RoutesScopedToGroup;
 use App\Models\Group;
 use App\Models\Meetup;
-use App\Models\User;
-use Illuminate\Console\Command;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Session;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 class GetNextMeetup
 {
 	use AsAction;
+	use RoutesScopedToGroup;
 	
 	public static function routes(Router $router): void
 	{

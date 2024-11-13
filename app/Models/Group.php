@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Routing\UrlGenerator;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Revolution\Bluesky\Contracts\Factory;
 use Revolution\Bluesky\Facades\Bluesky;
@@ -20,6 +21,16 @@ class Group extends Model
 	use SoftDeletes;
 	use HasFactory;
 	use HasSnowflakes;
+	
+	protected $visible = [
+		'id',
+		'domain',
+		'name',
+		'region',
+		'description',
+		'timezone',
+		'created_at',
+	];
 	
 	protected function casts(): array
 	{
@@ -36,11 +47,19 @@ class Group extends Model
 	
 	public static function findByDomain(string $domain): ?static
 	{
+		if (App::isLocal()) {
+			$domain = str($domain)->replaceEnd('.test', '.com')->toString();
+		}
+		
 		$container = Container::getInstance();
 		$id = "group:{$domain}";
 		
 		if (! $container->has($id)) {
-			$container->instance($id, Group::firstWhere('domain', $domain));
+			if (! $group = Group::firstWhere('domain', $domain)) {
+				return null;
+			}
+			
+			$container->instance($id, $group);
 		}
 		
 		return $container->get($id);
