@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use App\Models\ExternalGroup;
 use App\Models\Group;
+use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\App;
@@ -34,31 +35,33 @@ class AppServiceProvider extends ServiceProvider
 	
 	protected function sharePhpxNetwork()
 	{
-		$network = Cache::remember('phpx-network', now()->addWeek(), function() {
-			try {
-				return Group::query()
-					->select('domain', 'name', 'region')
-					->get()
-					->mapWithKeys(fn(Group $group) => [$group->domain => $group->label()])
-					->toArray();
-			} catch (Throwable) {
-				return [];
-			}
+		$this->callAfterResolving(Factory::class, function(Factory $view) {
+			$network = Cache::remember('phpx-network', now()->addWeek(), function() {
+				try {
+					return Group::query()
+						->select('domain', 'name', 'region')
+						->get()
+						->mapWithKeys(fn(Group $group) => [$group->domain => $group->label()])
+						->toArray();
+				} catch (Throwable) {
+					return [];
+				}
+			});
+			
+			$external = Cache::remember('phpx-network-external', now()->addWeek(), function() {
+				try {
+					return ExternalGroup::query()
+						->select('domain', 'name', 'region')
+						->get()
+						->mapWithKeys(fn(ExternalGroup $g) => [$g->domain => $g->label()])
+						->toArray();
+				} catch (Throwable) {
+					return [];
+				}
+			});
+			
+			$view->share('phpx_network', $network);
+			$view->share('phpx_external', $external);
 		});
-		
-		$external = Cache::remember('phpx-network-external', now()->addWeek(), function() {
-			try {
-				return ExternalGroup::query()
-					->select('domain', 'name', 'region')
-					->get()
-					->mapWithKeys(fn(ExternalGroup $g) => [$g->domain => $g->label()])
-					->toArray();
-			} catch (Throwable) {
-				return [];
-			}
-		});
-		
-		View::share('phpx_network', $network);
-		View::share('phpx_external', $external);
 	}
 }
