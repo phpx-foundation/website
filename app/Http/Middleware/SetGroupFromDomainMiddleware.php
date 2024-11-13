@@ -2,16 +2,14 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\RootDomains;
 use App\Models\Group;
 use Closure;
 use Illuminate\Container\Container;
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Context;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Facades\View;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -19,6 +17,10 @@ class SetGroupFromDomainMiddleware
 {
 	public function handle(Request $request, Closure $next)
 	{
+		if ($this->isRootDomain($request)) {
+			return $next($request);
+		}
+		
 		if (! $group = $this->group($request)) {
 			throw new NotFoundHttpException();
 		}
@@ -51,5 +53,12 @@ class SetGroupFromDomainMiddleware
 		return $attributes
 			? (new Group())->newFromBuilder($attributes)
 			: null;
+	}
+	
+	protected function isRootDomain(Request $request): bool
+	{
+		return collect(RootDomains::cases())
+			->map(fn(RootDomains $case) => $case->value)
+			->contains($request->host());
 	}
 }
