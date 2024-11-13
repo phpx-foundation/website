@@ -1,7 +1,7 @@
 <x-layout class="justify-between">
 	<div class="flex flex-col gap-4">
 		<h1 class="font-mono font-semibold text-white text-4xl sm:text-6xl md:text-7xl lg:text-8xl">
-			PHP<span x-data x-typed="['{{ str($group->name)->after('PHP') }}']"></span>
+			PHP<span x-data x-typed="['×{{ $group->label() }}']"></span>
 		</h1>
 		<h2 class="font-semibold">
 			A bi-monthly<span x-data x-typed.cursorless.delay.3000="['(ish)']"></span> meetup for PHP artisans.
