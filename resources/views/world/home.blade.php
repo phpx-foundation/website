@@ -20,7 +20,7 @@
 <div {{ $attributes->merge(['class' => 'flex w-full flex-col bg-dots']) }}>
 	
 	{{-- Content --}}
-	<div class="w-full max-w-4xl h-full mx-auto flex flex-col items-center justify-center px-4 py-8">
+	<div class="w-full max-w-4xl mx-auto flex flex-col items-start justify-center px-4 py-8">
 		<x-phpx-dropdown />
 	</div>
 	
