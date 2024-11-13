@@ -1,10 +1,14 @@
 @props(['footer' => null, 'title' => null, 'og' => null])
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full antialiased bg-black text-white/50">
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>{{ $title ? "{$title} - {$group->name}" : $group->name }}</title>
+	@if(isset($group))
+		<title>{{ $title ? "{$title} - {$group->name}" : $group->name }}</title>
+	@elseif(isset($title))
+		<title>{{ $title }}</title>
+	@endif
 	<link rel="preconnect" href="https://fonts.bunny.net">
 	<link href="https://fonts.bunny.net/css?family=fira-code:300,400,500,600,700" rel="stylesheet" />
 	<style>
@@ -18,20 +22,24 @@
 	@isset($og)
 		{{ $og }}
 	@else
-	<meta property="og:url" content="{{ url()->current() }}" />
-	<meta property="og:type" content="website" />
-	<meta property="og:title" content="{{ $title ? "{$title} - {$group->name}" : $group->name }}" />
-	<meta property="twitter:domain" content="{{ parse_url(url()->current(), PHP_URL_HOST) }}" />
-	@if($group->description)
-		<meta name="description" content="{{ $group->description }}" />
-		<meta property="og:description" content="{{ $group->description }}" />
-	@endif
-	@if($group->og_asset)
-		<meta property="og:image" content="{{ asset("og/{$group->og_asset}") }}" />
-	@endif
+		<meta property="og:url" content="{{ url()->current() }}" />
+		<meta property="twitter:domain" content="{{ parse_url(url()->current(), PHP_URL_HOST) }}" />
+		<meta property="og:type" content="website" />
+		@if(isset($group))
+			<meta property="og:title" content="{{ $title ? "{$title} - {$group->name}" : $group->name }}" />
+			@if($group->description)
+				<meta name="description" content="{{ $group->description }}" />
+				<meta property="og:description" content="{{ $group->description }}" />
+			@endif
+			@if($group->og_asset)
+				<meta property="og:image" content="{{ asset("og/{$group->og_asset}") }}" />
+			@endif
+		@endif
 	@endisset
 	
-	<script defer data-domain="{{ $group->domain }}" src="https://plausible.io/js/script.js"></script>
+	@if(isset($group))
+		<script defer data-domain="{{ $group->domain }}" src="https://plausible.io/js/script.js"></script>
+	@endif
 </head>
 <body class="flex min-h-full font-sans">
 <div {{ $attributes->merge(['class' => 'flex w-full flex-col bg-dots']) }}>

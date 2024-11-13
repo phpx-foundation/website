@@ -1,25 +1,18 @@
-@props(['name', 'label', 'type' => 'text', 'id' => null, 'default' => null])
+@props(['name', 'label', 'id' => null])
 
 <div>
 	<label class="block font-mono font-bold text-white" for="{{ $name }}">
-		{{ $label ?? $name }}
+		{{ $label }}
 	</label>
 	
-	@if('textarea' === $type)
-		<textarea {{ $attributes->merge([
-			'class' => 'font-mono text-black p-2 font-semibold w-full',
-			'name' => $name,
-			'id' => $id ?? $name,
-		]) }}>{{ old($name, $default) }}</textarea>
-	@else
-		<input {{ $attributes->merge([
-			'class' => 'font-mono text-black p-2 font-semibold w-full',
-			'type' => $type,
-			'name' => $name,
-			'id' => $id ?? $name,
-			'value' => old($name, $default),
-		]) }} />
-	@endif
+	<select {{ $attributes->merge([
+	'class' => 'font-mono text-black p-2 font-semibold w-full',
+	'type' => 'text',
+	'name' => $name,
+	'id' => $id ?? $name,
+]) }}>
+		{{ $slot }}
+	</select>
 	
 	@error($name)
 	<div class="bg-red-50 mt-1 mb-3 p-2 border-l-8 border-red-400 font-mono font-bold w-full flex items-center gap-2 transform text-red-600">
