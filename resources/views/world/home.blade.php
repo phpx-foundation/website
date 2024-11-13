@@ -15,6 +15,12 @@
 	</style>
 	@vite('resources/css/app.css')
 	@vite('resources/js/app.js')
+	
+	<meta property="og:url" content="{{ url()->current() }}" />
+	<meta property="og:type" content="website" />
+	<meta property="og:title" content="PHP×" />
+	<meta property="og:image" content="{{ asset('world/og.jpg') }}" />
+	
 </head>
 <body class="flex min-h-full font-sans">
 <div {{ $attributes->merge(['class' => 'flex w-full flex-col bg-dots']) }}>

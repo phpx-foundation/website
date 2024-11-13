@@ -21,19 +21,13 @@
 	<meta property="og:url" content="{{ url()->current() }}" />
 	<meta property="og:type" content="website" />
 	<meta property="og:title" content="{{ $title ? "{$title} - {$group->name}" : $group->name }}" />
-	<meta name="twitter:card" content="summary_large_image" />
 	<meta property="twitter:domain" content="{{ parse_url(url()->current(), PHP_URL_HOST) }}" />
-	<meta property="twitter:url" content="{{ url()->current() }}" />
-	<meta name="twitter:title" content="{{ $title ? "{$title} - {$group->name}" : $group->name }}" />
-	<meta name="twitter:creator" content="{{ str($group->twitter_url)->after('twitter.com/')->prepend('@') }}" />
 	@if($group->description)
 		<meta name="description" content="{{ $group->description }}" />
 		<meta property="og:description" content="{{ $group->description }}" />
-		<meta name="twitter:description" content="{{ $group->description }}" />
 	@endif
 	@if($group->og_asset)
 		<meta property="og:image" content="{{ asset("og/{$group->og_asset}") }}" />
-		<meta name="twitter:image" content="{{ asset("og/{$group->og_asset}") }}" />
 	@endif
 	@endisset
 	
