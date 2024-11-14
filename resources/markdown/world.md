@@ -11,6 +11,26 @@ and he'll add you to the network (we can host your site or link out to an existi
 If you would like to contribute to this document, [pull requests are welcome](https://github.com/phpx-foundation/website/blob/main/resources/markdown/world.md).
 Not sure? [Join the PHP× Discord](https://discord.gg/wMy6Eeuwbu) first to discuss!
 
+## Adding a group to PHP×
+
+> [!note]
+> There has been a lot of interest in adding new groups to the site. It may take a couple
+> of days to get you added! (We're working on a better way to submit new groups through
+> the website—using Discord is a little less than ideal.)
+
+We're happy to add new groups to PHP× as long as there's an organizer ready to run the
+group (each group is run by a different organizer).
+
+### Existing Groups
+
+If you already have a group with an existing website, just [let Chris Morrell know on the Discord](https://discord.gg/wMy6Eeuwbu)
+and we'll add them to the list of external meetup sites (the bottom of the drop-down at the top of this page).
+
+### New Groups
+
+If you would like to start a new group, [get in touch with Chris Morrell on the Discord](https://discord.gg/wMy6Eeuwbu)
+and we'll walk you through getting set up. There has been a lot of interest, so it might take a few days!
+
 ## The PHP× site
 
 This site is a basic multi-tenant Laravel app. As of November 13, 2024, the following

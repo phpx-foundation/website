@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 export default {
 	content: [
+		"./app/View/**/*.php",
 		"./resources/**/*.php",
 		"./resources/**/*.js",
 		"./resources/**/*.jsx",
