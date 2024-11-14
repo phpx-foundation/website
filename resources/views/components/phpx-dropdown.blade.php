@@ -1,4 +1,4 @@
-<div class="flex justify-center">
+<div class="flex justify-center z-50">
 	<div
 		x-data="{
             open: false,
@@ -50,12 +50,12 @@
 			x-on:click.outside="close($refs.button)"
 			:id="$id('dropdown-button')"
 			style="display: none;"
-			class="absolute left-0 border-2 border-white mt-px w-52 bg-black text-white font-mono font-bold"
+			class="absolute left-0 border-2 border-white mt-px w-52 bg-black text-white font-mono font-bold shadow-sharp"
 		>
 			@foreach($phpx_network as $domain => $group_name)
 				<a
 					href="{{ $domain === $group->domain ? url('/') : "https://{$domain}/" }}"
-					class="border-t-2 border-white first-of-type:border-t-0 flex items-center justify-start gap-2 w-full px-4 py-2.5 text-right text-sm hover:bg-white hover:text-black"
+					class="border-t-2 border-white first-of-type:border-t-0 bg-black flex items-center justify-start gap-2 w-full px-4 py-2.5 text-right text-sm hover:bg-white hover:text-black"
 				>
 					<span class="flex-shrink basis-12"></span>
 					<span class="whitespace-nowrap">
@@ -86,7 +86,7 @@
 						href="{{ "https://{$domain}/" }}"
 						target="_blank"
 						@class([
-							'flex items-center justify-start gap-2 w-full px-4 py-2.5 text-right text-sm hover:bg-white hover:text-black',
+							'flex items-center justify-start gap-2 w-full px-4 py-2.5 text-right text-sm bg-black hover:bg-white hover:text-black',
 							'border-t-2 border-white' => ! $loop->first,
 						])
 					>
