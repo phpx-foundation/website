@@ -8,7 +8,7 @@ As of right now, this page serves as a scratchpad for meetup organizers. If you 
 to start a PHP× meetup, [get in touch with Chris Morrell](https://bsky.app/profile/cmorrell.com)
 and he'll add you to the network (we can host your site or link out to an existing site).
 
-If you would like to contribute to this document, [pull requests are welcome](https://github.com/phpx-foundation/website/blob/main/resources/views/rsvp.blade.php).
+If you would like to contribute to this document, [pull requests are welcome](https://github.com/phpx-foundation/website/blob/main/resources/markdown/world.md).
 Not sure? [Join the PHP× Discord](https://discord.gg/wMy6Eeuwbu) first to discuss!
 
 ## The PHP× site
