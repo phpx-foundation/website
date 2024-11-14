@@ -10,6 +10,7 @@ use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Date;
+use Illuminate\Support\Facades\Gate;
 use Lorisleiva\Actions\Concerns\AsAction;
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\select;
@@ -87,6 +88,8 @@ class CreateMeetup
 	
 	public function asController(Request $request)
 	{
+		Gate::authorize('create', Meetup::class);
+		
 		if ($request->isMethod('GET')) {
 			return view('meetups.create', [
 				'groups' => Group::all(),
@@ -108,7 +111,7 @@ class CreateMeetup
 			description: $request->input('description'),
 			capacity: $request->integer('capacity'),
 			starts_at: $request->date('starts_at'),
-			ends_at: $request->date('ends_at'), 
+			ends_at: $request->date('ends_at'),
 		);
 		
 		return redirect($meetup->rsvp_url);
