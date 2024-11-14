@@ -8,6 +8,15 @@
 		"og_asset": "philly.png",
 		"bsky_url": "https://bsky.app/profile/phpxphilly.com"
 	},
+	"phpxcebu.com": {
+		"external": false,
+		"name": "PHP×Cebu",
+		"region": "Cebu",
+		"description": "A Cebu-Philippines PHP meetup for artisans who want to grow and make friends.",
+		"timezone": "Asia/Manila",
+		"og_asset": null,
+		"bsky_url": "https://bsky.app/profile/phpxcebu.com"
+	},
 	"upstatephp.com": {
 		"external": true,
 		"name": "PHP×GVL",
