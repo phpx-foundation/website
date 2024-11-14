@@ -15,4 +15,10 @@ abstract class TestCase extends BaseTestCase
 			$this->afterApplicationCreated(fn() => $this->seed(GroupSeeder::class));
 		}
 	}
+	
+	#[Before]
+	public function disableVite(): void
+	{
+		$this->withoutVite();
+	}
 }
