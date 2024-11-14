@@ -35,7 +35,11 @@
 		>
 			<span class="px-2.5 py-1.5 pr-1">PHP<span class="inline-block ml-0.5">×</span></span>
 			<span class="border-l-2 border-gray-200 bg-white text-black px-2.5 py-1.5 flex items-center">
-				{{ str($group->name)->afterLast('×')->trim() }}
+				@isset($group)
+					{{ str($group->name)->after('×') }}
+				@else
+					World
+				@endisset
 				<svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-black" viewBox="0 0 20 20" fill="currentColor">
 	                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
 	            </svg>
@@ -54,14 +58,14 @@
 		>
 			@foreach($phpx_network as $domain => $group_name)
 				<a
-					href="{{ $domain === $group->domain ? url('/') : "https://{$domain}/" }}"
+					href="{{ isset($group) && $domain === $group->domain ? url('/') : "https://{$domain}/" }}"
 					class="border-t-2 border-white first-of-type:border-t-0 bg-black flex items-center justify-start gap-2 w-full px-4 py-2.5 text-right text-sm hover:bg-white hover:text-black"
 				>
 					<span class="flex-shrink basis-12"></span>
 					<span class="whitespace-nowrap">
 						{{ str($group_name)->after('×') }}
 					</span>
-					@if($domain === $group->domain)
+					@if(isset($group) && $domain === $group->domain)
 						<svg class="w-5 h-5 fill-current ml-auto" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
 							<path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z" />
 						</svg>
