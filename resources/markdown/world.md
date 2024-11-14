@@ -73,7 +73,7 @@ Hopefully this list will grow over the coming weeks. Keep an eye out.
 
 ## What's Next
 
-PHP× started with with [Joe Tannenbaum](https://bsky.app/profile/joe.codes) and 
+PHP× started with [Joe Tannenbaum](https://bsky.app/profile/joe.codes) and 
 [PHP×NYC](https://phpxnyc.com/). [Chris Morrell](https://bsky.app/profile/cmorrell.com) 
 launched [PHP×Philly](https://phpxphilly.com/) soon after, but in mid-November 2024, 
 PHP meetups really started to explode.
