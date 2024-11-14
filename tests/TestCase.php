@@ -19,6 +19,6 @@ abstract class TestCase extends BaseTestCase
 	#[Before]
 	public function disableVite(): void
 	{
-		$this->withoutVite();
+		$this->afterApplicationCreated(fn() => $this->withoutVite());
 	}
 }
