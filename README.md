@@ -16,6 +16,44 @@ You can add your group by submitting a pull request to the [PHP× website reposi
 Please add your group to the [`groups.json`](https://github.com/phpx-foundation/website/blob/main/groups.json) file, and
 once approved, your group will automatically get synced to [phpx.world](https://phpx.world).
 
+There are two kinds of groups:
+
+### PHP× Groups
+
+These are groups that are hosted on [phpx.world](https://phpx.world) and use the PHP× naming convention.
+To start a PHP× group:
+
+1. Make sure there isn't an existing group in your region
+2. Get a phpx(…).com domain (use local airport code or something similar)
+3. Pull request your group to the [`groups.json`](https://github.com/phpx-foundation/website/blob/main/groups.json)
+   with the following format:
+
+```json5
+"<<your domain>>": {
+    "external": false, // always leave this
+    "name": "PHP×<<your airport code/similar>>",
+    "region": "<<short city or region name>>", // can be null if airport code is good enough
+    "description": "<<short description>>",
+    "timezone": "<<php-compatible timezone ID>>",
+    "og_asset": "<<include image in public/og/ in pr>>", // can be null
+    "bsky_url": "https://bsky.app/profile/<<group profile>>" // can be null
+},
+```
+
+### External groups
+
+You don't need to host your site on our platform. If you already have a successful meetup, we're
+happy to link to it. Just submit a PR to the [`groups.json`](https://github.com/phpx-foundation/website/blob/main/groups.json)
+file with the following format:
+
+```json5
+"<<your domain>>": {
+    "external": true, // must be true
+    "name": "PHP×<<local airport code or similar>>",
+    "region": "<<short city or region name>>",
+},
+```
+
 ## The PHP× site
 
 This site is a basic multi-tenant Laravel app. As of November 13, 2024, the following
