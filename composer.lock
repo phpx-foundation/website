@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fea8bed45ce6a65af6705b3ed0151cfb",
+    "content-hash": "4127c6778646641d30d9ba17827d4c55",
     "packages": [
         {
             "name": "brick/math",
@@ -1293,6 +1293,80 @@
                 }
             ],
             "time": "2023-12-16T14:21:10+00:00"
+        },
+        {
+            "name": "laravel/forge-sdk",
+            "version": "v3.19.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel/forge-sdk.git",
+                "reference": "1b7f1e9fce87fb045618019c43c5a4f730bfe7b9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel/forge-sdk/zipball/1b7f1e9fce87fb045618019c43c5a4f730bfe7b9",
+                "reference": "1b7f1e9fce87fb045618019c43c5a4f730bfe7b9",
+                "shasum": ""
+            },
+            "require": {
+                "ext-json": "*",
+                "guzzlehttp/guzzle": "^6.3.1|^7.0",
+                "php": "^7.2|^8.0"
+            },
+            "require-dev": {
+                "illuminate/support": "^7.0|^8.0|^9.0|^10.0|^11.0",
+                "mockery/mockery": "^1.3.1",
+                "phpstan/phpstan": "^1.10",
+                "phpunit/phpunit": "^8.4|^9.0|^10.4"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.x-dev"
+                },
+                "laravel": {
+                    "providers": [
+                        "Laravel\\Forge\\ForgeServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Laravel\\Forge\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Taylor Otwell",
+                    "email": "taylor@laravel.com"
+                },
+                {
+                    "name": "Mohamed Said",
+                    "email": "mohamed@laravel.com"
+                },
+                {
+                    "name": "Dries Vints",
+                    "email": "dries@laravel.com"
+                },
+                {
+                    "name": "James Brooks",
+                    "email": "james@laravel.com"
+                }
+            ],
+            "description": "The official Laravel Forge PHP SDK.",
+            "keywords": [
+                "forge",
+                "laravel"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel/forge-sdk/issues",
+                "source": "https://github.com/laravel/forge-sdk"
+            },
+            "time": "2024-11-12T12:22:14+00:00"
         },
         {
             "name": "laravel/framework",
