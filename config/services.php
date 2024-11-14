@@ -30,5 +30,11 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+	
+	'forge' => [
+		'token' => env('FORGE_TOKEN'),
+		'server' => env('FORGE_SERVER_ID'),
+		'site' => env('FORGE_SITE_ID'),
+	],
 
 ];
