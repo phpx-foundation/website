@@ -28,6 +28,7 @@
 	{{-- Content --}}
 	<div class="w-full max-w-4xl mx-auto flex flex-col items-start justify-center px-4 py-8">
 		<x-phpx-dropdown />
+		<x-markdown class="my-12" :file="resource_path('markdown/world.md')" />
 	</div>
 	
 </div>
