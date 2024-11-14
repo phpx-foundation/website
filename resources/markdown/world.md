@@ -41,11 +41,20 @@ features were loosely supported:
 - Connecting to individual [Mailcoach](https://www.mailcoach.app/) instances to send group announcements
 - Connecting to a Bluesky account to post meetups (partially)
 
+### TODO
+
 Next steps for the site:
 
 - Adding an admin UI (right now all admin is done via artisan commands)
 - Adding more per-group customizations (like theme/etc)
 - Improving the announcement integrations
+
+Other ideas:
+
+- Allow for external sites to add an iCalendar feed that we can then merge with the PHP× feed for a central list of all events
+- Add latitude/longitude to events to visualize
+- How do we ensure that groups that never meet eventually disappear from the site
+- We should have a "placeholder" concept for groups that are considering forming (maybe subdomains)
 
 If any of that sounds interesting, [join the Discord](https://discord.gg/wMy6Eeuwbu)! You're welcome
 to PR changes, but it's best to talk it thru with group organizers first.
