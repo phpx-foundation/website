@@ -1,0 +1,16 @@
+{
+	"phpxphilly.com": {
+		"external": false,
+		"name": "PHP×Philly",
+		"region": null,
+		"description": "A Philly-area PHP meetup for web artisans who want to learn and connect.",
+		"timezone": "America/New_York",
+		"og_asset": "philly.png",
+		"bsky_url": "https://bsky.app/profile/phpxphilly.com"
+	},
+	"upstatephp.com": {
+		"external": true,
+		"name": "PHP×GVL",
+		"region": "Greenville"
+	}
+}

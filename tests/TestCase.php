@@ -11,6 +11,8 @@ abstract class TestCase extends BaseTestCase
 	#[Before]
 	public function seedDefaultGroups(): void
 	{
-		$this->afterApplicationCreated(fn() => $this->seed(GroupSeeder::class));
+		if (method_exists($this, 'refreshDatabase')) {
+			$this->afterApplicationCreated(fn() => $this->seed(GroupSeeder::class));
+		}
 	}
 }
