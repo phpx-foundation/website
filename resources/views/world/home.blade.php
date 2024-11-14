@@ -30,7 +30,7 @@
 		<x-phpx-dropdown />
 		<div class="flex items-start justify-start">
 			<article class="max-w-none flex-shrink mb-64">
-				<x-markdown class="my-12" :file="resource_path('markdown/world.md')" />
+				<x-markdown class="my-12" :file="base_path('README.md')" />
 			</article>
 			<aside
 				x-data="onThisPage"
