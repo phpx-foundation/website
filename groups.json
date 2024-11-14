@@ -8,6 +8,15 @@
 		"og_asset": "philly.png",
 		"bsky_url": "https://bsky.app/profile/phpxphilly.com"
 	},
+	"phpxadl.com": {
+		"external": false,
+		"name": "PHP×Adl",
+		"region": null,
+		"description": "A Adelaide, Australia PHP meetup for web artisans who want to learn and connect.",
+		"timezone": "Australia/Adelaide",
+		"og_asset": "adl.png",
+		"bsky_url": "https://bsky.app/profile/phpxadl.bsky.social"
+	},	
 	"upstatephp.com": {
 		"external": true,
 		"name": "PHP×GVL",
