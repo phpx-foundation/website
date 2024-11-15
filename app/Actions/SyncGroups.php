@@ -7,6 +7,7 @@ use App\Models\Group;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
 use Lorisleiva\Actions\Concerns\AsAction;
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\info;
@@ -23,7 +24,9 @@ class SyncGroups
 		$groups = $this->groups()
 			->each(fn(Group|ExternalGroup $g) => $g->save());
 		
-		SyncDomainsWithForge::run();
+		if (App::isProduction()) {
+			SyncDomainsWithForge::run();
+		}
 		
 		return $groups;
 	}
@@ -76,6 +79,8 @@ class SyncGroups
 			'timezone',
 			'bsky_url',
 			'meetup_url',
+			'status',
+			'frequency',
 		]));
 		
 		return $group;

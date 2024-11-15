@@ -9,10 +9,12 @@
 	},
 	"phpxadl.com": {
 		"external": false,
-		"name": "PHP×Adl",
-		"region": null,
+		"name": "PHP×ADL",
+		"region": "Adelaide",
 		"description": "A Adelaide, Australia PHP meetup for web artisans who want to learn and connect.",
 		"timezone": "Australia/Adelaide",
+		"status": "active",
+		"frequency": "monthly",
 		"bsky_url": "https://bsky.app/profile/phpxadl.bsky.social"
 	},	
 	"upstatephp.com": {
