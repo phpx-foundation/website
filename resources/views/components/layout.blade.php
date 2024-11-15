@@ -1,5 +1,5 @@
-@props(['footer' => null, 'title' => null, 'og' => null])
-	<!DOCTYPE html>
+@props(['footer' => null, 'title' => null, 'og' => null, 'scripts' => null])
+<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full antialiased bg-black text-white/50">
 <head>
 	<meta charset="utf-8">
@@ -17,7 +17,6 @@
 	}
 	</style>
 	@vite('resources/css/app.css')
-	@vite('resources/js/app.js')
 	
 	@isset($og)
 		{{ $og }}
@@ -36,6 +35,9 @@
 			@endif
 		@endif
 	@endisset
+	
+	{{ $scripts }}
+	@vite('resources/js/app.js')
 	
 	@if(isset($group))
 		<script defer data-domain="{{ $group->domain }}" src="https://plausible.io/js/script.js"></script>
