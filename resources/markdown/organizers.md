@@ -24,7 +24,7 @@ Awesome. You want to start a PHP× group! Here are the basic steps to get starte
 ### Required Data
 
 - `external` — always set this to `false` if you want us to host for you
-- `name` — use "PHP×FOO" where FOO is the code you picked in step 2
+- `name` — use "PHP×FOO" where FOO is the code you picked in step 2. Please use the unicode times symbol “×” rather than the letter “x” (you can just copy-and-paste from here). 
 - `region` — Set this to a short descriptive name of your region (like Philadelphia or Atlanta)
 - `description` — Set this to a single-sentence description of your meetup. Something like: _"A Philly-area PHP meetup for web artisans who want to learn and connect."_
 - `timezone` — Use your PHP-compatible timezone ID (like `America/New_York`)
@@ -39,3 +39,55 @@ Awesome. You want to start a PHP× group! Here are the basic steps to get starte
 - `bsky_url` — if you use Bluesky, you can provide your group's Bluesky profile URL 
 - `meetup_url` — if you use Meetup.com, you can provide your group's Meetup URL
 - `frequency` — groups show as "bi-monthly" by default, but you can set this to however often you meet (monthly/quarterly/etc)
+
+## Once you've started
+
+### Set up Mailcoach
+
+The folks at [Mailcoach](https://www.mailcoach.app/) have generously offered free accounts to all
+PHP× organizers. Reach out to Chris Morrell on the Discord to get the coupon code.
+
+### Get a free Mailcoach account
+
+Once you have your coupon code, register at [Mailcoach](https://www.mailcoach.app/). 
+
+- When registering, you can choose "Let us handle sending."
+- Go to billing and choose the base plan. At checkout, use the PHP× coupon code that you received
+  from Chris. That will cover the monthly fee and the first 2,000 emails.
+- You will still need to provide a credit card and will be billed if you send more than 2,000
+  emails in a given month.
+- Finally, you will have to go thru a short approval process to get out of test mode (this is
+  to mitigate spam).
+
+Once your account is set up, you will want to go through the Mailcoach settings and configure it
+however you choose. A few things you will probably want to do:
+
+- Set your timezone
+- Verify you PHP× domain
+- Set your default from address to something at your domain (if you don't have email set up
+  you can set up something like hello@phpx(…).com to forward to your personal email address
+  using Cloudflare's free email routing)
+
+### Connect your account to PHP×
+
+Once your account is set up and you have a mailing list configured, please get in touch
+with Chris Morrell and give him the following information:
+
+- Your sending email addres (eg. `hello@phpx(…).com`)
+- Your Mailcoach list UUID (this can be found on the list's general settings page)
+- Your Mailcoach API token (go to "API Tokens" under your profile menu)
+- Your Mailcoach API URL (shown when creating a token)
+
+Once we have this, we can both configure Mailcoach for your account and sync anyone
+who has already registered for updates to your list.
+
+Eventually, the PHP× platform will automatically trigger transactional emails for things
+like RSVP receipts and announcement/reminder emails, but for now you will need to send
+out event announcements yourself via Mailcoach.
+
+## Set up Bluesky
+
+- Create bluesky account
+- Verify domain as handle
+- Create an app password for PHP×
+- Provide DID and app password to us
