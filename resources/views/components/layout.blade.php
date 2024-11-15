@@ -1,4 +1,11 @@
-@props(['footer' => null, 'title' => null, 'og' => null, 'scripts' => null])
+@props([
+	'before' => null,
+	'after' => null,
+	'footer' => null, 
+	'title' => null, 
+	'og' => null, 
+	'scripts' => null,
+])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full antialiased bg-black text-white/50">
 <head>
@@ -54,10 +61,14 @@
 		@endif
 	</div>
 	
+	{{ $before }}
+	
 	{{-- Content --}}
 	<div class="w-full max-w-4xl mx-auto flex flex-col items-start justify-center px-4 py-8">
 		{{ $slot }}
 	</div>
+	
+	{{ $after }}
 	
 	{{-- Footer --}}
 	@isset($footer)

@@ -21,12 +21,8 @@ const Globe = new ThreeGlobe()
 	.labelColor(() => 'white')
 	.labelText('name');
 
-console.log(data);
-
 // Setup renderer
-const renderer = new THREE.WebGLRenderer();
-renderer.setSize(node.clientWidth, node.clientHeight);
-node.appendChild(renderer.domElement);
+const renderer = new THREE.WebGLRenderer({ alpha: true });
 
 // Setup scene
 const scene = new THREE.Scene();
@@ -43,8 +39,23 @@ camera.position.z = 150;
 // Add camera controls
 const tbControls = new TrackballControls(camera, renderer.domElement);
 tbControls.minDistance = 101;
-tbControls.rotateSpeed = 5;
-tbControls.zoomSpeed = 0.8;
+tbControls.rotateSpeed = 1;
+tbControls.zoomSpeed = 0.2;
+
+function setSize() {
+	const width = node.clientWidth;
+	const height = node.clientHeight;
+	
+	camera.position.z = width > 1000 ? 150 : 120;
+	camera.aspect = width / height;
+	camera.updateProjectionMatrix();
+	
+	renderer.setSize(width, height);
+}
+
+setSize();
+window.addEventListener('resize', setSize, false);
+node.appendChild(renderer.domElement);
 
 let last_coords = [null, null];
 

@@ -7,9 +7,11 @@
 		<meta property="og:image" content="{{ asset('world/og.jpg') }}" />
 	</x-slot:og>
 	
-	<div id="globe-visualization" class="w-full h-96" data-points="{{ json_encode($points) }}"></div>
+	<x-slot:before>
+		<div id="globe-visualization" class="w-full h-32 -mb-4 sm:h-40 md:h-56 lg:h-96" data-points="{{ json_encode($points) }}"></div>
+	</x-slot:before>
 	
-	<x-markdown class="my-12" :file="base_path('README.md')" sidebar />
+	<x-markdown :file="base_path('README.md')" sidebar />
 	
 	@vite('resources/js/globe.js')
 	
