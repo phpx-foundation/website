@@ -85,9 +85,11 @@ Eventually, the PHP× platform will automatically trigger transactional emails f
 like RSVP receipts and announcement/reminder emails, but for now you will need to send
 out event announcements yourself via Mailcoach.
 
+<!--
 ## Set up Bluesky
 
 - Create bluesky account
 - Verify domain as handle
 - Create an app password for PHP×
 - Provide DID and app password to us
+-->
