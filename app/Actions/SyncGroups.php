@@ -72,6 +72,8 @@ class SyncGroups
 			'timezone',
 			'bsky_url',
 			'meetup_url',
+			'latitude',
+			'longitude',
 		]));
 		
 		return $group;
@@ -86,6 +88,8 @@ class SyncGroups
 		$external_group->forceFill(Arr::only($config, [
 			'name',
 			'region',
+			'latitude',
+			'longitude',
 		]));
 		
 		return $external_group;
