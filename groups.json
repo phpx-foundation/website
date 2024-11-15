@@ -82,6 +82,18 @@
         "latitude": -34.9281805,
         "longitude": 138.5999312
     },
+    "phpxcebu.com": {
+        "external": false,
+        "name": "PHP×CEBU",
+        "region": "Cebu",
+        "description": "A Cebu-Philippines PHP meetup for web artisans who want to learn and connect.",
+        "timezone": "Asia/Manila",
+        "bsky_url": "https://bsky.app/profile/phpxcebu.com",
+        "status": "planned",
+        "frequency": "bi-monthly",
+        "latitude": 10.2935639,
+        "longitude": 123.9019209
+    },
     "phpxbru.com": {
         "external": false,
         "name": "PHP×BRU",
