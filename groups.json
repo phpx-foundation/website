@@ -19,5 +19,13 @@
 		"external": true,
 		"name": "PHP×GVL",
 		"region": "Greenville"
+	},
+	"chattanoogaphp.org": {
+		"external": true,
+		"name": "PHP×Chattanooga",
+		"region": "Chattanooga",
+		"description": "A Chattanooga Tennessee PHP meetup for web artisans who want to learn and connect, held over zoom - over lunch, doing PHP/Laravel/Drupal/Anything PHP",
+		"timezone": "America/New York",
+		"bsky_url": "https://bsky.app/profile/phpxchattanooga.bsky.social"
 	}
 }
