@@ -4,6 +4,7 @@ namespace App\Actions;
 
 use App\Models\ExternalGroup;
 use App\Models\Group;
+use BackedEnum;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
@@ -53,7 +54,11 @@ class SyncGroups
 			table(
 				headers: ['Attribute', 'Before', 'After'],
 				rows: collect($group->getDirty())
-					->map(fn($value, $attribute) => [$attribute, $group->getOriginal($attribute), $value]),
+					->map(fn($value, $attribute) => [
+						$attribute,
+						$this->valueForTable($group->getOriginal($attribute)),
+						$this->valueForTable($value),
+					]),
 			);
 		}
 		
@@ -108,5 +113,13 @@ class SyncGroups
 				? $this->syncConfigWithExternalGroup($domain, $config)
 				: $this->syncConfigWithGroup($domain, $config))
 			->filter(fn(Group|ExternalGroup $g) => $g->isDirty());
+	}
+	
+	protected function valueForTable($attribute): string
+	{
+		return match(true) {
+			$attribute instanceof BackedEnum => $attribute->value,
+			default => (string) $attribute,
+		};
 	}
 }
