@@ -15,7 +15,7 @@
 		"timezone": "Australia/Adelaide",
 		"bsky_url": "https://bsky.app/profile/phpxadl.bsky.social"
 	},	
-  "phpxcebu.com": {
+    "phpxcebu.com": {
 		"external": false,
 		"name": "PHP×Cebu",
 		"region": "Cebu",
