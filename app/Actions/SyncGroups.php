@@ -20,8 +20,12 @@ class SyncGroups
 	
 	public function handle(): Collection
 	{
-		return $this->groups()
+		$groups = $this->groups()
 			->each(fn(Group|ExternalGroup $g) => $g->save());
+		
+		SyncDomainsWithForge::run();
+		
+		return $groups;
 	}
 	
 	public function getCommandSignature(): string
