@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Route;
 foreach(RootDomains::cases() as $case) {
 	Route::domain($case->value)->group(function() {
 		Route::view('/', 'world.home');
+		Route::view('/organizers', 'world.organizers');
 	});
 }
 

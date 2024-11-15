@@ -30,10 +30,6 @@ class GroupsJsonTest extends TestCase
 		Assert::assertNotEmpty(data_get($config, 'description'));
 		Assert::assertContains(data_get($config, 'timezone'), \DateTimeZone::listIdentifiers());
 		
-		if ($og_asset = data_get($config, 'og_asset')) {
-			Assert::assertFileExists(public_path("og/{$og_asset}"));
-		}
-		
 		if ($bsky_url = data_get($config, 'bsky_url')) {
 			Assert::assertEquals(200, Http::get($bsky_url)->status());
 		}

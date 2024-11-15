@@ -32,13 +32,13 @@ class ConfigureGroup
 			'region' => $region,
 			'description' => $description,
 			'timezone' => $timezone,
-			'bsky_url' => $bsky_url
-				?: null,
-			'meetup_url' => $meetup_url
-				?: null,
+			'bsky_url' => $bsky_url ?: null,
+			'meetup_url' => $meetup_url ?: null,
 		]);
 		
 		Cache::clear();
+		
+		SyncDomainsWithForge::run();
 		
 		app()->instance("group:{$domain}", $group);
 		
