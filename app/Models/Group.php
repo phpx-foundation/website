@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\GroupStatus;
 use Glhd\Bits\Database\HasSnowflakes;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -31,6 +32,8 @@ class Group extends Model
 		'region',
 		'description',
 		'timezone',
+		'frequency',
+		'status',
 		'created_at',
 	];
 	
@@ -39,6 +42,7 @@ class Group extends Model
 		return [
 			'mailcoach_token' => 'encrypted',
 			'bsky_app_password' => 'encrypted',
+			'status' => GroupStatus::class,
 		];
 	}
 	
@@ -70,6 +74,26 @@ class Group extends Model
 	public function label(): string
 	{
 		return $this->region ?? str($this->name)->afterLast('×')->trim()->toString();
+	}
+	
+	public function isActive()
+	{
+		return GroupStatus::Active === $this->status;
+	}
+	
+	public function isPlanned()
+	{
+		return GroupStatus::Planned === $this->status;
+	}
+	
+	public function isProspective()
+	{
+		return GroupStatus::Prospective === $this->status;
+	}
+	
+	public function isDisbanded()
+	{
+		return GroupStatus::Disbanded === $this->status;
 	}
 	
 	public function mailcoach(): ?Mailcoach
