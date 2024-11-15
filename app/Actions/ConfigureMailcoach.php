@@ -51,6 +51,8 @@ class ConfigureMailcoach
 		$this->handle($group, $token, $endpoint, $list, $email);
 		
 		$command->info('MailCoach configured!');
+		$command->info('You may want to run `php artisan group:sync-all-mailcoach` next…');
+		
 		return 0;
 	}
 }

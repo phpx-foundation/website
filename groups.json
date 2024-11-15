@@ -1,107 +1,132 @@
 {
-	"phpxphilly.com": {
-		"external": false,
-		"name": "PHP×Philly",
-		"region": null,
-		"description": "A Philly-area PHP meetup for web artisans who want to learn and connect.",
-		"timezone": "America/New_York",
-		"bsky_url": "https://bsky.app/profile/phpxphilly.com",
-		"latitude": 39.9527237,
-		"longitude": -75.1635262
-	},
-	"phpxstl.com": {
-		"external": false,
-		"name": "PHP×STL",
-		"region": "St. Louis",
-		"description": "A St. Louis-area PHP meetup for web artisans who want to learn and connect.",
-		"timezone": "America/Chicago",
-		"bsky_url": null,
-		"latitude": 38.6280278,
-		"longitude": -90.1910154
-	},
-	"phpxchi.com": {
-		"external": false,
-		"name": "PHP×CHI",
-		"region": "Chicago",
-		"description": "A meetup in Chicago for PHP and Laravel devs. Coming soon.",
-		"timezone": "America/Chicago",
-		"bsky_url": "https://bsky.app/profile/phpxchi.com",
-		"latitude": 41.8755616,
-		"longitude": -87.6244212
-	},
-	"phpxatl.com": {
-		"external": false,
-		"name": "PHP×ATL",
-		"region": "Atlanta",
-		"description": "A local Atlanta Metro area PHP meetup for web artisans who want to learn and connect.",
-		"timezone": "America/New_York",
-		"bsky_url": "https://bsky.app/profile/phpxatl.com",
-		"latitude": 33.7489924,
-		"longitude": -84.3902644
-	},
-	"phpxmsp.com": {
-		"external": false,
-		"name": "PHP×MSP",
-		"region": "Minneapolis",
-		"description": "A local Minneapolis / St. Paul PHP meetup for web artisans who want to learn and connect.",
-		"timezone": "America/Chicago",
-		"bsky_url": null,
-		"latitude": 44.9772995,
-		"longitude": -93.2654692
-	},
-	"phpxhou.com": {
-		"external": false,
-		"name": "PHP×HOU",
-		"region": "Houston",
-		"description": "A local Houston PHP meetup for web artisans who want to learn and connect.",
-		"timezone": "America/Chicago",
-		"bsky_url": "https://bsky.app/profile/phpxhou.com",
-		"latitude": 29.7589382,
-		"longitude": -95.3676974
-	},
-	"phpxcmh.com": {
-		"external": false,
-		"name": "PHP×CMH",
-		"region": "Columbus",
-		"description": "A local Columbus PHP meetup for web artisans who want to learn and connect.",
-		"timezone": "America/New_York",
-		"bsky_url": "https://bsky.app/profile/phpxcmh.com",
-		"latitude": 39.9622601,
-		"longitude": -83.0007065
-	},
-	"upstatephp.com": {
-		"external": true,
-		"name": "PHP×GVL",
-		"region": "Greenville",
-		"latitude": 34.851354,
-		"longitude": -82.3984882
-	},
-	"phpxnyc.com": {
-		"external": true,
-		"name": "PHP×NYC",
-		"region": "NYC",
-		"latitude": 40.7127281,
-		"longitude": -74.0060152
-	},
-	"kyphpug.org": {
-		"external": true,
-		"name": "PHP×LEX",
-		"region": "Kentucky",
-		"latitude": 38.0464066,
-		"longitude": -84.4970393
-	},
-	"mkepug.org": {
-		"external": true,
-		"name": "PHP×MKE",
-		"region": "Milwaukee",
-		"latitude": 43.0386475,
-		"longitude": -87.9090751
-	},
-	"phpstoke.co.uk": {
-		"external": true,
-		"name": "PHP×Stoke",
-		"region": "Stoke-on-Trent",
-		"latitude": 53.0162014,
-		"longitude": -2.1812607
-	}
+    "phpxphilly.com": {
+        "external": false,
+        "name": "PHP×Philly",
+        "region": null,
+        "description": "A Philly-area PHP meetup for web artisans who want to learn and connect.",
+        "timezone": "America/New_York",
+        "bsky_url": "https://bsky.app/profile/phpxphilly.com",
+        "latitude": 39.9527237,
+        "longitude": -75.1635262
+    },
+    "phpxstl.com": {
+        "external": false,
+        "name": "PHP×STL",
+        "region": "St. Louis",
+        "description": "A St. Louis-area PHP meetup for web artisans who want to learn and connect.",
+        "timezone": "America/Chicago",
+        "bsky_url": null,
+        "latitude": 38.6280278,
+        "longitude": -90.1910154
+    },
+    "phpxchi.com": {
+        "external": false,
+        "name": "PHP×CHI",
+        "region": "Chicago",
+        "description": "A meetup in Chicago for PHP and Laravel devs. Coming soon.",
+        "timezone": "America/Chicago",
+        "bsky_url": "https://bsky.app/profile/phpxchi.com",
+        "latitude": 41.8755616,
+        "longitude": -87.6244212
+    },
+    "phpxatl.com": {
+        "external": false,
+        "name": "PHP×ATL",
+        "region": "Atlanta",
+        "description": "A local Atlanta Metro area PHP meetup for web artisans who want to learn and connect.",
+        "timezone": "America/New_York",
+        "bsky_url": "https://bsky.app/profile/phpxatl.com",
+        "latitude": 33.7489924,
+        "longitude": -84.3902644
+    },
+    "phpxmsp.com": {
+        "external": false,
+        "name": "PHP×MSP",
+        "region": "Minneapolis",
+        "description": "A local Minneapolis / St. Paul PHP meetup for web artisans who want to learn and connect.",
+        "timezone": "America/Chicago",
+        "status": "planned",
+        "bsky_url": null,
+        "latitude": 44.9772995,
+        "longitude": -93.2654692
+    },
+    "phpxhou.com": {
+        "external": false,
+        "name": "PHP×HOU",
+        "region": "Houston",
+        "description": "A local Houston PHP meetup for web artisans who want to learn and connect.",
+        "timezone": "America/Chicago",
+        "bsky_url": "https://bsky.app/profile/phpxhou.com",
+        "latitude": 29.7589382,
+        "longitude": -95.3676974
+    },
+    "phpxcmh.com": {
+        "external": false,
+        "name": "PHP×CMH",
+        "region": "Columbus",
+        "description": "A local Columbus PHP meetup for web artisans who want to learn and connect.",
+        "timezone": "America/New_York",
+        "bsky_url": "https://bsky.app/profile/phpxcmh.com",
+        "latitude": 39.9622601,
+        "longitude": -83.0007065
+    },
+    "phpxadl.com": {
+        "external": false,
+        "name": "PHP×ADL",
+        "region": "Adelaide",
+        "description": "A Adelaide, Australia PHP meetup for web artisans who want to learn and connect.",
+        "timezone": "Australia/Adelaide",
+        "status": "active",
+        "frequency": "monthly",
+        "bsky_url": "https://bsky.app/profile/phpxadl.bsky.social",
+        "latitude": -34.9281805,
+        "longitude": 138.5999312
+    },
+    "phpxcebu.com": {
+        "external": false,
+        "name": "PHP×CEBU",
+        "region": "Cebu",
+        "description": "A Cebu-Philippines PHP meetup for web artisans who want to learn and connect.",
+        "timezone": "Asia/Manila",
+        "bsky_url": "https://bsky.app/profile/phpxcebu.com",
+        "status": "planned",
+        "frequency": "bi-monthly",
+        "latitude": 10.2935639,
+        "longitude": 123.9019209
+    },
+    "upstatephp.com": {
+        "external": true,
+        "name": "PHP×GVL",
+        "region": "Greenville",
+        "latitude": 34.851354,
+        "longitude": -82.3984882
+    },
+    "phpxnyc.com": {
+        "external": true,
+        "name": "PHP×NYC",
+        "region": "NYC",
+        "latitude": 40.7127281,
+        "longitude": -74.0060152
+    },
+    "kyphpug.org": {
+        "external": true,
+        "name": "PHP×LEX",
+        "region": "Kentucky",
+        "latitude": 38.0464066,
+        "longitude": -84.4970393
+    },
+    "mkepug.org": {
+        "external": true,
+        "name": "PHP×MKE",
+        "region": "Milwaukee",
+        "latitude": 43.0386475,
+        "longitude": -87.9090751
+    },
+    "phpstoke.co.uk": {
+        "external": true,
+        "name": "PHP×Stoke",
+        "region": "Stoke-on-Trent",
+        "latitude": 53.0162014,
+        "longitude": -2.1812607
+    }
 }

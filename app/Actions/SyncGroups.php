@@ -4,9 +4,11 @@ namespace App\Actions;
 
 use App\Models\ExternalGroup;
 use App\Models\Group;
+use BackedEnum;
 use Illuminate\Console\Command;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
 use Lorisleiva\Actions\Concerns\AsAction;
 use function Laravel\Prompts\confirm;
 use function Laravel\Prompts\info;
@@ -20,8 +22,14 @@ class SyncGroups
 	
 	public function handle(): Collection
 	{
-		return $this->groups()
+		$groups = $this->groups()
 			->each(fn(Group|ExternalGroup $g) => $g->save());
+		
+		if (App::isProduction()) {
+			SyncDomainsWithForge::run();
+		}
+		
+		return $groups;
 	}
 	
 	public function getCommandSignature(): string
@@ -46,7 +54,11 @@ class SyncGroups
 			table(
 				headers: ['Attribute', 'Before', 'After'],
 				rows: collect($group->getDirty())
-					->map(fn($value, $attribute) => [$attribute, $group->getOriginal($attribute), $value]),
+					->map(fn($value, $attribute) => [
+						$attribute,
+						$this->valueForTable($group->getOriginal($attribute)),
+						$this->valueForTable($value),
+					]),
 			);
 		}
 		
@@ -72,6 +84,8 @@ class SyncGroups
 			'timezone',
 			'bsky_url',
 			'meetup_url',
+			'status',
+			'frequency',
 			'latitude',
 			'longitude',
 		]));
@@ -103,5 +117,13 @@ class SyncGroups
 				? $this->syncConfigWithExternalGroup($domain, $config)
 				: $this->syncConfigWithGroup($domain, $config))
 			->filter(fn(Group|ExternalGroup $g) => $g->isDirty());
+	}
+	
+	protected function valueForTable($attribute): string
+	{
+		return match(true) {
+			$attribute instanceof BackedEnum => $attribute->value,
+			default => (string) $attribute,
+		};
 	}
 }
