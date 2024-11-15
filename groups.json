@@ -84,11 +84,15 @@
     },
     "phpxcebu.com": {
         "external": false,
-        "name": "PHP×Cebu",
+        "name": "PHP×CEBU",
         "region": "Cebu",
         "description": "A Cebu-Philippines PHP meetup for web artisans who want to learn and connect.",
         "timezone": "Asia/Manila",
-        "bsky_url": "https://bsky.app/profile/phpxcebu.com"
+        "bsky_url": "https://bsky.app/profile/phpxcebu.com",
+        "status": "planned",
+        "frequency": "bi-monthly",
+        "latitude": 10.2935639,
+        "longitude": 123.9019209
     },
     "upstatephp.com": {
         "external": true,
