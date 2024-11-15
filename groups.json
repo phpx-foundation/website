@@ -19,5 +19,12 @@
 		"external": true,
 		"name": "PHP×GVL",
 		"region": "Greenville"
-	}
+	},
+    "phpxdmv.com": {
+        "bsky_url": "https://bsky.app/profile/phpxdmv.bsky.social",
+        "external": true,
+        "name": "PHPxDMV",
+        "region": "Washington D.C., Maryland, and Virginia",
+        "timezone": "America/New_York",
+    }
 }
