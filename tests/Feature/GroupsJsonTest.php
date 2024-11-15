@@ -2,10 +2,9 @@
 
 namespace Tests\Feature;
 
-use App\Models\Group;
-use Exception;
-use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Enums\GroupStatus;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use Illuminate\Testing\Assert;
 use Tests\TestCase;
 
@@ -30,6 +29,14 @@ class GroupsJsonTest extends TestCase
 		Assert::assertNotEmpty(data_get($config, 'description'));
 		Assert::assertContains(data_get($config, 'timezone'), \DateTimeZone::listIdentifiers());
 		
+		if ($status = data_get($config, 'status')) {
+			Assert::assertNotNull(GroupStatus::from($status));
+		}
+		
+		if ($frequency = data_get($config, 'frequency')) {
+			Assert::assertTrue(Str::contains($frequency, ['week', 'month', 'quarter', 'year']));
+		}
+		
 		if ($bsky_url = data_get($config, 'bsky_url')) {
 			Assert::assertEquals(200, Http::get($bsky_url)->status());
 		}
@@ -47,7 +54,7 @@ class GroupsJsonTest extends TestCase
 		Assert::assertIsString($value, "Domain must be a string.");
 		Assert::assertTrue(false !== filter_var($value, FILTER_VALIDATE_DOMAIN), "Domain format is invalid.");
 		
-		$records = dns_get_record("{$value}.", DNS_A|DNS_AAAA);
+		$records = dns_get_record("{$value}.", DNS_A | DNS_AAAA);
 		
 		Assert::assertIsArray($records, "There aren't DNS records for $value");
 		Assert::assertNotEmpty($records, "There aren't DNS records for $value");

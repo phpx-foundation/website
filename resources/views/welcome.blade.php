@@ -1,11 +1,26 @@
 <x-layout class="justify-between">
 	<div class="flex flex-col gap-4">
+		
+		{{-- Group Label --}}
 		<h1 class="font-mono font-semibold text-white text-4xl sm:text-6xl md:text-7xl lg:text-8xl">
 			PHP<span x-data x-typed="['×{{ $group->label() }}']"></span>
 		</h1>
-		<h2 class="font-semibold">
-			A bi-monthly<span x-data x-typed.cursorless.delay.3000="['(ish)']"></span> meetup for PHP artisans.
-		</h2>
+		
+		{{-- Status / Frequency --}}
+		@if ($group->isActive() || $group->isPlanned())
+			<h2 class="font-semibold">
+				A {{ $group->frequency }}<span x-data x-typed.cursorless.delay.3000="['(ish)']"></span> meetup for PHP artisans.
+				@if($group->isPlanned())
+					Coming soon!
+				@endif
+			</h2>
+		@elseif ($group->isProspective())
+			<h2 class="font-semibold">
+				We're hoping to start a local meetup. If you’re interested, sign up for updates or join the Discord!
+			</h2>
+		@endif
+		
+		{{-- Actions --}}
 		<div class="flex gap-4 items-center">
 			@isset($next_meetup)
 				<a href="{{ url("/meetups/{$next_meetup->getKey()}/rsvps") }}" class="bg-white px-4 py-2.5 text-black font-semibold text-lg transform opacity-90 hover:opacity-100 hover:-rotate-2">
@@ -48,6 +63,7 @@
 		</div>
 	</div>
 	
+	{{-- Upcoming Meetup --}}
 	@isset($next_meetup)
 		<x-slot:footer>
 			<a href="{{ url("/meetups/{$next_meetup->getKey()}/rsvps") }}" class="group flex items-center gap-2 p-4 text-center justify-center xl:text-xl">
@@ -69,4 +85,5 @@
 			</a>
 		</x-slot:footer>
 	@endisset
+	
 </x-layout>
