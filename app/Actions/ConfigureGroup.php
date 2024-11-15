@@ -24,7 +24,6 @@ class ConfigureGroup
 		string $timezone = 'America/New_York', // One true timezone
 		?string $bsky_url = null,
 		?string $meetup_url = null,
-		?string $og_asset = null,
 	): Group {
 		$group = Group::updateOrCreate([
 			'domain' => $domain,
@@ -35,7 +34,6 @@ class ConfigureGroup
 			'timezone' => $timezone,
 			'bsky_url' => $bsky_url ?: null,
 			'meetup_url' => $meetup_url ?: null,
-			'og_asset' => $og_asset ?: null,
 		]);
 		
 		Cache::clear();
@@ -73,7 +71,6 @@ class ConfigureGroup
 		$timezone = suggest('Timezone', DateTimeZone::listIdentifiers(), default: str($existing->timezone), required: true);
 		$bsky_url = text('Is there a Bluesky URL?', default: str($existing->bsky_url));
 		$meetup_url = text('Is there a Meetup URL?', default: str($existing->meetup_url));
-		$og_asset = text('What is the open graph image name?', default: str($existing->og_asset));
 		
 		table(['Option', 'Value'], [
 			['Name', $name],
@@ -81,7 +78,6 @@ class ConfigureGroup
 			['Timezone', $timezone],
 			['Bluesky', $bsky_url],
 			['Meetup', $meetup_url],
-			['Open Graph Image', $og_asset],
 		]);
 		
 		if (confirm('Is this correct?')) {
@@ -93,7 +89,6 @@ class ConfigureGroup
 				timezone: $timezone,
 				bsky_url: $bsky_url,
 				meetup_url: $meetup_url,
-				og_asset: $og_asset,
 			);
 			
 			$command->info($group->wasRecentlyCreated

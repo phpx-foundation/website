@@ -31,8 +31,8 @@
 				<meta name="description" content="{{ $group->description }}" />
 				<meta property="og:description" content="{{ $group->description }}" />
 			@endif
-			@if($group->og_asset)
-				<meta property="og:image" content="{{ asset("og/{$group->og_asset}") }}" />
+			@if($group->open_graph_image_url)
+				<meta property="og:image" content="{{ $group->open_graph_image_url }}" />
 			@endif
 		@endif
 	@endisset

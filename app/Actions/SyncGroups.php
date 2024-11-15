@@ -72,7 +72,6 @@ class SyncGroups
 			'timezone',
 			'bsky_url',
 			'meetup_url',
-			'og_asset',
 		]));
 		
 		return $group;
