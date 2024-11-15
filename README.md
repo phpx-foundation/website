@@ -34,7 +34,6 @@ To start a PHP× group:
     "region": "<<short city or region name>>", // can be null if airport code is good enough
     "description": "<<short description>>",
     "timezone": "<<php-compatible timezone ID>>",
-    "og_asset": "<<include image in public/og/ in pr>>", // can be null
     "bsky_url": "https://bsky.app/profile/<<group profile>>" // can be null
 },
 ```

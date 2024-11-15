@@ -5,16 +5,22 @@
 		"region": null,
 		"description": "A Philly-area PHP meetup for web artisans who want to learn and connect.",
 		"timezone": "America/New_York",
-		"og_asset": "philly.png",
 		"bsky_url": "https://bsky.app/profile/phpxphilly.com"
 	},
-	"phpxcebu.com": {
+	"phpxadl.com": {
+		"external": false,
+		"name": "PHP×Adl",
+		"region": null,
+		"description": "A Adelaide, Australia PHP meetup for web artisans who want to learn and connect.",
+		"timezone": "Australia/Adelaide",
+		"bsky_url": "https://bsky.app/profile/phpxadl.bsky.social"
+	},	
+  "phpxcebu.com": {
 		"external": false,
 		"name": "PHP×Cebu",
 		"region": "Cebu",
-		"description": "A Cebu-Philippines PHP meetup for artisans who want to grow and make friends.",
+		"description": "A Cebu-Philippines PHP meetup for web artisans who want to learn and connect.",
 		"timezone": "Asia/Manila",
-		"og_asset": null,
 		"bsky_url": "https://bsky.app/profile/phpxcebu.com"
 	},
 	"upstatephp.com": {

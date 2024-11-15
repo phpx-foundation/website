@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Glhd\Bits\Database\HasSnowflakes;
 use Illuminate\Container\Container;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -12,6 +13,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Stringable;
 use Revolution\Bluesky\Contracts\Factory;
 use Revolution\Bluesky\Facades\Bluesky;
 use Spatie\MailcoachSdk\Mailcoach;
@@ -117,6 +119,27 @@ class Group extends Model
 	public function mailcoach_transactional_emails(): HasMany
 	{
 		return $this->hasMany(MailcoachTransactionalEmail::class);
+	}
+	
+	protected function airportCode(): Attribute
+	{
+		return Attribute::get(
+			fn(): Stringable => str($this->name)->afterLast('×')->trim()->upper(),
+		);
+	}
+	
+	protected function openGraphImageUrl(): Attribute
+	{
+		return Attribute::get(function() {
+			$filename = $this->airport_code->lower()->finish('.png');
+			$path = public_path("og/{$filename}");
+			
+			if (file_exists($path)) {
+				return asset("og/{$filename}").'?t='.filemtime($path);
+			}
+			
+			return null;
+		});
 	}
 }
 

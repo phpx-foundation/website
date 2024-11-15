@@ -16,7 +16,6 @@ class GroupSeeder extends Seeder
 			'twitter_url' => 'https://twitter.com/joetannenbaum',
 			'meetup_url' => 'https://www.meetup.com/php-nyc/',
 			'description' => 'A fresh PHP meetup for NYC area devs.',
-			'og_asset' => 'nyc.png',
 		]);
 		
 		app()->instance('group:phpxnyc.com', $nyc);
@@ -28,7 +27,6 @@ class GroupSeeder extends Seeder
 			'twitter_url' => 'https://twitter.com/inxilpro',
 			'meetup_url' => 'https://www.meetup.com/php-philly/',
 			'description' => 'A Philly-area PHP meetup for web artisans who want to learn and connect.',
-			'og_asset' => 'philly.png',
 		]);
 		
 		app()->instance('group:phpxphilly.com', $philly);
@@ -40,7 +38,6 @@ class GroupSeeder extends Seeder
 			'twitter_url' => 'https://twitter.com/skylerkatz',
 			'meetup_url' => 'https://www.meetup.com/php-stl/',
 			'description' => 'A St. Louis-area PHP meetup for web artisans who want to learn and connect.',
-			'og_asset' => 'stl.png',
 		]);
 		
 		app()->instance('group:phpxstl.com', $stl);
