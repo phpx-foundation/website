@@ -27,8 +27,8 @@ class HomeController
 		return $groups
 			->merge($external)
 			->map(fn(Group|ExternalGroup $row) => [
-				'lat' => $row->latitude,
-				'lng' => $row->longitude,
+				'lat' => (float) $row->latitude,
+				'lng' => (float) $row->longitude,
 				'name' => $row->label(),
 			])
 			->reject(fn($data) => empty($data['lat']) || empty($data['lat']))
