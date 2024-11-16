@@ -138,5 +138,17 @@
         "bsky_url": "https://bsky.app/profile/phpxchattanooga.bsky.social",
         "latitude": 35.0457219,
         "longitude": -85.3094883
-    }
+    },
+    "laravel.swiss": {
+        "external": true,
+        "name": "Laravel Swiss Association",
+        "region": "Switzerland",
+        "description": "Bringing the Swiss Laravel community together on a regular base by organizing a monthly Meetup covering all topics around the Laravel and PHP ecosystem.",
+        "frequency": "monthly",
+        "timezone": "Europe/Zurich",
+        "bsky_url": null,
+        "latitude": 46.94809,
+        "longitude": 7.44744,
+        "status": "active"
+    }    
 }
