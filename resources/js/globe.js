@@ -40,6 +40,8 @@ camera.aspect = node.clientWidth / node.clientHeight;
 camera.updateProjectionMatrix();
 camera.position.z = 150;
 
+console.log({ debug: { Globe, renderer, scene, camera }});
+
 // Add camera controls
 // const tbControls = new TrackballControls(camera, renderer.domElement);
 // tbControls.minDistance = 101;
@@ -86,6 +88,7 @@ function tick(timestamp) {
 		tick_count = Math.ceil(fps * seconds);
 		point_index = data.length <= (point_index + 1) ? 0 : point_index + 1;
 		current_step = 0;
+		console.log({ item: data[point_index], fps });
 	}
 }
 
