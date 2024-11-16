@@ -1,4 +1,4 @@
-<x-layout>
+<x-layout scripts="resources/js/globe.js">
 	
 	<x-slot:og>
 		<meta property="og:url" content="{{ url()->current() }}" />
@@ -12,7 +12,5 @@
 	</x-slot:before>
 	
 	<x-markdown :file="base_path('README.md')" sidebar />
-	
-	@vite('resources/js/globe.js')
 	
 </x-layout>

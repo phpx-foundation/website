@@ -4,7 +4,7 @@
 	'footer' => null, 
 	'title' => null, 
 	'og' => null, 
-	'scripts' => null,
+	'scripts' => [],
 ])
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full antialiased bg-black text-white/50">
@@ -43,8 +43,7 @@
 		@endif
 	@endisset
 	
-	{{ $scripts }}
-	@vite('resources/js/app.js')
+	@vite(array_merge(['resources/js/app.js'], Arr::wrap($scripts)))
 	
 	@if(isset($group))
 		<script defer data-domain="{{ $group->domain }}" src="https://plausible.io/js/script.js"></script>
