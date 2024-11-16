@@ -16,8 +16,6 @@ const data = JSON.parse(node.dataset.points);
 const colorInterpolator = t => `rgba(255, 100, 50, ${ 1 - t })`;
 
 const Globe = new ThreeGlobe()
-	// .globeImageUrl('/world/earth-night.jpg')
-	// .bumpImageUrl('/world/earth-topology.png')
 	.globeImageUrl(earthNight)
 	.bumpImageUrl(earthTopology)
 	.ringsData(data)

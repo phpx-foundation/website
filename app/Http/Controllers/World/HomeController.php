@@ -31,6 +31,7 @@ class HomeController
 				'lng' => $row->longitude,
 				'name' => $row->label(),
 			])
+			->reject(fn($data) => empty($data['lat']) || empty($data['lat']))
 			->values();
 	}
 	
