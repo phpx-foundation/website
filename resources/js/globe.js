@@ -16,13 +16,17 @@ const Globe = new ThreeGlobe()
 	.ringPropagationSpeed(() => 1)
 	.ringRepeatPeriod(() => 2000)
 	.labelsData(data)
-	.labelSize(() => 0.8)
+	.labelSize(() => 0.7)
 	.labelDotRadius(() => 0.1)
 	.labelColor(() => 'white')
 	.labelText('name');
 
 // Setup renderer
-const renderer = new THREE.WebGLRenderer({ alpha: true });
+const renderer = new THREE.WebGLRenderer({
+	alpha: true,
+	antialias: true,
+});
+renderer.setPixelRatio(window.devicePixelRatio);
 
 // Setup scene
 const scene = new THREE.Scene();
@@ -46,7 +50,7 @@ function setSize() {
 	const width = node.clientWidth;
 	const height = node.clientHeight;
 	
-	camera.position.z = width > 1000 ? 150 : 120;
+	camera.position.z = width > 1000 ? 130 : 110;
 	camera.aspect = width / height;
 	camera.updateProjectionMatrix();
 	
@@ -57,26 +61,49 @@ setSize();
 window.addEventListener('resize', setSize, false);
 node.appendChild(renderer.domElement);
 
-let last_coords = [null, null];
+let seconds = 4; // seconds between animations
+let point_index = 0;
+let current_step = 0;
+let tick_count = 100;
+let last_timestamp = 0;
+let fps = 0;
 
-function show(lat, lng) {
-	const x = THREE.MathUtils.degToRad(lat);
-	const y = THREE.MathUtils.degToRad(-lng);
+function tick(timestamp) {
+	const prev = 0 === point_index ? data[data.length - 1] : data[point_index - 1];
+	const next = data[point_index];
 	
-	last_coords = [x, y];
+	const x = THREE.MathUtils.degToRad(interpolate(prev.lat, next.lat, current_step, tick_count));
+	const y = THREE.MathUtils.degToRad(-1 * interpolate(prev.lng, next.lng, current_step, tick_count));
 	
 	Globe.rotation.set(x, y, 0, 'XYZ');
+	
+	current_step++;
+	
+	fps = 1 / (timestamp - last_timestamp);
+	last_timestamp = timestamp;
+	
+	if (current_step >= tick_count) {
+		tick_count = Math.ceil(fps * seconds);
+		point_index = data.length <= (point_index + 1) ? 0 : point_index + 1;
+		current_step = 0;
+	}
+}
+
+function ease(k) {
+	return .5 * (Math.sin((k - .5) * Math.PI) + 1);
+}
+
+function interpolate(from, to, tick, ticks) {
+	const k = Math.max(0, Math.min(1, tick / (ticks - 1)));
+	const easing = ease(k);
+	return from + (to - from) * easing;
 }
 
 // Kick-off renderer
-// let centered = false;
-(function animate() {
-	show(data[0].lat, data[0].lng);
-	// Globe.rotation.y += 0.001
+(function animate(timestamp) {
+	tick(timestamp * 0.001);
 	
 	tbControls.update();
 	renderer.render(scene, camera);
 	requestAnimationFrame(animate);
 })();
-
-// setTimeout(() => console.log(Globe.rotation), 1000);

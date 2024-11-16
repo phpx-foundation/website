@@ -1,8 +1,10 @@
 <?php
 
 use App\Enums\RootDomains;
+use App\Http\Controllers\World\HomeController;
 use App\Http\Middleware\SetGroupFromDomainMiddleware;
 use App\Http\Middleware\ShareNextMeetupMiddleware;
+use App\Models\ExternalGroup;
 use App\Models\Group;
 use App\Models\Meetup;
 use Illuminate\Support\Facades\Route;
@@ -10,17 +12,7 @@ use Illuminate\Support\Facades\Route;
 // Register the phpx.world routes
 foreach (RootDomains::cases() as $case) {
 	Route::domain($case->value)->group(function() {
-		Route::get('/', function() {
-			return view('world.home', [
-				'points' => Group::query()->select(['name', 'latitude', 'longitude'])->get()
-					->map(fn($row) => [
-						'lat' => $row->latitude, 
-						'lng' => $row->longitude,
-						'name' => $row->label(),
-					])
-					->toArray(),
-			]);
-		});
+		Route::get('/', HomeController::class);
 		Route::view('/organizers', 'world.organizers');
 	});
 }
