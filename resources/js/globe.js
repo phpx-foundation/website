@@ -1,6 +1,14 @@
 import * as THREE from 'three';
 import ThreeGlobe from 'three-globe';
+import WebGL from 'three/addons/capabilities/WebGL.js';
+import earthNight from '../../public/world/earth-night.jpg';
+import earthTopology from '../../public/world/earth-topology.png';
 // import { TrackballControls } from 'three/examples/jsm/controls/TrackballControls.js';
+
+if (! WebGL.isWebGL2Available()) {
+	const warning = THREE.WEBGL.getWebGLErrorMessage();
+	throw new Error(warning);
+}
 
 const node = document.getElementById('globe-visualization');
 const data = JSON.parse(node.dataset.points);
@@ -8,8 +16,10 @@ const data = JSON.parse(node.dataset.points);
 const colorInterpolator = t => `rgba(255, 100, 50, ${ 1 - t })`;
 
 const Globe = new ThreeGlobe()
-	.globeImageUrl('/world/earth-night.jpg')
-	.bumpImageUrl('/world/earth-topology.png')
+	// .globeImageUrl('/world/earth-night.jpg')
+	// .bumpImageUrl('/world/earth-topology.png')
+	.globeImageUrl(earthNight)
+	.bumpImageUrl(earthTopology)
 	.ringsData(data)
 	.ringColor(() => colorInterpolator)
 	.ringMaxRadius(() => 5)
@@ -23,7 +33,7 @@ const Globe = new ThreeGlobe()
 
 // Setup renderer
 const renderer = new THREE.WebGLRenderer({
-	// alpha: true,
+	alpha: true,
 	antialias: true,
 });
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -88,7 +98,6 @@ function tick(timestamp) {
 		tick_count = Math.ceil(fps * seconds);
 		point_index = data.length <= (point_index + 1) ? 0 : point_index + 1;
 		current_step = 0;
-		// console.log({ item: data[point_index], fps });
 	}
 }
 
