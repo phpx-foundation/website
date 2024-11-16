@@ -141,7 +141,7 @@
     },
     "laravel.swiss": {
         "external": true,
-        "name": "Laravel Swiss Association",
+        "name": "Swiss Laravel Association",
         "region": "Switzerland",
         "description": "Bringing the Swiss Laravel community together on a regular base by organizing a monthly Meetup covering all topics around the Laravel and PHP ecosystem.",
         "frequency": "monthly",
