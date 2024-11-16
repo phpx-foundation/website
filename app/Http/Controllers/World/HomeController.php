@@ -14,7 +14,7 @@ class HomeController
 			'points' => Cache::remember(
 				key: 'homepage-points', 
 				ttl: now()->addDay(), 
-				callback: fn() => $this->maximizeDistance($this->points())
+				callback: fn() => $this->points()->shuffle(), // $this->maximizeDistance($this->points())
 			),
 		]);
 	}

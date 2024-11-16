@@ -13,6 +13,15 @@ if (! WebGL.isWebGL2Available()) {
 const node = document.getElementById('globe-visualization');
 const data = JSON.parse(node.dataset.points);
 
+// We need to define these up here because they're used in the dynamic labels
+let seconds = 4; // seconds between animations
+let point_index = 0;
+let current_step = 0;
+let tick_count = 100;
+let last_timestamp = 0;
+let fps = 0;
+let pausing = 0;
+
 const colorInterpolator = t => `rgba(255, 100, 50, ${ 1 - t })`;
 
 const Globe = new ThreeGlobe()
@@ -24,7 +33,7 @@ const Globe = new ThreeGlobe()
 	.ringPropagationSpeed(() => 1)
 	.ringRepeatPeriod(() => 2000)
 	.labelsData(data)
-	.labelSize(() => 0.7)
+	.labelSize(() => 0.4)
 	.labelDotRadius(() => 0.1)
 	.labelColor(() => 'white')
 	.labelText('name');
@@ -46,7 +55,6 @@ scene.add(new THREE.DirectionalLight(0xffffff, 0.6 * Math.PI));
 const camera = new THREE.PerspectiveCamera();
 camera.aspect = node.clientWidth / node.clientHeight;
 camera.updateProjectionMatrix();
-camera.position.z = 150;
 
 window.__debug__ = { Globe, renderer, scene, camera };
 
@@ -71,14 +79,14 @@ setSize();
 window.addEventListener('resize', setSize, false);
 node.appendChild(renderer.domElement);
 
-let seconds = 4; // seconds between animations
-let point_index = 0;
-let current_step = 0;
-let tick_count = 100;
-let last_timestamp = 0;
-let fps = 0;
-
 function tick(timestamp) {
+	// if ((current_step + 1) >= tick_count && pausing < (fps * 1.5)) {
+	// 	pausing++;
+	// 	return;
+	// }
+	//
+	// pausing = 0;
+	
 	const prev = 0 === point_index ? data[data.length - 1] : data[point_index - 1];
 	const next = data[point_index];
 	
@@ -86,6 +94,9 @@ function tick(timestamp) {
 	const y = THREE.MathUtils.degToRad(-1 * interpolate(prev.lng, next.lng, current_step, tick_count));
 	
 	Globe.rotation.set(x, y, 0, 'XYZ');
+	
+	const normalized = (current_step - (tick_count / 2)) / (tick_count / 2);
+	camera.position.z = -15 * (normalized * normalized) + 130;
 	
 	current_step++;
 	
@@ -96,6 +107,8 @@ function tick(timestamp) {
 		tick_count = Math.ceil(fps * seconds);
 		point_index = data.length <= (point_index + 1) ? 0 : point_index + 1;
 		current_step = 0;
+		
+		// Globe.labelColor(d => d.name === data[point_index].name ? 'yellow' : 'white');
 	}
 }
 
@@ -111,7 +124,7 @@ function interpolate(from, to, tick, ticks) {
 
 // Kick-off renderer
 (function animate(timestamp) {
-	tick(timestamp * 0.001);
+	const pause = tick(timestamp * 0.001);
 	
 	// tbControls.update();
 	renderer.render(scene, camera);
