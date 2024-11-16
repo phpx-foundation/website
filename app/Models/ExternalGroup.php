@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\GroupStatus;
 use Exception;
 use Glhd\Bits\Database\HasSnowflakes;
 use Illuminate\Database\Eloquent\Model;
@@ -19,6 +20,14 @@ class ExternalGroup extends Model
 				throw new Exception('Cannot create an external group with a domain for an existing group.');
 			}
 		});
+	}
+	
+	protected function casts(): array
+	{
+		return [
+			'latitude' => 'float',
+			'longitude' => 'float',
+		];
 	}
 	
 	public function label(): string

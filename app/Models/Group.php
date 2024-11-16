@@ -43,6 +43,8 @@ class Group extends Model
 			'mailcoach_token' => 'encrypted',
 			'bsky_app_password' => 'encrypted',
 			'status' => GroupStatus::class,
+			'latitude' => 'float',
+			'longitude' => 'float',
 		];
 	}
 	
