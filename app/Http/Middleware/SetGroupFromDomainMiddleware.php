@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Enums\DomainStatus;
 use App\Enums\RootDomains;
 use App\Models\Group;
 use Closure;
@@ -24,6 +25,8 @@ class SetGroupFromDomainMiddleware
 		if (! $group = $this->group($request)) {
 			throw new NotFoundHttpException();
 		}
+		
+		$this->updateDomainStatusIfNecessary($group);
 		
 		Container::getInstance()->instance(Group::class, $group);
 		Container::getInstance()->instance("group:{$group->domain}", $group);
@@ -53,6 +56,14 @@ class SetGroupFromDomainMiddleware
 		return $attributes
 			? (new Group())->newFromBuilder($attributes)
 			: null;
+	}
+	
+	protected function updateDomainStatusIfNecessary(Group $group): void
+	{
+		if ($group->domain_status !== DomainStatus::Confirmed) {
+			$group->update(['domain_status' => DomainStatus::Confirmed]);
+			Cache::forget('phpx-network');
+		}
 	}
 	
 	protected function isRootDomain(Request $request): bool

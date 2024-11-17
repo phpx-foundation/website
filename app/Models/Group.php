@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\DomainStatus;
 use App\Enums\GroupStatus;
 use Glhd\Bits\Database\HasSnowflakes;
 use Illuminate\Container\Container;
@@ -43,6 +44,7 @@ class Group extends Model
 			'mailcoach_token' => 'encrypted',
 			'bsky_app_password' => 'encrypted',
 			'status' => GroupStatus::class,
+			'domain_status' => DomainStatus::class,
 			'latitude' => 'float',
 			'longitude' => 'float',
 		];

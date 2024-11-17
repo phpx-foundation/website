@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Enums\DomainStatus;
 use App\Models\ExternalGroup;
 use App\Models\Group;
 use Illuminate\Contracts\View\Factory;
@@ -37,6 +38,7 @@ class AppServiceProvider extends ServiceProvider
 				try {
 					return Group::query()
 						->select('domain', 'name', 'region')
+						->where('domain_status', DomainStatus::Confirmed)
 						->get()
 						->mapWithKeys(fn(Group $group) => [$group->domain => $group->label()])
 						->toArray();
