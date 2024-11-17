@@ -44,7 +44,16 @@
 					<x-icon.bsky class="fill-white w-10 h-10 opacity-50 transform group-hover:opacity-90 group-hover:-rotate-2" />
 				</a>
 			@endif
-			@if($group->meetup_url)
+			@if(str_contains($group->meetup_url, '|'))
+				@foreach(explode('|', $group->meetup_url) as $url)
+					<a href="{{ $url }}" class="group relative" target="_blank">
+						<div class="absolute bg-white whitespace-nowrap px-2 py-1 text-black font-mono font-bold -top-full -left-2 transform transition-all ease-out duration-100 opacity-0 rotate-6 pointer-events-none translate-y-3 group-hover:-rotate-3 group-hover:block group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
+							Meetup.com
+						</div>
+						<x-icon.meetup class="fill-white w-10 h-10 opacity-50 transform group-hover:opacity-90 group-hover:-rotate-2" />
+					</a>
+				@endforeach
+			@elseif($group->meetup_url)
 				<a href="{{ $group->meetup_url }}" class="group relative" target="_blank">
 					<div class="absolute bg-white whitespace-nowrap px-2 py-1 text-black font-mono font-bold -top-full -left-2 transform transition-all ease-out duration-100 opacity-0 rotate-6 pointer-events-none translate-y-3 group-hover:-rotate-3 group-hover:block group-hover:opacity-100 group-hover:translate-y-0 group-hover:pointer-events-auto">
 						Meetup.com
