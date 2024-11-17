@@ -23,8 +23,8 @@ const Globe = new ThreeGlobe()
 	.ringPropagationSpeed(() => 1)
 	.ringRepeatPeriod(() => 2000)
 	.labelsData(points)
-	.labelSize(() => 0.4)
-	.labelDotRadius(() => 0.1)
+	.labelSize(() => 0.25)
+	.labelDotRadius(() => 0.05)
 	.labelColor(() => 'white')
 	.labelText('name');
 
