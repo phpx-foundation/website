@@ -49,6 +49,7 @@ site should start working immediately. There are a handful of things that will
 need to happen manually after that. For right now, the best way to do this is to
 reach out to Chris Morrell on Discord to check in on each of these:
 
+- Get the "organizer" role on Discord
 - Have a channel created in the Discord
 - Get a logo for social media
 - Get an open graph image created
