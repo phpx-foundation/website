@@ -42,12 +42,25 @@ Awesome. You want to start a PHP× group! Here are the basic steps to get starte
 
 ## Once you've started
 
+### Manual set up
+
+Once your PR is merged, your domain will be automatically added to Forge and your
+site should start working immediately. There are a handful of things that will
+need to happen manually after that. For right now, the best way to do this is to
+reach out to Chris Morrell on Discord to check in on each of these:
+
+- Have a channel created in the Discord
+- Get a logo for social media
+- Get an open graph image created
+- Configure your mailing list
+- Integrate with Bluesky
+
 ### Set up Mailcoach
 
 The folks at [Mailcoach](https://www.mailcoach.app/) have generously offered free accounts to all
 PHP× organizers. Reach out to Chris Morrell on the Discord to get the coupon code.
 
-### Get a free Mailcoach account
+#### Get a free Mailcoach account
 
 Once you have your coupon code, register at [Mailcoach](https://www.mailcoach.app/). 
 
@@ -68,7 +81,7 @@ however you choose. A few things you will probably want to do:
   you can set up something like hello@phpx(…).com to forward to your personal email address
   using Cloudflare's free email routing)
 
-### Connect your account to PHP×
+#### Connect your account to PHP×
 
 Once your account is set up and you have a mailing list configured, please get in touch
 with Chris Morrell and give him the following information:
