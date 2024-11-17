@@ -46,7 +46,7 @@
         "description": "A local Minneapolis / St. Paul PHP meetup for web artisans who want to learn and connect.",
         "timezone": "America/Chicago",
         "status": "planned",
-        "bsky_url": null,
+        "bsky_url": "https://bsky.app/profile/phpxmsp.com",
         "latitude": 44.9772995,
         "longitude": -93.2654692
     },
