@@ -99,6 +99,23 @@ Eventually, the PHP× platform will automatically trigger transactional emails f
 like RSVP receipts and announcement/reminder emails, but for now you will need to send
 out event announcements yourself via Mailcoach.
 
+## Next up
+
+We'd like to gather lots of organizer resources so that each person isn't in it alone. Some ideas:
+
+- Guides on having your first meeting
+- Companies that are interested in sponsoring meetups
+- Tips on estimating how much food/drinks/etc you'll need
+- How to get speakers, and what kinds of meetings work well
+
+Some things already in the works:
+
+- Free [Mailcoach](https://www.mailcoach.app/) accounts for organizers
+- Listing on [Laravel News](https://laravel-news.com/events)
+- Collaboration with [Laravel](https://laravel.com/) to give meetups exposure and help find speakers (both in-person and virtual)
+
+Hopefully this list will grow over the coming weeks. Keep an eye out.
+
 <!--
 ## Set up Bluesky
 

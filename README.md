@@ -1,39 +1,45 @@
 # PHP×
 
-PHP× is a small group of PHP and Laravel meetups around the world. We're a small group now,
-but hope to grow over the coming months!
+PHP× is a group of PHP and Laravel meetups around the world. Each group is independently
+organized, but we try to share knowledge and resources how we can.
 
-As of right now, this page serves as a scratchpad for meetup organizers. If you would like to 
-contribute to this document, [pull requests are welcome](https://github.com/phpx-foundation/website).
-Not sure? [Join the PHP× Discord](https://discord.gg/wMy6Eeuwbu) first to discuss!
+Our group started in 2024, first with [PHP×NYC](https://phpxnyc.com/) and shortly after
+with [PHP×Philly](https://phpxphilly.com/). In late 2024, the PHP× network started expanding
+rapidly. We're now trying to figure out the best ways to work together and help promote
+each other's groups and events.
 
-## Adding a group to PHP×
+Want to get involved? The best place right now is [on our Discord](https://discord.gg/wMy6Eeuwbu).
 
-There are two kinds of groups:
+## Joining PHP×
 
-### PHP× Groups
+Existing groups are welcome to join PHP×, and if there isn't a local PHP meetup or user
+group in your area, we'll help you get set up.
 
-These are groups that are hosted on [phpx.world](https://phpx.world) and use the PHP× naming convention.
-To start a PHP× group, read our [organizer guide](/organizers).
+### Existing Groups
 
-### External groups
+If you already have a PHP meetup and would like to be listed on our site, please submit
+a PR to the [`groups.json`](https://github.com/phpx-foundation/website/blob/main/groups.json) file
+in our website repo. Just match the style of any group in that file that has `external` set
+to `true`.
 
-You don't need to host your site on our platform. If you already have a successful meetup, we're
-happy to link to it. Just submit a PR to the [`groups.json`](https://github.com/phpx-foundation/website/blob/main/groups.json)
-file with the following format:
+### New groups
 
-```json5
-"<<your domain>>": {
-    "external": true, // must be true
-    "name": "PHP×<<local airport code or similar>>",
-    "region": "<<short city or region name>>",
-},
-```
+If you would like to start a new PHP× group, please check our [Organizers page](/organizers)
+for instructions and considerations.
 
-## The PHP× site
+## Sponsoring Groups
 
-This site is a basic multi-tenant Laravel app. As of November 13, 2024, the following
-features were loosely supported:
+If you are a company that would like to sponsor PHP and Laravel events, please get in
+touch. The best way to do that, right now, is [via the PHP× Discord](https://discord.gg/wMy6Eeuwbu).
+In the future, we plan to make it easier to connect groups with sponsors.
+
+## The PHP× network of sites
+
+This site is a basic multi-tenant Laravel app that any event organizer is welcome to use
+to host a basic landing page and accept newsletter sign-ups and event RSVPs. Check out
+the [Organizers page](/organizers) for details on how to get set up.
+
+As of November 17, 2024, the following features were loosely supported:
 
 - Creating groups
 - Creating and RSVPing to meetups
@@ -56,32 +62,11 @@ Other ideas:
 - We should have a "placeholder" concept for groups that are considering forming (maybe subdomains)
 
 If any of that sounds interesting, [join the Discord](https://discord.gg/wMy6Eeuwbu)! You're welcome
-to PR changes, but it's best to talk it thru with group organizers first.
-
-## Resources for Organizers
-
-Another big goal is to make it easier to organize meetups! We'd like to gather resources
-so that each person isn't in it alone. Some ideas:
-
-- Guides on having your first meeting
-- Companies that are interested in sponsoring meetups
-- Tips on estimating how much food/drinks/etc you'll need
-- How to get speakers, and what kinds of meetings work well
-
-Some things already in the works:
-
-- Free [Mailcoach](https://www.mailcoach.app/) accounts for organizers
-- Listing on [Laravel News](https://laravel-news.com/events)
-
-Hopefully this list will grow over the coming weeks. Keep an eye out.
+to [PR changes](https://github.com/phpx-foundation/website), but it's best to talk it thru with 
+group organizers first.
 
 ## What's Next
 
-PHP× started with [Joe Tannenbaum](https://bsky.app/profile/joe.codes) and
-[PHP×NYC](https://phpxnyc.com/). [Chris Morrell](https://bsky.app/profile/cmorrell.com)
-launched [PHP×Philly](https://phpxphilly.com/) soon after, but in mid-November 2024,
-PHP meetups really started to explode.
-
-We're in the **very** early days of figuring out what this group can do!
+We're still in the **very** early days of figuring out what this group can do!
 
 Stay tuned.

@@ -30,6 +30,7 @@ export default {
 			},
 			animation: {
 				cursor: 'cursor 1.2s ease-in-out infinite',
+				'spin-ultra-slow': 'spin 15s linear infinite',
 			},
 			boxShadow: {
 				'sharp': '8px 8px 0px 5px rgba(0,0,0,0.8)',
