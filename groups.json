@@ -112,6 +112,7 @@
         "region": "Vienna",
         "description": "A Vienna PHP meetup for web artisans who want to learn and connect.",
         "timezone": "Europe/Vienna",
+        "bsky_url": "https://bsky.app/profile/phpxvie.bsky.social",
         "meetup_url": [
             "https://www.meetup.com/viennaphp/",
             "https://www.meetup.com/Laravel-Frameworkers-Vienna/"
