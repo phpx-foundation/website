@@ -28,7 +28,16 @@ class ImportFromMeetup
 
             $command->info('Crawling ' . $group->name);
 
-            $events = $this->crawl_meetupcom($group->meetup_url);
+            $events = collect([]);
+
+            // if the meetup_url is an array, we need to crawl all of them
+            if(is_array($group->meetup_url)) {
+                foreach($group->meetup_url as $url) {
+                    $events = $events->merge($this->crawl_meetupcom($url));
+                }
+            } else {
+                $events = $this->crawl_meetupcom($group->meetup_url);
+            }
 
             foreach ($events as $event) {
 
