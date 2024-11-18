@@ -68,9 +68,16 @@ function ease(k) {
 }
 
 function interpolate(from, to, tick, ticks) {
+	let diff = to - from;
+	
+	if (Math.abs(diff) > 180) {
+		diff = diff > 0 ? diff - 360 : diff + 360;
+	}
+	
 	const k = Math.max(0, Math.min(1, tick / (ticks - 1)));
 	const easing = ease(k);
-	return from + (to - from) * easing;
+	
+	return from + diff * easing;
 }
 
 const SECONDS_BETWEEN_POINTS = 4;
