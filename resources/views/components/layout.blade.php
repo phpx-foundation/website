@@ -6,7 +6,7 @@
 	'og' => null, 
 	'scripts' => [],
 ])
-<!DOCTYPE html>
+	<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full antialiased bg-black text-white/50">
 <head>
 	<meta charset="utf-8">
@@ -52,12 +52,18 @@
 <body class="flex min-h-full font-sans">
 <div {{ $attributes->merge(['class' => 'flex w-full flex-col bg-dots']) }}>
 	{{-- Header --}}
-	<div class="w-full max-w-4xl mx-auto flex items-center gap-4 p-4">
+	<div class="w-full max-w-4xl mx-auto flex items-center justify-between gap-4 p-4">
 		@if(url()->current() == url('/'))
 			<x-phpx-dropdown />
 		@else
 			<x-phpx-home />
 		@endif
+		
+		@isset($group)
+			<a href="https://phpx.world" target="_blank" class="cursor-pointer text-white opacity-50 hover:opacity-90">
+				<x-icon.globe class="size-8 hover:animate-spin-ultra-slow" />
+			</a>
+		@endisset
 	</div>
 	
 	{{ $before }}
