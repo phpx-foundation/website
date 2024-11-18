@@ -23,7 +23,7 @@ class ConfigureGroup
 		string $description,
 		string $timezone = 'America/New_York', // One true timezone
 		?string $bsky_url = null,
-		string|array $meetup_url = null,
+		?string $meetup_url = null,
 	): Group {
 		$group = Group::updateOrCreate([
 			'domain' => $domain,
@@ -33,7 +33,7 @@ class ConfigureGroup
 			'description' => $description,
 			'timezone' => $timezone,
 			'bsky_url' => $bsky_url ?: null,
-			'meetup_url' => is_array($meetup_url) ? implode('|', $meetup_url) : $meetup_url,
+			'meetup_url' => $meetup_url ?: null,
 		]);
 		
 		Cache::clear();
