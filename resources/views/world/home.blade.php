@@ -13,4 +13,8 @@
 	
 	<x-markdown :file="base_path('README.md')" sidebar />
 	
+	<p>
+		<a href="/terms">Terms of Use</a>
+	</p>
+
 </x-layout>

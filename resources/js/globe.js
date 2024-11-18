@@ -19,15 +19,19 @@ const colorInterpolator = t => `rgba(255, 210, 210, ${ 1 - t })`;
 
 // const is_fast_connection = ('connection' in navigator && navigator.connection && 'downlink' in navigator.connection && navigator.connection.downlink >= 10);
 
+function random_number(min, max) {
+	return Math.random() * (max - min) + min;
+}
+
 const Globe = new ThreeGlobe()
 	// .globeImageUrl(is_fast_connection ? earthNightHighRes : earthNight)
 	.globeImageUrl(earthNightCustom)
 	.bumpImageUrl(earthTopology)
 	.ringsData(points)
 	.ringColor(() => colorInterpolator)
-	.ringMaxRadius(() => 3)
+	.ringMaxRadius(() => random_number(2.5, 4))
 	.ringPropagationSpeed(() => 1)
-	.ringRepeatPeriod(() => 2000)
+	.ringRepeatPeriod(() => random_number(1800, 2200))
 	.labelsData(points)
 	.labelSize(() => 0.25)
 	.labelDotRadius(() => 0.05)
@@ -73,6 +77,18 @@ setSize();
 window.addEventListener('resize', setSize, false);
 node.appendChild(renderer.domElement);
 
+function getDistance(a, b) {
+	const R = 6371; // Earth's radius in km
+	const dLat = (b.lat - a.lat) * Math.PI / 180;
+	const dLng = (b.lng - b.lng) * Math.PI / 180;
+	
+	const x = Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+		Math.cos(a.lat * Math.PI / 180) * Math.cos(b.lat * Math.PI / 180) *
+		Math.sin(dLng / 2) * Math.sin(dLng / 2);
+	
+	return 2 * R * Math.asin(Math.sqrt(x));
+}
+
 function ease(k) {
 	return .5 * (Math.sin((k - .5) * Math.PI) + 1);
 }
@@ -103,6 +119,8 @@ let point_index = 0;
 let frame = 0;
 let frames_per_point = (60 * SECONDS_BETWEEN_POINTS); // Assume 60 fps at first
 let last_timestamp = 0;
+let current_z = default_z;
+let last_z = default_z;
 let fps = 0;
 
 function move(frame)
@@ -115,9 +133,14 @@ function move(frame)
 	
 	Globe.rotation.set(x, y, 0, 'XYZ');
 	
-	camera.position.z = easeInOut(frame, frames_per_point, default_z, default_z + 40);
+	const distance = Math.max(0, Math.min(2500, getDistance(prev, next)));
+	const distance_multiplier = distance / 2500;
+	const height = 40 * distance_multiplier;
+	
+	camera.position.z = easeInOut(frame, frames_per_point, last_z, default_z + height);
 	
 	if (frame >= frames_per_point) {
+		last_z = camera.position.z;
 		frames_per_point = Math.ceil(fps * SECONDS_BETWEEN_POINTS);
 		point_index = points.length <= (point_index + 1) ? 0 : point_index + 1;
 		return true;
@@ -128,9 +151,14 @@ function move(frame)
 
 function pause(frame)
 {
-	camera.position.z = default_z - (frame / 100);
+	camera.position.z = last_z - (frame / 100);
 	
-	return frame >= (frames_per_point / 2);
+	if (frame >= (frames_per_point / 2)) {
+		last_z = camera.position.z;
+		return true;
+	}
+	
+	return false;
 }
 
 // Kick-off renderer
