@@ -130,7 +130,7 @@
         "frequency": "quarterly",
         "latitude": 48.142370,
         "longitude": 11.584800
-    }
+    },
     "upstatephp.com": {
         "external": true,
         "name": "PHP×GVL",
