@@ -119,6 +119,18 @@
         "latitude": 48.18835594056084,
         "longitude": 16.374042777964085
     },
+    "phpxmuc.com": {
+        "external": true,
+        "name": "PHPxMUC",
+        "region": "Munich",
+        "description": "A Munich, Germany PHP and Laravel meetup",
+        "timezone": "Europe/Berlin",
+        "meetup_url": "https://www.meetup.com/de-DE/laravel-munich/",
+        "status": "active",
+        "frequency": "quarterly",
+        "latitude": 48.142370,
+        "longitude": 11.584800
+    }
     "upstatephp.com": {
         "external": true,
         "name": "PHP×GVL",
