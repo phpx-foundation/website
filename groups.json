@@ -162,5 +162,17 @@
         "latitude": 46.94809,
         "longitude": 7.44744,
         "status": "active"
-    }    
+    },
+        "filamentbrasil.com.br": {
+        "external": true,
+        "name": "PHPxFilamentBrasil",
+        "region": "Brazil",
+        "description": "Connecting the Brazilian Filament and Laravel community with regular events, discussions, and knowledge sharing about the Laravel and Filament ecosystem.",
+        "frequency": "monthly",
+        "timezone": "America/Sao_Paulo",
+        "bsky_url": null,
+        "latitude": -23.55052,
+        "longitude": -46.6333,
+        "status": "active"
+    }
 }
