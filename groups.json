@@ -175,5 +175,17 @@
         "latitude": 46.94809,
         "longitude": 7.44744,
         "status": "active"
-    }    
+    },
+    "phpxmtl.ca": {
+        "external": true,
+        "name": "PHP×Montreal",
+        "region": "Montreal",
+        "description": "Your friendly Montreal Laravel User Group, organizing monthly Meetups about the Laravel ecosystem.",
+        "frequency": "monthly",
+        "timezone": "America/Toronto",
+        "bsky_url": null,
+        "latitude": 45.494642,
+        "longitude": -73.55776,
+        "status": "active"
+    }
 }
