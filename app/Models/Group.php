@@ -169,5 +169,15 @@ class Group extends Model
 			return null;
 		});
 	}
+	
+	protected function meetupUrlArray(): Attribute
+	{
+		return Attribute::get(fn() => str($this->meetup_url)
+			->explode(',')
+			->map(fn($url) => trim($url))
+			->filter()
+			->values()
+			->toArray());
+	}
 }
 
