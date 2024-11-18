@@ -1,7 +1,9 @@
 import * as THREE from 'three';
 import ThreeGlobe from 'three-globe';
 import WebGL from 'three/addons/capabilities/WebGL.js';
-import earthNight from '../../public/world/earth-night.jpg';
+// import earthNight from '../../public/world/earth-night.jpg';
+// import earthNightHighRes from '../../public/world/earth-night-hires.jpg';
+import earthNightCustom from '../../public/world/earth-night-custom.jpg';
 import earthTopology from '../../public/world/earth-topology.png';
 
 if (! WebGL.isWebGL2Available()) {
@@ -12,14 +14,18 @@ if (! WebGL.isWebGL2Available()) {
 const node = document.getElementById('globe-visualization');
 const points = JSON.parse(node.dataset.points);
 
-const colorInterpolator = t => `rgba(255, 100, 50, ${ 1 - t })`;
+const colorInterpolator = t => `rgba(255, 210, 210, ${ 1 - t })`;
+// const colorInterpolator = t => `rgba(83, 116, 255, ${ 1 - t })`; // php.net
+
+// const is_fast_connection = ('connection' in navigator && navigator.connection && 'downlink' in navigator.connection && navigator.connection.downlink >= 10);
 
 const Globe = new ThreeGlobe()
-	.globeImageUrl(earthNight)
+	// .globeImageUrl(is_fast_connection ? earthNightHighRes : earthNight)
+	.globeImageUrl(earthNightCustom)
 	.bumpImageUrl(earthTopology)
 	.ringsData(points)
 	.ringColor(() => colorInterpolator)
-	.ringMaxRadius(() => 5)
+	.ringMaxRadius(() => 3)
 	.ringPropagationSpeed(() => 1)
 	.ringRepeatPeriod(() => 2000)
 	.labelsData(points)
@@ -48,11 +54,15 @@ camera.updateProjectionMatrix();
 
 // window.__debug__ = { Globe, renderer, scene, camera };
 
+let default_z = 110;
+
 function setSize() {
 	const width = node.clientWidth;
 	const height = node.clientHeight;
 	
-	camera.position.z = width > 1000 ? 130 : 110;
+	default_z = width > 1000 ? 110 : 105;
+	
+	camera.position.z = default_z;
 	camera.aspect = width / height;
 	camera.updateProjectionMatrix();
 	
@@ -65,6 +75,10 @@ node.appendChild(renderer.domElement);
 
 function ease(k) {
 	return .5 * (Math.sin((k - .5) * Math.PI) + 1);
+}
+
+function easeInOut (frame, frames, min, max) {
+	return min + (max - min) * Math.sin(Math.PI * (frame / frames)) * Math.sin(Math.PI * (frame / frames));
 }
 
 function interpolate(from, to, tick, ticks) {
@@ -101,8 +115,7 @@ function move(frame)
 	
 	Globe.rotation.set(x, y, 0, 'XYZ');
 	
-	const normalized = (frame - (frames_per_point / 2)) / (frames_per_point / 2);
-	camera.position.z = -15 * (normalized * normalized) + 130;
+	camera.position.z = easeInOut(frame, frames_per_point, default_z, default_z + 40);
 	
 	if (frame >= frames_per_point) {
 		frames_per_point = Math.ceil(fps * SECONDS_BETWEEN_POINTS);
@@ -115,13 +128,9 @@ function move(frame)
 
 function pause(frame)
 {
-	camera.position.z = 115 - (frame / 100);
+	camera.position.z = default_z - (frame / 100);
 	
-	if (frame >= (frames_per_point / 2)) {
-		return true;
-	}
-	
-	return false;
+	return frame >= (frames_per_point / 2);
 }
 
 // Kick-off renderer
