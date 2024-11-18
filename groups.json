@@ -178,8 +178,8 @@
     },
     "phpxmtl.ca": {
         "external": true,
-        "name": "Laravel Montreal",
-        "region": "Montreal, Canada",
+        "name": "PHP×Montreal",
+        "region": "Montreal",
         "description": "Your friendly Montreal Laravel User Group, organizing monthly Meetups about the Laravel ecosystem.",
         "frequency": "monthly",
         "timezone": "America/Toronto",
