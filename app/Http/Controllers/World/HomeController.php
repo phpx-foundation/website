@@ -67,8 +67,10 @@ class HomeController
 				$targets = $result->take(-2);
 				
 				$distance = $this->distance($targets->pop(), $point);
+				
 				if ($targets->isNotEmpty()) {
 					$distance += $this->distance($targets->pop(), $point);
+					$distance = $distance / 2;
 				}
 				
 				return $distance;

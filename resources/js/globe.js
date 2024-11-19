@@ -12,6 +12,7 @@ if (! WebGL.isWebGL2Available()) {
 }
 
 const node = document.getElementById('globe-visualization');
+// const debug_node = document.getElementById('debug');
 const points = JSON.parse(node.dataset.points);
 
 const colorInterpolator = t => `rgba(255, 210, 210, ${ 1 - t })`;
@@ -94,7 +95,13 @@ function ease(k) {
 }
 
 function easeInOut (frame, frames, min, max) {
-	return min + (max - min) * Math.sin(Math.PI * (frame / frames)) * Math.sin(Math.PI * (frame / frames));
+	let eased = min + (max - min) * Math.sin(Math.PI * (frame / frames)) * Math.sin(Math.PI * (frame / frames));
+	
+	if (frame > (frames /2 )) {
+		eased = Math.max(eased, default_z);
+	}
+	
+	return eased;
 }
 
 function interpolate(from, to, tick, ticks) {
@@ -121,7 +128,7 @@ let frames_per_point = (60 * SECONDS_BETWEEN_POINTS); // Assume 60 fps at first
 let last_timestamp = 0;
 let current_z = default_z;
 let last_z = default_z;
-let fps = 0;
+let fps = 60;
 
 function move(frame)
 {
@@ -177,6 +184,10 @@ function pause(frame)
 	
 	fps = 1 / (timestamp - last_timestamp);
 	last_timestamp = timestamp;
+	
+	// if (debug_node) {
+	// 	debug_node.innerText = `${ camera.position.z.toFixed(2) } (${ Math.round(fps) } fps)`;
+	// }
 	
 	renderer.render(scene, camera);
 	requestAnimationFrame(animate);
