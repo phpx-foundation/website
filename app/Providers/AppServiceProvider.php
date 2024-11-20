@@ -7,8 +7,10 @@ use App\Models\ExternalGroup;
 use App\Models\Group;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Lorisleiva\Actions\Facades\Actions;
 use Throwable;
@@ -23,6 +25,10 @@ class AppServiceProvider extends ServiceProvider
 	public function boot(): void
 	{
 		Model::unguard();
+		
+		if (App::isProduction()) {
+			URL::forceScheme('https');
+		}
 		
 		Actions::registerCommands();
 		
