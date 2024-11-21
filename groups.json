@@ -119,6 +119,19 @@
         "latitude": 48.18835594056084,
         "longitude": 16.374042777964085
     },
+    "phpxfra.com": {
+        "external": false,
+        "name": "PHP×FRA",
+        "region": "Frankfurt",
+        "description": "A Frankfurt PHP/Laravel meetup for web artisans who want to learn and connect.",
+        "timezone": "Europe/Berlin",
+        "bsky_url": "https://bsky.app/profile/byte5.bsky.social",
+        "meetup_url": "https://www.meetup.com/de-DE/laravel-meetup-germany/",
+        "status": "active",
+        "frequency": "quarterly",
+        "latitude": 50.10133008361063,
+        "longitude": 8.663325905799867
+    },
     "upstatephp.com": {
         "external": true,
         "name": "PHP×GVL",
