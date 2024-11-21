@@ -37,36 +37,29 @@ class AppServiceProvider extends ServiceProvider
 		$this->sharePhpxNetwork();
 	}
 	
-	protected function sharePhpxNetwork()
+	protected function sharePhpxNetwork(): void
 	{
 		$this->callAfterResolving(Factory::class, function(Factory $view) {
-			$network = Cache::remember('phpx-network', now()->addWeek(), function() {
-				try {
-					return Group::query()
-						->select('domain', 'name', 'region')
-						->where('domain_status', DomainStatus::Confirmed)
-						->get()
-						->mapWithKeys(fn(Group $group) => [$group->domain => $group->label()])
-						->toArray();
-				} catch (Throwable) {
-					return [];
-				}
+			$data = Cache::remember('phpx-network', now()->addWeek(), function() {
+				$groups = Group::query()
+					->where('domain_status', DomainStatus::Confirmed)
+					->get()
+					->map(fn(Group $group) => [$group::class, $group->attributesToArray()]);
+				
+				$external = ExternalGroup::query()->get()
+					->map(fn(ExternalGroup $group) => [$group::class, $group->attributesToArray()]);
+				
+				return $groups->merge($external)->values()->toArray();
 			});
 			
-			$external = Cache::remember('phpx-network-external', now()->addWeek(), function() {
-				try {
-					return ExternalGroup::query()
-						->select('domain', 'name', 'region')
-						->get()
-						->mapWithKeys(fn(ExternalGroup $g) => [$g->domain => $g->label()])
-						->toArray();
-				} catch (Throwable) {
-					return [];
-				}
-			});
+			/** @var \Illuminate\Support\Collection<string, Group|ExternalGroup> $network */
+			$network = collect($data)
+				->map(function (array $record) {
+					[$fqcn, $attributes] = $record;
+					return (new $fqcn)->newFromBuilder($attributes);
+				});
 			
 			$view->share('phpx_network', $network);
-			$view->share('phpx_external', $external);
 		});
 	}
 }

@@ -3,7 +3,7 @@
 		
 		{{-- Group Label --}}
 		<h1 class="font-mono font-semibold text-white text-4xl sm:text-6xl md:text-7xl lg:text-8xl">
-			PHP<span x-data x-typed="['×{{ $group->label() }}']"></span>
+			PHP<span x-data x-typed="['×{{ $group->label }}']"></span>
 		</h1>
 		
 		{{-- Status / Frequency --}}
