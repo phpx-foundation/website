@@ -40,6 +40,18 @@ class GroupsJsonTest extends TestCase
 		if ($bsky_url = data_get($config, 'bsky_url')) {
 			Assert::assertEquals(200, Http::get($bsky_url)->status());
 		}
+		
+		$latitude = data_get($config, 'latitude');
+		$longitude = data_get($config, 'longitude');
+		
+		if ($latitude || $longitude) {
+			Assert::assertIsFloat($latitude);
+			Assert::assertIsFloat($longitude);
+			Assert::assertGreaterThanOrEqual(-90, $latitude);
+			Assert::assertLessThanOrEqual(90, $latitude);
+			Assert::assertGreaterThanOrEqual(-180, $latitude);
+			Assert::assertLessThanOrEqual(180, $latitude);
+		}
 	}
 	
 	protected function assertValidExternalGroup(string $domain, array $config): void

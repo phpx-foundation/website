@@ -57,8 +57,8 @@ class Markdown extends Component
 			
 			if ($this->sidebar) {
 				$html = <<<HTML
-				<div class="flex items-start justify-start">
-					<article class="max-w-none flex-shrink mb-64">
+				<div class="w-full flex items-start justify-start">
+					<article class="flex-1 max-w-full flex-shrink mb-64 overflow-x-auto">
 						{$html}
 					</article>
 					{$this->sidebar()}

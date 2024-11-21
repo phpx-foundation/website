@@ -27,7 +27,11 @@ trait FetchesModelsForCommands
 			
 			$id = select('Which meetup?', $group->meetups()
 				->when($upcoming, fn($query) => $query->where('starts_at', '>', now()))
-				->pluck('location', 'id'));
+				->orderByDesc('starts_at')
+				->get()
+				->mapWithKeys(fn(Meetup $meetup) => [
+					$meetup->getKey() => "{$meetup->location} ({$meetup->date_day})",
+				]));
 		}
 		
 		return $group

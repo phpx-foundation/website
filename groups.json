@@ -46,7 +46,7 @@
         "description": "A local Minneapolis / St. Paul PHP meetup for web artisans who want to learn and connect.",
         "timezone": "America/Chicago",
         "status": "planned",
-        "bsky_url": null,
+        "bsky_url": "https://bsky.app/profile/phpxmsp.com",
         "latitude": 44.9772995,
         "longitude": -93.2654692
     },
@@ -106,6 +106,31 @@
         "latitude": 50.8465573,
         "longitude": 4.351697
     },
+    "phpxpnq.com": {
+        "external": false,
+        "name": "PHP×PNQ",
+        "region": "Pune",
+        "description": "A Pune-India PHP meetup for web artisans who want to learn and connect.",
+        "timezone": "Asia/Kolkata",
+        "status": "planned",
+        "frequency": "quarterly",
+        "bsky_url": "https://bsky.app/profile/phpxpnq.com",
+        "latitude": 18.5204301,
+        "longitude": 73.8564637
+    },
+    "phpxvie.com": {
+        "external": false,
+        "name": "PHP×VIE",
+        "region": "Vienna",
+        "description": "A Vienna PHP meetup for web artisans who want to learn and connect.",
+        "timezone": "Europe/Vienna",
+        "bsky_url": "https://bsky.app/profile/phpxvie.bsky.social",
+        "meetup_url": "https://www.meetup.com/viennaphp/,https://www.meetup.com/Laravel-Frameworkers-Vienna/",
+        "status": "active",
+        "frequency": "bi-monthly",
+        "latitude": 48.18835594056084,
+        "longitude": 16.374042777964085
+    },
     "upstatephp.com": {
         "external": true,
         "name": "PHP×GVL",
@@ -140,5 +165,39 @@
         "region": "Stoke-on-Trent",
         "latitude": 53.0162014,
         "longitude": -2.1812607
+    },
+    "chattanoogaphp.org": {
+        "external": true,
+        "name": "PHP×Chattanooga",
+        "region": "Chattanooga",
+        "description": "A Chattanooga Tennessee PHP meetup for web artisans who want to learn and connect, held over zoom - over lunch, doing PHP/Laravel/Drupal/Anything PHP",
+        "timezone": "America/New York",
+        "bsky_url": "https://bsky.app/profile/phpxchattanooga.bsky.social",
+        "latitude": 35.0457219,
+        "longitude": -85.3094883
+    },
+    "laravel.swiss": {
+        "external": true,
+        "name": "PHP×Switzerland",
+        "region": "Switzerland",
+        "description": "Bringing the Swiss Laravel community together on a regular base by organizing a monthly Meetup covering all topics around the Laravel and PHP ecosystem.",
+        "frequency": "monthly",
+        "timezone": "Europe/Zurich",
+        "bsky_url": null,
+        "latitude": 46.94809,
+        "longitude": 7.44744,
+        "status": "active"
+    },
+    "phpxmtl.ca": {
+        "external": true,
+        "name": "PHP×Montreal",
+        "region": "Montreal",
+        "description": "Your friendly Montreal Laravel User Group, organizing monthly Meetups about the Laravel ecosystem.",
+        "frequency": "monthly",
+        "timezone": "America/Toronto",
+        "bsky_url": null,
+        "latitude": 45.494642,
+        "longitude": -73.55776,
+        "status": "active"
     }
 }

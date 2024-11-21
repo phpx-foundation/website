@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\DomainStatus;
 use App\Enums\GroupStatus;
 use Glhd\Bits\Database\HasSnowflakes;
 use Illuminate\Container\Container;
@@ -24,17 +25,23 @@ class Group extends Model
 	use SoftDeletes;
 	use HasFactory;
 	use HasSnowflakes;
+	use HasDomain;
 	
 	protected $visible = [
 		'id',
 		'domain',
 		'name',
 		'region',
+		'continent',
 		'description',
 		'timezone',
 		'frequency',
 		'status',
 		'created_at',
+	];
+	
+	protected $appends = [
+		'label',
 	];
 	
 	protected function casts(): array
@@ -43,6 +50,9 @@ class Group extends Model
 			'mailcoach_token' => 'encrypted',
 			'bsky_app_password' => 'encrypted',
 			'status' => GroupStatus::class,
+			'domain_status' => DomainStatus::class,
+			'latitude' => 'float',
+			'longitude' => 'float',
 		];
 	}
 	
@@ -51,29 +61,9 @@ class Group extends Model
 		static::saved(fn() => Cache::forget('phpx-network'));
 	}
 	
-	public static function findByDomain(string $domain): ?static
+	protected function label(): Attribute
 	{
-		if (App::isLocal()) {
-			$domain = str($domain)->replaceEnd('.test', '.com')->toString();
-		}
-		
-		$container = Container::getInstance();
-		$id = "group:{$domain}";
-		
-		if (! $container->has($id)) {
-			if (! $group = Group::firstWhere('domain', $domain)) {
-				return null;
-			}
-			
-			$container->instance($id, $group);
-		}
-		
-		return $container->get($id);
-	}
-	
-	public function label(): string
-	{
-		return $this->region ?? str($this->name)->afterLast('×')->trim()->toString();
+		return Attribute::get(fn() => $this->region ?? str($this->name)->afterLast('×')->trim()->toString());
 	}
 	
 	public function isActive()
@@ -164,6 +154,16 @@ class Group extends Model
 			
 			return null;
 		});
+	}
+	
+	protected function meetupUrlArray(): Attribute
+	{
+		return Attribute::get(fn() => str($this->meetup_url)
+			->explode(',')
+			->map(fn($url) => trim($url))
+			->filter()
+			->values()
+			->toArray());
 	}
 }
 

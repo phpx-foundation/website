@@ -86,6 +86,8 @@ class SyncGroups
 			'meetup_url',
 			'status',
 			'frequency',
+			'latitude',
+			'longitude',
 		]));
 		
 		return $group;
@@ -100,6 +102,8 @@ class SyncGroups
 		$external_group->forceFill(Arr::only($config, [
 			'name',
 			'region',
+			'latitude',
+			'longitude',
 		]));
 		
 		return $external_group;
@@ -119,6 +123,7 @@ class SyncGroups
 	{
 		return match(true) {
 			$attribute instanceof BackedEnum => $attribute->value,
+			is_array($attribute) => implode(', ', $attribute),
 			default => (string) $attribute,
 		};
 	}

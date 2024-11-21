@@ -1,4 +1,11 @@
-@props(['footer' => null, 'title' => null, 'og' => null])
+@props([
+	'before' => null,
+	'after' => null,
+	'footer' => null, 
+	'title' => null, 
+	'og' => null, 
+	'scripts' => [],
+])
 	<!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-full antialiased bg-black text-white/50">
 <head>
@@ -17,7 +24,6 @@
 	}
 	</style>
 	@vite('resources/css/app.css')
-	@vite('resources/js/app.js')
 	
 	@isset($og)
 		{{ $og }}
@@ -37,25 +43,39 @@
 		@endif
 	@endisset
 	
+	@vite(array_merge(['resources/js/app.js'], Arr::wrap($scripts)))
+	
 	@if(isset($group))
 		<script defer data-domain="{{ $group->domain }}" src="https://plausible.io/js/script.js"></script>
+	@elseif(App::isProduction())
+		<script defer data-domain="phpx.world" src="https://plausible.io/js/script.js"></script>
 	@endif
 </head>
 <body class="flex min-h-full font-sans">
 <div {{ $attributes->merge(['class' => 'flex w-full flex-col bg-dots']) }}>
 	{{-- Header --}}
-	<div class="w-full max-w-4xl mx-auto flex items-center gap-4 p-4">
+	<div class="w-full max-w-4xl mx-auto flex items-center justify-between gap-4 p-4">
 		@if(url()->current() == url('/'))
 			<x-phpx-dropdown />
 		@else
 			<x-phpx-home />
 		@endif
+		
+		@isset($group)
+			<a href="https://phpx.world" target="_blank" class="cursor-pointer text-white opacity-50 hover:opacity-90">
+				<x-icon.globe class="size-8 hover:animate-spin-ultra-slow" />
+			</a>
+		@endisset
 	</div>
+	
+	{{ $before }}
 	
 	{{-- Content --}}
 	<div class="w-full max-w-4xl mx-auto flex flex-col items-start justify-center px-4 py-8">
 		{{ $slot }}
 	</div>
+	
+	{{ $after }}
 	
 	{{-- Footer --}}
 	@isset($footer)
