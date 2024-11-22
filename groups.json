@@ -1,4 +1,18 @@
 {
+    "phpxaz.com": {
+        "external": false,
+        "name": "PHP×Phoenix",
+        "region": "Phoenix",
+        "description": "AKA azPHP - A Phoenix-area PHP meetup for PHP and other devs to hang out.",
+        "timezone": "America/Phoenix",
+        "bsky_url": null,
+        "active": "true",
+        "status": "active",
+        "frequency": "monthly",
+        "meetup_url": "https://www.meetup.com/azPHPUG/",
+        "latitude": 33.4484,
+        "longitude": -112.0740
+    },
     "phpxphilly.com": {
         "external": false,
         "name": "PHP×Philly",
