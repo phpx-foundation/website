@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Enums\Continent;
 use App\Enums\GroupStatus;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
@@ -31,6 +32,10 @@ class GroupsJsonTest extends TestCase
 		
 		if ($status = data_get($config, 'status')) {
 			Assert::assertNotNull(GroupStatus::from($status));
+		}
+		
+		if ($continent = data_get($config, 'continent')) {
+			Assert::assertNotNull(Continent::from($continent));
 		}
 		
 		if ($frequency = data_get($config, 'frequency')) {
