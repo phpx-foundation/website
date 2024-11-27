@@ -1,4 +1,18 @@
 {
+    "phpxaz.com": {
+        "external": false,
+        "name": "PHP×Phoenix",
+        "region": "Phoenix",
+        "description": "AKA azPHP - A Phoenix-area PHP meetup for PHP and other devs to hang out.",
+        "timezone": "America/Phoenix",
+        "bsky_url": null,
+        "active": "true",
+        "status": "active",
+        "frequency": "monthly",
+        "meetup_url": "https://www.meetup.com/azPHPUG/",
+        "latitude": 33.4484,
+        "longitude": -112.0740
+    },
     "phpxphilly.com": {
         "external": false,
         "name": "PHP×Philly",
@@ -45,7 +59,7 @@
         "region": "Minneapolis",
         "description": "A local Minneapolis / St. Paul PHP meetup for web artisans who want to learn and connect.",
         "timezone": "America/Chicago",
-        "status": "planned",
+        "status": "active",
         "bsky_url": "https://bsky.app/profile/phpxmsp.com",
         "latitude": 44.9772995,
         "longitude": -93.2654692
@@ -93,6 +107,19 @@
         "frequency": "bi-monthly",
         "latitude": 10.2935639,
         "longitude": 123.9019209
+    },
+    "phpxbru.com": {
+        "external": false,
+        "name": "PHP×BRU",
+        "region": "Brussels",
+        "continent": "Europe",
+        "description": "PHP & Laravel meetups for belgian developers",
+        "timezone": "Europe/Brussels",
+        "bsky_url": "https://bsky.app/profile/phpxbru.com",
+        "status": "planned",
+        "frequency": "monthly",
+        "latitude": 50.8465573,
+        "longitude": 4.351697
     },
     "phpxpnq.com": {
         "external": false,

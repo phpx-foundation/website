@@ -1,5 +1,12 @@
 import Alpine from 'alpinejs';
 import Typed from 'typed.js';
+import './flux-lite.js';
+import '@oddbird/popover-polyfill';
+import { apply, isPolyfilled, isSupported } from '@oddbird/popover-polyfill/fn';
+
+if (! isSupported() && ! isPolyfilled()) {
+	apply();
+}
 
 window.Alpine = Alpine;
 
@@ -18,13 +25,13 @@ Alpine.directive('typed', (el, { expression, modifiers }, { evaluateLater, effec
 		}
 		
 		return value ? value : fallback;
-	}
+	};
 	
 	effect(() => getStrings(strings => {
 		const instance = new Typed(el, {
 			strings,
 			startDelay: modifierValue('delay', 750),
-			typeSpeed: modifierValue('speed',150),
+			typeSpeed: modifierValue('speed', 150),
 			backSpeed: modifierValue('backspace', 100),
 			showCursor: ! modifiers.includes('cursorless'),
 			loop: modifiers.includes('loop'),

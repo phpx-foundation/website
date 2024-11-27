@@ -34,8 +34,6 @@ class SetGroupFromDomainMiddleware
 		View::share('group', $group);
 		$request->attributes->set('group', $group);
 		
-		config(['app.timezone' => $group->timezone]);
-		
 		return $next($request);
 	}
 	

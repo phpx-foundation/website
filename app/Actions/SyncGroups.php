@@ -80,6 +80,7 @@ class SyncGroups
 		$group->forceFill(Arr::only($config, [
 			'name',
 			'region',
+			'continent',
 			'description',
 			'timezone',
 			'bsky_url',
@@ -102,6 +103,7 @@ class SyncGroups
 		$external_group->forceFill(Arr::only($config, [
 			'name',
 			'region',
+			'continent',
 			'latitude',
 			'longitude',
 		]));

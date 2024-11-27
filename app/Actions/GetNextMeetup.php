@@ -30,7 +30,7 @@ class GetNextMeetup
 		}
 		
 		// If there's not an upcoming meetup, abort
-		if (! $meetup = $group->meetups()->future()->first()) {
+		if (! $meetup = $group->meetups()->future()->orderBy('starts_at')->first()) {
 			return null;
 		}
 		

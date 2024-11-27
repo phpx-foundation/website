@@ -9,6 +9,7 @@ use Carbon\CarbonInterface;
 use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Date;
 use Illuminate\Support\Facades\Gate;
 use Lorisleiva\Actions\Concerns\AsAction;
@@ -40,11 +41,13 @@ class CreateMeetup
 			'location' => $location,
 			'description' => $description,
 			'capacity' => $capacity,
-			'starts_at' => $starts_at,
-			'ends_at' => $ends_at,
+			'starts_at' => $starts_at->shiftTimezone($group->timezone),
+			'ends_at' => $ends_at->shiftTimezone($group->timezone),
 		]);
 		
 		GenerateOpenGraphImage::run($meetup);
+		
+		Cache::clear();
 		
 		return $meetup;
 	}
@@ -61,15 +64,15 @@ class CreateMeetup
 		$description = textarea('Event description (markdown)', required: true);
 		$capacity = (int) text('What is the capacity of the location?', required: true);
 		$starts_at = Date::parse(text('When does the event start?', required: true));
-		$ends_at = Date::parse(text('When does the event end?', required: true));
+		$ends_at = Date::parse(text('When does the event end?', default: $starts_at->toDateTimeString(), required: true));
 		
 		table(['Option', 'Value'], [
 			['Group', $group->name],
 			['Location', $location],
 			['Description', $description],
 			['Capacity', $capacity],
-			['Starts at', $starts_at->toDateTimeString()],
-			['Ends at', $ends_at->toDateTimeString()],
+			['Starts at', $starts_at->shiftTimezone($group->timezone)->format('M jS Y h:ia (T)')],
+			['Ends at', $ends_at->shiftTimezone($group->timezone)->format('M jS Y h:ia (T)')],
 		]);
 		
 		if (confirm('Is this correct?')) {

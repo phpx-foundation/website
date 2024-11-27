@@ -30,7 +30,7 @@ class HomeController
 			->map(fn(Group|ExternalGroup $row) => [
 				'lat' => $row->latitude,
 				'lng' => $row->longitude,
-				'name' => $row->label(),
+				'name' => $row->label,
 			])
 			->reject(fn($data) => empty($data['lat']) || empty($data['lat']))
 			->values();
