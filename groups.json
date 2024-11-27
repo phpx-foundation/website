@@ -150,6 +150,7 @@
         "external": false,
         "name": "PHP×FRA",
         "region": "Frankfurt",
+        "continent": "Europe",
         "description": "A Frankfurt PHP/Laravel meetup for web artisans who want to learn and connect.",
         "timezone": "Europe/Berlin",
         "bsky_url": "https://bsky.app/profile/byte5.bsky.social",
