@@ -80,22 +80,37 @@ class Meetup extends Model implements Htmlable
 	
 	public function range(): string
 	{
-		$starts_at = $this->starts_at->timezone($this->group->timezone);
-		$ends_at = $this->ends_at->timezone($this->group->timezone);
-		
-		if ($starts_at->eq($ends_at)) {
-			return $starts_at->format("l, F jS Y \a\\t g:ia T");
+		if ($this->starts_at->eq($this->ends_at)) {
+			return $this->starts_at->format("l, F jS Y \a\\t g:ia T");
 		}
 		
-		if ($starts_at->isSameDay($ends_at)) {
-			$start = $starts_at->format("l, F jS Y \\f\\r\o\m g:ia");
-			$end = $ends_at->format('g:ia T');
+		if ($this->starts_at->isSameDay($this->ends_at)) {
+			$start = $this->starts_at->format("l, F jS Y \\f\\r\o\m g:ia");
+			$end = $this->ends_at->format('g:ia T');
+			
 			return "$start to $end";
 		}
 		
-		$start = $starts_at->format('F jS');
-		$end = $ends_at->format("F jS Y");
+		$start = $this->starts_at->format('F jS');
+		$end = $this->ends_at->format("F jS Y");
+		
 		return "{$start}–{$end}";
+	}
+	
+	protected function startsAt(): Attribute
+	{
+		return Attribute::make(
+			get: fn($value) => $this->asDateTime($value)->shiftTimezone(config('app.timezone'))->timezone($this->group->timezone),
+			set: fn($value) => $this->asDateTime($value)->timezone(config('app.timezone')),
+		);
+	}
+	
+	protected function endsAt(): Attribute
+	{
+		return Attribute::make(
+			get: fn($value) => $this->asDateTime($value)->shiftTimezone(config('app.timezone'))->timezone($this->group->timezone),
+			set: fn($value) => $this->asDateTime($value)->timezone(config('app.timezone')),
+		);
 	}
 	
 	protected function openGraphImageFile(): Attribute

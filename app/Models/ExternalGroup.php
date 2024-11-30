@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Enums\GroupStatus;
 use Exception;
 use Glhd\Bits\Database\HasSnowflakes;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -12,6 +13,11 @@ class ExternalGroup extends Model
 {
 	use HasSnowflakes;
 	use SoftDeletes;
+	use HasDomain;
+	
+	protected $appends = [
+		'label',
+	];
 	
 	protected static function booted()
 	{
@@ -30,8 +36,8 @@ class ExternalGroup extends Model
 		];
 	}
 	
-	public function label(): string
+	protected function label(): Attribute
 	{
-		return $this->region ?? str($this->name)->afterLast('×')->trim()->toString();
+		return Attribute::get(fn() => $this->region ?? str($this->name)->afterLast('×')->trim()->toString());
 	}
 }

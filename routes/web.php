@@ -14,6 +14,9 @@ foreach (RootDomains::cases() as $case) {
 	Route::domain($case->value)->group(function() {
 		Route::get('/', HomeController::class);
 		Route::view('/organizers', 'world.organizers');
+		Route::view('/venues', 'world.venues');
+		Route::view('/sponsors', 'world.sponsors');
+		Route::view('/terms', 'world.terms');
 	});
 }
 
@@ -22,6 +25,7 @@ Route::middleware([SetGroupFromDomainMiddleware::class, ShareNextMeetupMiddlewar
 	->group(function() {
 		Route::view('/', 'welcome');
 		Route::view('/join', 'join');
+		Route::view('/terms', 'world.terms');
 		
 		Route::get('meetups/{meetup}/rsvps', function(Meetup $meetup) {
 			return view('rsvp', ['meetup' => $meetup]);

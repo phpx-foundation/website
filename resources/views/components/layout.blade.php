@@ -47,6 +47,8 @@
 	
 	@if(isset($group))
 		<script defer data-domain="{{ $group->domain }}" src="https://plausible.io/js/script.js"></script>
+	@elseif(App::isProduction())
+		<script defer data-domain="phpx.world" src="https://plausible.io/js/script.js"></script>
 	@endif
 </head>
 <body class="flex min-h-full font-sans">

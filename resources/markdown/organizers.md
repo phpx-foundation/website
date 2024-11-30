@@ -26,6 +26,14 @@ Awesome. You want to start a PHP× group! Here are the basic steps to get starte
 - `external` — always set this to `false` if you want us to host for you
 - `name` — use "PHP×FOO" where FOO is the code you picked in step 2. Please use the unicode times symbol “×” rather than the letter “x” (you can just copy-and-paste from here). 
 - `region` — Set this to a short descriptive name of your region (like Philadelphia or Atlanta)
+- `continent` — One of: 
+    - `Africa`
+    - `Asia`
+    - `Europe`
+    - `North America`
+    - `South America`
+    - `Antarctica`
+    - `Australia`
 - `description` — Set this to a single-sentence description of your meetup. Something like: _"A Philly-area PHP meetup for web artisans who want to learn and connect."_
 - `timezone` — Use your PHP-compatible timezone ID (like `America/New_York`)
 - `status` — choose one of:

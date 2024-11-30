@@ -4,6 +4,7 @@ namespace App\Http\Controllers\World;
 
 use App\Models\ExternalGroup;
 use App\Models\Group;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
 class HomeController
@@ -14,7 +15,7 @@ class HomeController
 			'points' => Cache::remember(
 				key: 'homepage-points', 
 				ttl: now()->addDay(), 
-				callback: fn() => $this->points()->shuffle(), // $this->maximizeDistance($this->points())
+				callback: fn() => $this->maximizeDistance($this->points()),
 			),
 		]);
 	}
@@ -29,7 +30,7 @@ class HomeController
 			->map(fn(Group|ExternalGroup $row) => [
 				'lat' => $row->latitude,
 				'lng' => $row->longitude,
-				'name' => $row->label(),
+				'name' => $row->label,
 			])
 			->reject(fn($data) => empty($data['lat']) || empty($data['lat']))
 			->values();
@@ -56,16 +57,24 @@ class HomeController
 		return $earth * $c;
 	}
 	
-	function maximizeDistance($points)
+	function maximizeDistance(Collection $points)
 	{
 		$result = collect([$points->first()]);
 		$remaining = $points->slice(1);
 		
 		while ($remaining->isNotEmpty()) {
-			$lastPoint = $result->last();
-			
-			// Find the point that's furthest from the last added point
-			$furthest = $remaining->sortByDesc(fn($point) => $this->distance($lastPoint, $point))->first();
+			$furthest = $remaining->sortByDesc(function($point) use ($result) {
+				$targets = $result->take(-2);
+				
+				$distance = $this->distance($targets->pop(), $point);
+				
+				if ($targets->isNotEmpty()) {
+					$distance += $this->distance($targets->pop(), $point);
+					$distance = $distance / 2;
+				}
+				
+				return $distance;
+			})->first();
 			
 			$result->push($furthest);
 			$remaining = $remaining->filter(fn($point) => $point !== $furthest);
