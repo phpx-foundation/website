@@ -237,7 +237,7 @@
         "description": "A Denver-area PHP meetup for web artisans who want to learn and connect.",
         "timezone": "America/Denver",
         "status": "prospective",
-        "latitude": -104.9903,
-        "longitude": 39.7392
+        "latitude": 39.7392,
+        "longitude": -104.9903
     }
 }
