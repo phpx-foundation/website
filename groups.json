@@ -228,5 +228,16 @@
         "latitude": 45.494642,
         "longitude": -73.55776,
         "status": "active"
+    },
+    "phpxden.com": {
+        "external": false,
+        "name": "PHPxDEN",
+        "region": "Denver",
+        "continent": "North America",
+        "description": "A Denver-area PHP meetup for web artisans who want to learn and connect.",
+        "timezone": "America/Denver",
+        "status": "prospective",
+        "latitude": 39.7392,
+        "longitude": -104.9903
     }
 }
