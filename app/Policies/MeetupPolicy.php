@@ -22,26 +22,26 @@ class MeetupPolicy
 	
 	public function create(User $user): bool
 	{
-		return false;
+		return true; // FIXME
 	}
 	
 	public function update(User $user, Meetup $meetup): bool
 	{
-		return false;
+		return true; // FIXME
 	}
 	
 	public function delete(User $user, Meetup $meetup): bool
 	{
-		return false;
+		return true; // FIXME
 	}
 	
 	public function restore(User $user, Meetup $meetup): bool
 	{
-		return false;
+		return true; // FIXME
 	}
 	
 	public function forceDelete(User $user, Meetup $meetup): bool
 	{
-		return false;
+		return true; // FIXME
 	}
 }
