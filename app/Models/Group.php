@@ -30,6 +30,7 @@ class Group extends Model
 	protected $visible = [
 		'id',
 		'domain',
+		'domain_status',
 		'name',
 		'region',
 		'continent',
@@ -37,6 +38,8 @@ class Group extends Model
 		'timezone',
 		'frequency',
 		'status',
+		'latitude',
+		'longitude',
 		'created_at',
 	];
 	
