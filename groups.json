@@ -239,5 +239,17 @@
         "status": "prospective",
         "latitude": 39.7392,
         "longitude": -104.9903
-    }
+    },
+    "phpxsea.com": {
+        "external": false,
+        "name": "PHP×SEA",
+        "region": "Seattle",
+        "continent": "North America",
+        "description": "A Seattle-area PHP meetup for web artisans who want to learn and connect.",
+        "timezone": "America/Los_Angeles",
+        "status": "prospective",
+        "bsky_url": "https://bsky.app/profile/phpxsea.com",
+        "latitude": 47.60899936190318,
+        "longitude": -122.34052530121367
+    },
 }
