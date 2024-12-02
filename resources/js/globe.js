@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import ThreeGlobe from 'three-globe';
 import WebGL from 'three/addons/capabilities/WebGL.js';
 // import earthNight from '../../public/world/earth-night.jpg';
-import earthNightHighRes from '../../public/world/earth-night-hires.jpg';
+// import earthNightHighRes from '../../public/world/earth-night-hires.jpg';
 import earthNightCustom from '../../public/world/earth-night-custom.jpg';
 import earthTopology from '../../public/world/earth-topology.png';
 
@@ -27,7 +27,7 @@ function random_number(min, max) {
 
 const Globe = new ThreeGlobe()
 	// .globeImageUrl(is_fast_connection ? earthNightHighRes : earthNight)
-	.globeImageUrl(highres ? earthNightHighRes : earthNightCustom)
+	.globeImageUrl(earthNightCustom)
 	.bumpImageUrl(earthTopology)
 	.ringsData(points)
 	.ringColor(() => colorInterpolator)
