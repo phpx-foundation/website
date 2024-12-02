@@ -2,7 +2,7 @@ import * as THREE from 'three';
 import ThreeGlobe from 'three-globe';
 import WebGL from 'three/addons/capabilities/WebGL.js';
 // import earthNight from '../../public/world/earth-night.jpg';
-// import earthNightHighRes from '../../public/world/earth-night-hires.jpg';
+import earthNightHighRes from '../../public/world/earth-night-hires.jpg';
 import earthNightCustom from '../../public/world/earth-night-custom.jpg';
 import earthTopology from '../../public/world/earth-topology.png';
 
@@ -14,6 +14,7 @@ if (! WebGL.isWebGL2Available()) {
 const node = document.getElementById('globe-visualization');
 // const debug_node = document.getElementById('debug');
 const points = JSON.parse(node.dataset.points);
+const highres = ('highres' in node.dataset);
 
 const colorInterpolator = t => `rgba(255, 210, 210, ${ 1 - t })`;
 // const colorInterpolator = t => `rgba(83, 116, 255, ${ 1 - t })`; // php.net
@@ -26,7 +27,7 @@ function random_number(min, max) {
 
 const Globe = new ThreeGlobe()
 	// .globeImageUrl(is_fast_connection ? earthNightHighRes : earthNight)
-	.globeImageUrl(earthNightCustom)
+	.globeImageUrl(highres ? earthNightHighRes : earthNightCustom)
 	.bumpImageUrl(earthTopology)
 	.ringsData(points)
 	.ringColor(() => colorInterpolator)
