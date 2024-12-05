@@ -251,5 +251,17 @@
         "bsky_url": "https://bsky.app/profile/phpxsea.com",
         "latitude": 47.60899936190318,
         "longitude": -122.34052530121367
+    },
+    "phpxvadodara.com": {
+        "external": false,
+        "name": "PHP×VADODARA",
+        "region": "Vadodara",
+        "continent": "ASIA",
+        "description": "A vibrant PHP meetup in the cultural city of Vadodara, India, connecting developers, enthusiasts, and artisans to share knowledge, learn, and grow together.",
+        "timezone": "Asia/Kolkata",
+        "status": "active",
+        "frequency": "monthly",
+        "latitude": 22.3174902,
+        "longitude": 73.1667258
     }
 }
