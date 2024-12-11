@@ -254,12 +254,12 @@
     },
     "phpxvadodara.com": {
         "external": false,
-        "name": "PHP×VADODARA",
+        "name": "PHP×Vadodara",
         "region": "Vadodara",
-        "continent": "ASIA",
+        "continent": "Asia",
         "description": "A vibrant PHP meetup in the cultural city of Vadodara, India, connecting developers, enthusiasts, and artisans to share knowledge, learn, and grow together.",
         "timezone": "Asia/Kolkata",
-        "status": "active",
+        "status": "planned",
         "frequency": "monthly",
         "latitude": 22.3174902,
         "longitude": 73.1667258
