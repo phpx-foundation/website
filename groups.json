@@ -277,5 +277,17 @@
         "frequency": "monthly",
         "latitude": 22.3174902,
         "longitude": 73.1667258
+    },
+    "phpxmbs.com": {
+        "external": false,
+        "name": "PHP×MBS",
+        "region": "Saginaw",
+        "continent": "North America",
+        "description": "A PHP meetup in the Great Lakes Bay Region ",
+        "timezone": "America/Detroit",
+        "status": "prospective",
+        "frequency": "monthly",
+        "latitude": 43.4382,
+        "longitude": -83.9377
     }
 }
