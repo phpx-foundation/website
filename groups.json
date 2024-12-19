@@ -29,7 +29,7 @@
         "region": "St. Louis",
         "description": "A St. Louis-area PHP meetup for web artisans who want to learn and connect.",
         "timezone": "America/Chicago",
-        "bsky_url": null,
+        "bsky_url": "https://bsky.app/profile/phpxstl.com",
         "latitude": 38.6280278,
         "longitude": -90.1910154
     },
@@ -289,5 +289,30 @@
         "frequency": "monthly",
         "latitude": 43.4382,
         "longitude": -83.9377
+    },
+    "phpxlagos.com": {
+        "external": false,
+        "name": "PHP×Lagos",
+        "region": "Lagos",
+        "continent": "Africa",
+        "description": "A PHP meetup in Lagos for web artisans who want to connect",
+        "timezone": "Africa/Lagos",
+        "status": "planned",
+        "latitude": 6.5244,
+        "longitude": 3.3792
+    },
+    "laravel-moris.africa": {
+        "external": true,
+        "name": "Laravel Moris",
+        "region": "Mauritius",
+        "continent": "Africa",
+        "description": "We are a group of passionate Laravel developers dedicated to promoting its adoption across Mauritius and Africa",
+        "timezone": "Indian/Mauritius",
+        "status": "active",
+        "frequency": "monthly",
+        "meetup_url": "https://www.meetup.com/laravel-moris/",
+        "bsky_url": "https://bsky.app/profile/laravelmoris.bsky.social",
+        "latitude": -20.162480,
+        "longitude": 57.502617
     }
 }
