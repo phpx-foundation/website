@@ -29,7 +29,7 @@
         "region": "St. Louis",
         "description": "A St. Louis-area PHP meetup for web artisans who want to learn and connect.",
         "timezone": "America/Chicago",
-        "bsky_url": null,
+        "bsky_url": "https://bsky.app/profile/phpxstl.com",
         "latitude": 38.6280278,
         "longitude": -90.1910154
     },
