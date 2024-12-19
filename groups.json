@@ -278,6 +278,17 @@
         "latitude": 22.3174902,
         "longitude": 73.1667258
     },
+    "phpxlagos.com": {
+        "external": false,
+        "name": "PHP×Lagos",
+        "region": "Lagos",
+        "continent": "Africa",
+        "description": "A PHP meetup in Lagos for web artisans who want to connect",
+        "timezone": "Africa/Lagos",
+        "status": "planned",
+        "latitude": 6.5244,
+        "longitude": 3.3792
+    },
     "laravel-moris.africa": {
         "external": true,
         "name": "Laravel Moris",
