@@ -1,4 +1,20 @@
 {
+    "phpxsan.com": {
+        "external": false,
+        "name": "PHP×San",
+        "region": "San Diego",
+        "description": "AKA SDPHP - A San Diego California-area PHP meetup for PHP and other devs to hang out.",
+        "timezone": "America/Los_Angeles",
+        "continent": "North America",
+        "bsky_url": null,
+        "active": "true",
+        "status": "planned",
+        "frequency": "monthly",
+        "meetup_url": "https://www.meetup.com/sandiegophp/",
+        "bsky_url": "https://bsky.app/profile/phparch.com",
+        "latitude": 33.017301, 
+        "longitude": -117.099801
+    },
     "phpxaz.com": {
         "external": false,
         "name": "PHP×Phoenix",
