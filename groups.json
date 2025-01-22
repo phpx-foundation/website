@@ -330,5 +330,19 @@
         "bsky_url": "https://bsky.app/profile/laravelmoris.bsky.social",
         "latitude": -20.162480,
         "longitude": 57.502617
+    },
+    "phpxtky.com": {
+        "external": true,
+        "name": "PHP×TKY",
+        "region": "Tokyo",
+        "continent": "Asia",
+        "description": "A Tokyo PHP/Laravel meetup for web artisans who want to learn and connect.",
+        "timezone": "Asia/Tokyo",
+        "bsky_url": "https://bsky.app/profile/phpxtky.bsky.social",
+        "meetup_url": "https://www.meetup.com/phpxtky/",
+        "status": "planned",
+        "frequency": "monthly",
+        "latitude": 35.652832,
+        "longitude": 139.839478
     }
 }
