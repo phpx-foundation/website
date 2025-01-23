@@ -332,7 +332,7 @@
         "longitude": 57.502617
     },
     "phpxtky.com": {
-        "external": true,
+        "external": false,
         "name": "PHP×TKY",
         "region": "Tokyo",
         "continent": "Asia",
