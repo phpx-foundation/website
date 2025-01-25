@@ -344,5 +344,19 @@
         "frequency": "monthly",
         "latitude": 35.652832,
         "longitude": 139.839478
+    },
+        "laravelsenegal.dev": {
+        "external": false,
+        "name": "Php Laravel Senegal",
+        "region": "Senegal",
+        "continent": "Africa",
+        "description": "A Senegal PHP/Laravel meetup for passionate php and laravel developer.",
+        "timezone": "UTC +0 GMT",
+        "bsky_url": "https://bsky.app/profile/laravelsenegal.bsky.social",
+        "meetup_url": "#",
+        "status": "active",
+        "frequency": "monthly",
+        "latitude": 14.4974,
+        "longitude": 14.4974
     }
 }
