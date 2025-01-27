@@ -144,7 +144,7 @@ class Markdown extends Component
 				$paragraph = $node->firstChild();
 				$child = $paragraph?->firstChild();
 				
-				if ($child instanceof Text && preg_match('#^\[!(note|tip|important|warning|caution)]$#i', $child->getLiteral(), $matches)) {
+				if ($child instanceof Text && preg_match('#^\s*\[!(note|tip|important|warning|caution)]\s*$#i', $child->getLiteral(), $matches)) {
 					$child->detach();
 					
 					return match ($matches[1]) {
@@ -181,7 +181,7 @@ class Markdown extends Component
 					};
 				}
 				
-				return [null, null];
+				return [null, null, null, null];
 			}
 		});
 	}
