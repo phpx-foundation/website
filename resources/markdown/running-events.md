@@ -75,6 +75,14 @@ choose to record the talks, and others don't. If you *do* plan to record the tal
 to let the speakers know ahead of time, and give them an opportunity to decide what you
 do with the recording afterward.
 
+#### Finding Speakers
+
+Here are a couple resources for finding speakers:
+
+- [CFP Watch](https://cfp.watch/) is a place to post calls for papers
+- [Laravel](https://laravel.com/meetups) has offered to facilitate occasional
+  speakers from the Laravel team
+
 ### Show-and-tell events
 
 Doing a show-and-tell is a great low-stakes to get people to present at your meetups.
@@ -94,9 +102,3 @@ at a local pizza shop, a group hike, or a meetup at your usual event space but w
 no fixed agenda. Some groups have even talked about doing an escape room, or something
 like bowling or mini golf. (If you end up doing something that really works, definitely
 let us know so we can add it to this page!)
-
-## Finding Speakers
-
-Here are a couple resources for finding speakers:
-
-- [CFP Watch](https://cfp.watch/) is a place to post
