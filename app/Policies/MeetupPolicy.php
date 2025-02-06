@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Group;
 use App\Models\Meetup;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -22,26 +23,26 @@ class MeetupPolicy
 	
 	public function create(User $user): bool
 	{
-		return true; // FIXME
+		return $user->groups->contains(fn(Group $group) => $group->group_membership->isAdmin());
 	}
 	
 	public function update(User $user, Meetup $meetup): bool
 	{
-		return true; // FIXME
+		return $user->isGroupAdmin($meetup->group);
 	}
 	
 	public function delete(User $user, Meetup $meetup): bool
 	{
-		return true; // FIXME
+		return $this->update($user, $meetup);
 	}
 	
 	public function restore(User $user, Meetup $meetup): bool
 	{
-		return true; // FIXME
+		return $this->update($user, $meetup);
 	}
 	
 	public function forceDelete(User $user, Meetup $meetup): bool
 	{
-		return true; // FIXME
+		return false;
 	}
 }

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Enums\GroupRole;
 use Glhd\Bits\Database\HasSnowflakes;
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
@@ -15,5 +16,11 @@ class GroupMembership extends Pivot
 	
 	protected $casts = [
 		'is_subscribed' => 'boolean',
+		'role' => GroupRole::class,
 	];
+	
+	public function isAdmin(): bool
+	{
+		return $this->role === GroupRole::Admin;
+	}
 }

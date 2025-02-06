@@ -17,6 +17,8 @@ class User extends Authenticatable
 	use Notifiable;
 	use HasSnowflakes;
 	use SoftDeletes;
+	use BelongsToGroups;
+	use HasGroupMembership;
 	
 	protected $hidden = [
 		'password',
@@ -30,20 +32,6 @@ class User extends Authenticatable
 			'email_verified_at' => 'datetime',
 			'password' => 'hashed',
 		];
-	}
-	
-	public function current_group(): BelongsTo
-	{
-		return $this->belongsTo(Group::class, 'current_group_id');
-	}
-	
-	public function groups(): BelongsToMany
-	{
-		return $this->belongsToMany(Group::class, 'group_memberships')
-			->as('group_membership')
-			->withPivot('id', 'is_subscribed')
-			->withTimestamps()
-			->using(GroupMembership::class);
 	}
 	
 	public function meetups(): BelongsToMany

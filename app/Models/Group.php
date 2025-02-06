@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Enums\DomainStatus;
 use App\Enums\GroupStatus;
+use BadMethodCallException;
 use Glhd\Bits\Database\HasSnowflakes;
 use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Casts\Attribute;
@@ -26,6 +27,7 @@ class Group extends Model
 	use HasFactory;
 	use HasSnowflakes;
 	use HasDomain;
+	use HasGroupMembership;
 	
 	protected $visible = [
 		'id',
@@ -69,22 +71,22 @@ class Group extends Model
 		return Attribute::get(fn() => $this->region ?? str($this->name)->afterLast('×')->trim()->toString());
 	}
 	
-	public function isActive()
+	public function isActive(): bool
 	{
 		return GroupStatus::Active === $this->status;
 	}
 	
-	public function isPlanned()
+	public function isPlanned(): bool
 	{
 		return GroupStatus::Planned === $this->status;
 	}
 	
-	public function isProspective()
+	public function isProspective(): bool
 	{
 		return GroupStatus::Prospective === $this->status;
 	}
 	
-	public function isDisbanded()
+	public function isDisbanded(): bool
 	{
 		return GroupStatus::Disbanded === $this->status;
 	}
@@ -123,7 +125,7 @@ class Group extends Model
 	{
 		return $this->belongsToMany(User::class, 'group_memberships')
 			->as('group_membership')
-			->withPivot('id', 'is_subscribed')
+			->withPivot('id', 'role', 'is_subscribed')
 			->withTimestamps()
 			->using(GroupMembership::class);
 	}
