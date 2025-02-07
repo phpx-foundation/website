@@ -1,5 +1,9 @@
 # For Organizers
 
+> [!tip]
+> If you have already set up your PHP× group, please check out our
+> [running events](/running-events) resources.
+
 ## To start a PHP× group:
 
 Awesome. You want to start a PHP× group! Here are the basic steps to get started:

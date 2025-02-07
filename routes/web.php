@@ -12,6 +12,7 @@ foreach (RootDomains::cases() as $case) {
 	Route::domain($case->value)->group(function() {
 		Route::get('/', HomeController::class);
 		Route::view('/organizers', 'world.organizers');
+		Route::view('/running-events', 'world.running-events');
 		Route::view('/venues', 'world.venues');
 		Route::view('/sponsors', 'world.sponsors');
 		Route::view('/terms', 'world.terms');

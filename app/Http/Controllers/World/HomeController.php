@@ -4,14 +4,16 @@ namespace App\Http\Controllers\World;
 
 use App\Models\ExternalGroup;
 use App\Models\Group;
+use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Cache;
 
 class HomeController
 {
-	public function __invoke()
+	public function __invoke(Request $request)
 	{
 		return view('world.home', [
+			'show_1080p' => $request->has('1080p'),
 			'points' => Cache::remember(
 				key: 'homepage-points',
 				ttl: now()->addDay(),

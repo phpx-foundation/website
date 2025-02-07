@@ -8,7 +8,11 @@
 	</x-slot:og>
 	
 	<x-slot:before>
-		<div id="globe-visualization" class="w-full h-32 -mb-4 sm:h-40 md:h-56 lg:h-96" data-points="{{ json_encode($points) }}"></div>
+		@if($show_1080p)
+			<div id="globe-visualization" class="w-[1920px] h-[1080px] mx-auto -mb-4" data-points="{{ json_encode($points) }}" data-highres="true"></div>
+		@else
+			<div id="globe-visualization" class="w-full h-32 -mb-4 sm:h-40 md:h-56 lg:h-96" data-points="{{ json_encode($points) }}"></div>
+		@endif
 		@env('local')
 			<div id="debug" class="absolute top-4 right-4 bg-red-800 text-white p-4 rounded"></div>
 		@endenv

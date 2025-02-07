@@ -14,6 +14,7 @@ if (! WebGL.isWebGL2Available()) {
 const node = document.getElementById('globe-visualization');
 // const debug_node = document.getElementById('debug');
 const points = JSON.parse(node.dataset.points);
+const highres = ('highres' in node.dataset);
 
 const colorInterpolator = t => `rgba(255, 210, 210, ${ 1 - t })`;
 // const colorInterpolator = t => `rgba(83, 116, 255, ${ 1 - t })`; // php.net
