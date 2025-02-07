@@ -32,11 +32,13 @@ class GroupResource extends Resource
 						->required()
 						->maxLength(255),
 					Forms\Components\Textarea::make('description')
-						->columnSpanFull(),
+						->columnSpanFull()
+						->required(),
 					Forms\Components\TextInput::make('domain')
 						->required()
 						->maxLength(255)
-						->disabled(fn() => ! Auth::user()->isSuperAdmin()),
+						->disabled(fn() => ! Auth::user()->isSuperAdmin())
+						->rules(['']),
 					Forms\Components\Select::make('domain_status')
 						->required()
 						->options(DomainStatus::class)
@@ -95,21 +97,29 @@ class GroupResource extends Resource
 						->numeric()
 						->rules(['required', 'numeric', 'between:-180,180', 'decimal:2,8']),
 				]),
-				Forms\Components\Fieldset::make('MailCoach')->schema([
-					Forms\Components\TextInput::make('mailcoach_token')
-						->maxLength(255)
-						->rules(['nullable']),
-					Forms\Components\TextInput::make('mailcoach_endpoint')
-						->maxLength(255)
-						->rules(['nullable', 'url']),
-					Forms\Components\TextInput::make('mailcoach_list')
-						->maxLength(255)
-						->rules(['nullable', 'uuid']),
+				Forms\Components\Section::make('Third-Party Integrations')->schema([
+					Forms\Components\Fieldset::make('MailCoach')->schema([
+						Forms\Components\TextInput::make('mailcoach_token')
+							->label('Token')
+							->maxLength(255)
+							->rules(['nullable']),
+						Forms\Components\TextInput::make('mailcoach_endpoint')
+							->label('API Endpoint')
+							->maxLength(255)
+							->url(),
+						Forms\Components\TextInput::make('mailcoach_list')
+							->label('List UUID')
+							->maxLength(255)
+							->rules(['nullable', 'uuid']),
+					]),
+					Forms\Components\Fieldset::make('Bluesky')->schema([
+						Forms\Components\TextInput::make('bsky_did')
+							->label('DID')
+							->maxLength(255),
+						Forms\Components\TextInput::make('bsky_app_password')
+							->label('App Password'),
+					]),
 				]),
-				Forms\Components\TextInput::make('bsky_did')
-					->maxLength(255),
-				Forms\Components\Textarea::make('bsky_app_password')
-					->columnSpanFull(),
 			]);
 	}
 	
@@ -186,6 +196,5 @@ class GroupResource extends Resource
 			'edit' => Pages\EditGroup::route('/{record}/edit'),
 		];
 	}
-	
 	
 }

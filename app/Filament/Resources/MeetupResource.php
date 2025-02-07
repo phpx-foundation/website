@@ -29,9 +29,11 @@ class MeetupResource extends Resource
 					->required()
 					->numeric(),
 				Forms\Components\DateTimePicker::make('starts_at')
-					->required(),
+					->required()
+					->rules(['required', 'before_or_equal:ends_at']),
 				Forms\Components\DateTimePicker::make('ends_at')
-					->required(),
+					->required()
+					->rules(['required', 'after_or_equal:starts_at']),
 				Forms\Components\MarkdownEditor::make('description')
 					->required()
 					->columnSpanFull(),
@@ -94,7 +96,7 @@ class MeetupResource extends Resource
 	public static function getRelations(): array
 	{
 		return [
-			//
+			RelationManagers\UsersRelationManager::class,
 		];
 	}
 	
