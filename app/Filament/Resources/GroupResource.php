@@ -15,6 +15,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\HtmlString;
 
 class GroupResource extends Resource
 {
@@ -146,6 +147,11 @@ class GroupResource extends Resource
 					->searchable()
 					->toggleable(isToggledHiddenByDefault: true),
 				Tables\Columns\TextColumn::make('timezone')
+					->formatStateUsing(function(string $state) {
+						[$prefix, $zone] = explode('/', $state, 2);
+						$zone = str_replace(['_', '/'], [' ', ', '], $zone);
+						return new HtmlString("<div class='opacity-50 text-xs'>{$prefix}</div><div>{$zone}</div>");
+					})
 					->searchable(),
 				Tables\Columns\TextColumn::make('created_at')
 					->dateTime()
