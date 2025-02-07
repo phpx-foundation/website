@@ -4,9 +4,7 @@ namespace App\Models;
 
 use App\Enums\DomainStatus;
 use App\Enums\GroupStatus;
-use BadMethodCallException;
 use Glhd\Bits\Database\HasSnowflakes;
-use Illuminate\Container\Container;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -14,7 +12,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Routing\UrlGenerator;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Stringable;
 use Revolution\Bluesky\Contracts\Factory;
@@ -49,26 +46,9 @@ class Group extends Model
 		'label',
 	];
 	
-	protected function casts(): array
-	{
-		return [
-			'mailcoach_token' => 'encrypted',
-			'bsky_app_password' => 'encrypted',
-			'status' => GroupStatus::class,
-			'domain_status' => DomainStatus::class,
-			'latitude' => 'float',
-			'longitude' => 'float',
-		];
-	}
-	
 	protected static function booted()
 	{
 		static::saved(fn() => Cache::forget('phpx-network'));
-	}
-	
-	protected function label(): Attribute
-	{
-		return Attribute::get(fn() => $this->region ?? str($this->name)->afterLast('×')->trim()->toString());
 	}
 	
 	public function isActive(): bool
@@ -138,6 +118,23 @@ class Group extends Model
 	public function mailcoach_transactional_emails(): HasMany
 	{
 		return $this->hasMany(MailcoachTransactionalEmail::class);
+	}
+	
+	protected function casts(): array
+	{
+		return [
+			'mailcoach_token' => 'encrypted',
+			'bsky_app_password' => 'encrypted',
+			'status' => GroupStatus::class,
+			'domain_status' => DomainStatus::class,
+			'latitude' => 'float',
+			'longitude' => 'float',
+		];
+	}
+	
+	protected function label(): Attribute
+	{
+		return Attribute::get(fn() => $this->region ?? str($this->name)->afterLast('×')->trim()->toString());
 	}
 	
 	protected function airportCode(): Attribute

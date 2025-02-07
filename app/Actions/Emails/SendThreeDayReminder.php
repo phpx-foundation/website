@@ -5,8 +5,6 @@ namespace App\Actions\Emails;
 use App\Actions\Concerns\FetchesModelsForCommands;
 use App\Models\Meetup;
 use App\Models\User;
-use Illuminate\Console\Command;
-use Illuminate\Support\Arr;
 use Lorisleiva\Actions\Concerns\AsAction;
 
 class SendThreeDayReminder

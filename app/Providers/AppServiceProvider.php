@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Lorisleiva\Actions\Facades\Actions;
-use Throwable;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -54,9 +53,9 @@ class AppServiceProvider extends ServiceProvider
 			
 			/** @var \Illuminate\Support\Collection<string, Group|ExternalGroup> $network */
 			$network = collect($data)
-				->map(function (array $record) {
+				->map(function(array $record) {
 					[$fqcn, $attributes] = $record;
-					return (new $fqcn)->newFromBuilder($attributes);
+					return (new $fqcn())->newFromBuilder($attributes);
 				});
 			
 			$view->share('phpx_network', $network);

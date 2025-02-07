@@ -8,12 +8,12 @@ use Filament\Resources\Pages\EditRecord;
 
 class EditMeetup extends EditRecord
 {
-    protected static string $resource = MeetupResource::class;
-
-    protected function getHeaderActions(): array
-    {
-        return [
-            Actions\DeleteAction::make(),
-        ];
-    }
+	protected static string $resource = MeetupResource::class;
+	
+	protected function getHeaderActions(): array
+	{
+		return [
+			Actions\DeleteAction::make(),
+		];
+	}
 }

@@ -5,7 +5,6 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Glhd\Bits\Database\HasSnowflakes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -25,6 +24,14 @@ class User extends Authenticatable
 		'remember_token',
 	];
 	
+	public function meetups(): BelongsToMany
+	{
+		return $this->belongsToMany(Meetup::class, 'rsvps')
+			->as('meetups')
+			->withTimestamps()
+			->using(Rsvp::class);
+	}
+	
 	protected function casts(): array
 	{
 		return [
@@ -32,13 +39,5 @@ class User extends Authenticatable
 			'email_verified_at' => 'datetime',
 			'password' => 'hashed',
 		];
-	}
-	
-	public function meetups(): BelongsToMany
-	{
-		return $this->belongsToMany(Meetup::class, 'rsvps')
-			->as('meetups')
-			->withTimestamps()
-			->using(Rsvp::class);
 	}
 }

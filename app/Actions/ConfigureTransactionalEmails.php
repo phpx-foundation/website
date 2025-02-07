@@ -38,7 +38,7 @@ class ConfigureTransactionalEmails
 		$group = $this->getGroupFromCommand($command);
 		$existing = $group->mailcoach_transactional_emails()->pluck('mail_name', 'action_name');
 		$actions = $this->actions()
-			->mapWithKeys(function($fqcn) use($existing) {
+			->mapWithKeys(function($fqcn) use ($existing) {
 				$mail_name = text(
 					label: 'Name for "'.class_basename($fqcn).'"',
 					default: $existing->get($fqcn) ?? '',

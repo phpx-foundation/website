@@ -3,7 +3,6 @@
 namespace App\Actions;
 
 use App\Models\Group;
-use App\Models\Meetup;
 use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
@@ -34,7 +33,7 @@ class ListGroupMembers
 		$headers = ['Name', 'Email', 'Subscribed?', 'Speaker?'];
 		
 		$rows = $users->map(fn(User $user) => [
-			$user->name, 
+			$user->name,
 			$user->email,
 			$user->group_membership?->is_subscribed ? '✅' : '',
 			$user->is_potential_speaker ? '✅' : '',

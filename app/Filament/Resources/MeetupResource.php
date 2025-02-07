@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MeetupResource\Pages;
 use App\Filament\Resources\MeetupResource\RelationManagers;
-use App\Models\Group;
 use App\Models\Meetup;
 use Filament\Forms;
 use Filament\Forms\Form;

@@ -3,7 +3,6 @@
 namespace App\Actions;
 
 use App\Http\Resources\MeetupResource;
-use App\Models\ExternalGroup;
 use App\Models\Group;
 use App\Models\Meetup;
 use Illuminate\Routing\Router;

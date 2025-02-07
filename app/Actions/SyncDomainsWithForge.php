@@ -2,11 +2,7 @@
 
 namespace App\Actions;
 
-use App\Actions\Concerns\FetchesModelsForCommands;
-use App\Models\ExternalGroup;
 use App\Models\Group;
-use App\Models\GroupMembership;
-use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
 use Laravel\Forge\Facades\Forge;
@@ -28,9 +24,9 @@ class SyncDomainsWithForge
 	public function handle(): Site
 	{
 		return Forge::addSiteAliases(
-			serverId: config('services.forge.server'), 
+			serverId: config('services.forge.server'),
 			siteId: config('services.forge.site'),
-			aliases: $this->aliases()->values()->toArray(), 
+			aliases: $this->aliases()->values()->toArray(),
 		);
 	}
 	

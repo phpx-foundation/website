@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use App\Enums\GroupStatus;
 use Exception;
 use Glhd\Bits\Database\HasSnowflakes;
 use Illuminate\Database\Eloquent\Casts\Attribute;

@@ -12,15 +12,15 @@ class MailcoachTransactionalEmail extends Model
 	use HasSnowflakes;
 	use SoftDeletes;
 	
+	public function group(): BelongsTo
+	{
+		return $this->belongsTo(Group::class);
+	}
+	
 	protected function casts(): array
 	{
 		return [
 			'is_enabled' => 'boolean',
 		];
-	}
-	
-	public function group(): BelongsTo
-	{
-		return $this->belongsTo(Group::class);
 	}
 }

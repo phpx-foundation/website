@@ -4,7 +4,6 @@ namespace App\Actions;
 
 use App\Actions\Concerns\FetchesModelsForCommands;
 use App\Models\Group;
-use App\Models\GroupMembership;
 use App\Models\User;
 use Closure;
 use Illuminate\Console\Command;

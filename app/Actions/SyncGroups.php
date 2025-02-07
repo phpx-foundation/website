@@ -123,7 +123,7 @@ class SyncGroups
 	
 	protected function valueForTable($attribute): string
 	{
-		return match(true) {
+		return match (true) {
 			$attribute instanceof BackedEnum => $attribute->value,
 			is_array($attribute) => implode(', ', $attribute),
 			default => (string) $attribute,
