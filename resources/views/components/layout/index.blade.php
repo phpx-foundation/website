@@ -51,8 +51,8 @@
 		<script defer data-domain="phpx.world" src="https://plausible.io/js/script.js"></script>
 	@endif
 </head>
-<body class="flex min-h-full font-sans">
-<div {{ $attributes->merge(['class' => 'flex w-full flex-col bg-dots']) }}>
+<body class="flex min-h-full font-sans bg-dots">
+<div {{ $attributes->merge(['class' => 'flex w-full flex-col']) }}>
 	{{-- Header --}}
 	<div class="w-full max-w-4xl mx-auto flex items-center justify-between gap-4 p-4">
 		@if(url()->current() == url('/'))

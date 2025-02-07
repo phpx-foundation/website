@@ -22,12 +22,12 @@ class GroupPolicy
 	
 	public function create(User $user): bool
 	{
-		return false;
+		return $user->isSuperAdmin();
 	}
 	
 	public function update(User $user, Group $group): bool
 	{
-		return $user->isGroupAdmin($group);
+		return $user->isSuperAdmin() || $user->isGroupAdmin($group);
 	}
 	
 	public function delete(User $user, Group $group): bool

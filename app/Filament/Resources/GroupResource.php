@@ -14,6 +14,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Support\Facades\Auth;
 
 class GroupResource extends Resource
 {
@@ -34,17 +35,20 @@ class GroupResource extends Resource
 						->columnSpanFull(),
 					Forms\Components\TextInput::make('domain')
 						->required()
-						->maxLength(255),
+						->maxLength(255)
+						->disabled(fn() => ! Auth::user()->isSuperAdmin()),
 					Forms\Components\Select::make('domain_status')
 						->required()
 						->options(DomainStatus::class)
-						->default(DomainStatus::Pending),
+						->default(DomainStatus::Pending)
+						->disabled(fn() => ! Auth::user()->isSuperAdmin()),
 					Forms\Components\Select::make('continent')
 						->required()
 						->options(Continent::class)
 						->default(Continent::NorthAmerica),
 					Forms\Components\TextInput::make('region')
-						->maxLength(255),
+						->maxLength(255)
+						->helperText('eg. “New York” for NYC'),
 					Forms\Components\Select::make('status')
 						->required()
 						->options(GroupStatus::class)
@@ -76,20 +80,32 @@ class GroupResource extends Resource
 					Forms\Components\TextInput::make('twitter_url')
 						->url()
 						->label('Twitter')
-						->maxLength(255),
+						->maxLength(255)
+						->hidden(fn() => ! Auth::user()->isSuperAdmin()),
 					Forms\Components\TextInput::make('meetup_url')
 						->url()
 						->label('Meetup')
 						->maxLength(255),
 				]),
-				Forms\Components\TextInput::make('latitude')
-					->numeric(),
-				Forms\Components\TextInput::make('longitude')
-					->numeric(),
-				Forms\Components\TextInput::make('mailcoach_endpoint')
-					->maxLength(255),
-				Forms\Components\TextInput::make('mailcoach_list')
-					->maxLength(255),
+				Forms\Components\Fieldset::make('Coordinates')->schema([
+					Forms\Components\TextInput::make('latitude')
+						->numeric()
+						->rules(['required', 'numeric', 'between:-90,90', 'decimal:2,8']),
+					Forms\Components\TextInput::make('longitude')
+						->numeric()
+						->rules(['required', 'numeric', 'between:-180,180', 'decimal:2,8']),
+				]),
+				Forms\Components\Fieldset::make('MailCoach')->schema([
+					Forms\Components\TextInput::make('mailcoach_token')
+						->maxLength(255)
+						->rules(['nullable']),
+					Forms\Components\TextInput::make('mailcoach_endpoint')
+						->maxLength(255)
+						->rules(['nullable', 'url']),
+					Forms\Components\TextInput::make('mailcoach_list')
+						->maxLength(255)
+						->rules(['nullable', 'uuid']),
+				]),
 				Forms\Components\TextInput::make('bsky_did')
 					->maxLength(255),
 				Forms\Components\Textarea::make('bsky_app_password')
@@ -170,4 +186,6 @@ class GroupResource extends Resource
 			'edit' => Pages\EditGroup::route('/{record}/edit'),
 		];
 	}
+	
+	
 }

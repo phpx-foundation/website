@@ -24,6 +24,11 @@ class User extends Authenticatable
 		'remember_token',
 	];
 	
+	public function isSuperAdmin(): bool
+	{
+		return $this->hasVerifiedEmail() && 'chris@cmorrell.com' === $this->email;
+	}
+	
 	public function meetups(): BelongsToMany
 	{
 		return $this->belongsToMany(Meetup::class, 'rsvps')

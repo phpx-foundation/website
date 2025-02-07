@@ -23,12 +23,13 @@ class MeetupPolicy
 	
 	public function create(User $user): bool
 	{
-		return $user->groups->contains(fn(Group $group) => $group->group_membership->isAdmin());
+		return $user->isSuperAdmin() 
+			|| $user->groups->contains(fn(Group $group) => $group->group_membership->isAdmin());
 	}
 	
 	public function update(User $user, Meetup $meetup): bool
 	{
-		return $user->isGroupAdmin($meetup->group);
+		return $user->isSuperAdmin() || $user->isGroupAdmin($meetup->group);
 	}
 	
 	public function delete(User $user, Meetup $meetup): bool
