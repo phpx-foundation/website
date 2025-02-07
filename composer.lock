@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "c8b282e385dd7a023a4b4884d0d4d4f9",
+    "content-hash": "14fb51d2e76408bf15da4da2a726b51f",
     "packages": [
         {
             "name": "anourvalar/eloquent-serialize",
@@ -455,6 +455,75 @@
                 }
             ],
             "time": "2025-01-22T14:01:35+00:00"
+        },
+        {
+            "name": "danilopolani/filament-plausible-widget",
+            "version": "v3.1.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/danilopolani/filament-plausible-widget.git",
+                "reference": "d84ec7913b4aad6379723a113eed48452b391091"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/danilopolani/filament-plausible-widget/zipball/d84ec7913b4aad6379723a113eed48452b391091",
+                "reference": "d84ec7913b4aad6379723a113eed48452b391091",
+                "shasum": ""
+            },
+            "require": {
+                "filament/filament": "^3.0",
+                "illuminate/http": "^9.0|^10.0|^11.0",
+                "illuminate/support": "^9.0|^10.0|^11.0",
+                "php": "^8.0"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "DaniloPolani\\FilamentPlausibleWidget\\WidgetServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "DaniloPolani\\FilamentPlausibleWidget\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Danilo Polani",
+                    "email": "danilo.polani@gmail.com",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Plausible widget for Filament admin dashboard",
+            "homepage": "https://github.com/danilopolani/filament-plausible-widget",
+            "keywords": [
+                "danilopolani",
+                "filament",
+                "filament-admin",
+                "filament-plausible-widget",
+                "plausible"
+            ],
+            "support": {
+                "issues": "https://github.com/danilopolani/filament-plausible-widget/issues",
+                "source": "https://github.com/danilopolani/filament-plausible-widget/tree/v3.1.1"
+            },
+            "funding": [
+                {
+                    "url": "https://www.buymeacoffee.com/theraloss",
+                    "type": "custom"
+                },
+                {
+                    "url": "https://github.com/danilopolani",
+                    "type": "github"
+                }
+            ],
+            "time": "2024-09-24T07:33:44+00:00"
         },
         {
             "name": "dflydev/dot-access-data",

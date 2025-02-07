@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Http\Middleware\SetGroupFromDomainMiddleware;
+use DaniloPolani\FilamentPlausibleWidget\Widgets\PlausibleWidget;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -25,6 +26,7 @@ class AdminPanelProvider extends PanelProvider
 	{
 		return $panel
 			->default()
+			->profile()
 			->id('admin')
 			->path('admin')
 			->colors(['primary' => Color::Amber])
@@ -35,8 +37,8 @@ class AdminPanelProvider extends PanelProvider
 			])
 			->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
 			->widgets([
-				Widgets\AccountWidget::class,
-				Widgets\FilamentInfoWidget::class,
+				// Widgets\AccountWidget::class,
+				// PlausibleWidget::class,
 			])
 			->middleware([
 				EncryptCookies::class,

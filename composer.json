@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.2",
+        "danilopolani/filament-plausible-widget": "^3.1",
         "filament/filament": "^3.2",
         "glhd/bits": "^0.4.1",
         "laravel/forge-sdk": "^3.19",
