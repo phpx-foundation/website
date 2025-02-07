@@ -111,5 +111,19 @@ return [
 	*/
 	
 	'password_timeout' => env('AUTH_PASSWORD_TIMEOUT', 10800),
+	
+	/*
+	|--------------------------------------------------------------------------
+	| Super Admins
+	|--------------------------------------------------------------------------
+	|
+	| These are users that are configured to have 'super admin' privileges.
+	| Add super admins using their email address.
+	|
+	*/
+	
+	'super_admins' => [
+		...array_filter(array_map('trim', explode(',', env('AUTH_SUPER_ADMINS', '')))),
+	],
 
 ];

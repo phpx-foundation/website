@@ -26,7 +26,7 @@ class User extends Authenticatable
 	
 	public function isSuperAdmin(): bool
 	{
-		return $this->hasVerifiedEmail() && 'chris@cmorrell.com' === $this->email;
+		return $this->hasVerifiedEmail() && in_array($this->email, config('auth.super_admins'));
 	}
 	
 	public function meetups(): BelongsToMany
