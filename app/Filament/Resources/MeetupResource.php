@@ -7,6 +7,8 @@ use App\Filament\Resources\MeetupResource\RelationManagers;
 use App\Models\Group;
 use App\Models\Meetup;
 use Filament\Forms;
+use Filament\Forms\Components\Field;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
@@ -23,7 +25,7 @@ class MeetupResource extends Resource
 	{
 		return Meetup::query()
 			->when(
-				request()->attributes->get('group'), 
+				request()->attributes->get('group'),
 				fn(Builder $query, Group $group) => $query->where('group_id', $group->getKey())
 			)
 			->count();
@@ -33,6 +35,9 @@ class MeetupResource extends Resource
 	{
 		return $form
 			->schema([
+				Forms\Components\Select::make('group_id')
+					->relationship(name: 'group', titleAttribute: 'name')
+					->columnSpanFull(), // FIXME
 				Forms\Components\TextInput::make('location')
 					->required()
 					->maxLength(255),
@@ -40,11 +45,13 @@ class MeetupResource extends Resource
 					->required()
 					->numeric(),
 				Forms\Components\DateTimePicker::make('starts_at')
+					->label('Start')
 					->required()
-					->rules(['required', 'before_or_equal:ends_at']),
+					->rules(['required', 'date', 'before_or_equal:ends_at']),
 				Forms\Components\DateTimePicker::make('ends_at')
+					->label('End')
 					->required()
-					->rules(['required', 'after_or_equal:starts_at']),
+					->rules(['required', 'date', 'after_or_equal:starts_at']),
 				Forms\Components\MarkdownEditor::make('description')
 					->required()
 					->columnSpanFull(),
@@ -119,4 +126,6 @@ class MeetupResource extends Resource
 			'edit' => Pages\EditMeetup::route('/{record}/edit'),
 		];
 	}
+	
+	
 }

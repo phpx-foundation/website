@@ -14,4 +14,13 @@ class CreateMeetup extends CreateRecord
 	{
 		GenerateOpenGraphImage::run($this->getRecord());
 	}
+	
+	protected function mutateFormDataBeforeCreate(array $data): array
+	{
+		if ($group = request()->attributes->get('group')) {
+			$data['group_id'] = $group->getKey();
+		}
+		
+		return $data;
+	}
 }

@@ -39,14 +39,13 @@ class AdminPanelProvider extends PanelProvider
 				// Pages\Dashboard::class,
 			])
 			->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
-			->navigationItems(array_filter([
-				request()->attributes->has('group')
-					? NavigationItem::make('Homepage')
-						->group('Resources')
-						->url(url('/'))
-						->openUrlInNewTab()
-						->icon('heroicon-o-home')
-					: null,
+			->navigationItems([
+				NavigationItem::make('Homepage')
+					->group('Resources')
+					->url(url('/'))
+					->openUrlInNewTab()
+					->icon('heroicon-o-home')
+					->hidden(fn() => ! request()->attributes->has('group')),
 				NavigationItem::make('PHP×World')
 					->group('Resources')
 					->url('https://'.RootDomains::Production->value)
@@ -61,8 +60,8 @@ class AdminPanelProvider extends PanelProvider
 					->group('Resources')
 					->url('https://'.RootDomains::Production->value.'/running-events')
 					->openUrlInNewTab()
-					->icon('heroicon-o-document')
-			]))
+					->icon('heroicon-o-document'),
+			])
 			->widgets([
 				// Widgets\AccountWidget::class,
 				// PlausibleWidget::class,
