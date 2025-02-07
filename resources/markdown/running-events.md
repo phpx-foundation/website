@@ -13,7 +13,7 @@ getting together!
 
 ## Sponsors
 
-We're working to compile a list of companies that are open to sponsoring local PHP 
+We're working to compile a list of companies that are open to sponsoring local PHP
 events. If you run a company that would like to be added, please reach out!
 
 - [Laravel](https://laravel.com/meetups) will sponsor PHP× meetups with some swag
@@ -21,7 +21,7 @@ events. If you run a company that would like to be added, please reach out!
 - [JetBrains](https://www.jetbrains.com/community/events-partnership/) will provide
   free product licenses to events with over 50 attendees
 - [MailCoach](https://www.mailcoach.app/) is offering all PHP× groups a free account
-  to use for sending out event announcements (see [the organizers page](/organizers) 
+  to use for sending out event announcements (see [the organizers page](/organizers)
   for more details)
 - [Warp](https://warpdev.notion.site/Hosting-a-Warp-Sponsored-Meetup-18843263616d80a896f3c610837edfb8)
   will reimburse groups up to $300 for in-person developer meetups, but requires
@@ -93,9 +93,9 @@ These are typically 5–10 minute informal demos of something that a community m
 is working on. On a show-and-tell night, you may have up to 5–8 people do a quick
 demo.
 
-Show-and-tell is often a great way to let folks show things that are a little 
+Show-and-tell is often a great way to let folks show things that are a little
 outside their regular day-to-day PHP work. This might include showing some Swift
-code for an iOS app, or Kotlin code for a PhpStorm plugin, or progress on a new 
+code for an iOS app, or Kotlin code for a PhpStorm plugin, or progress on a new
 mechanical keyboard or Arduino project.
 
 ### Social meetups

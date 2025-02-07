@@ -10,7 +10,7 @@ class MeetupSeeder extends Seeder
 {
 	public function run(): void
 	{
-		Group::eachById(function (Group $group) {
+		Group::eachById(function(Group $group) {
 			// One past meetup
 			Meetup::factory()->for($group)->create([
 				'location' => 'Past Location',
