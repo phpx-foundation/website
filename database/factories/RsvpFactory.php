@@ -2,7 +2,6 @@
 
 namespace Database\Factories;
 
-use App\Models\Group;
 use App\Models\Meetup;
 use App\Models\Rsvp;
 use Illuminate\Database\Eloquent\Factories\Factory;

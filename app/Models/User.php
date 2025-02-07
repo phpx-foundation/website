@@ -23,15 +23,6 @@ class User extends Authenticatable
 		'remember_token',
 	];
 	
-	protected function casts(): array
-	{
-		return [
-			'is_potential_speaker' => 'boolean',
-			'email_verified_at' => 'datetime',
-			'password' => 'hashed',
-		];
-	}
-	
 	public function current_group(): BelongsTo
 	{
 		return $this->belongsTo(Group::class, 'current_group_id');
@@ -52,5 +43,14 @@ class User extends Authenticatable
 			->as('meetups')
 			->withTimestamps()
 			->using(Rsvp::class);
+	}
+	
+	protected function casts(): array
+	{
+		return [
+			'is_potential_speaker' => 'boolean',
+			'email_verified_at' => 'datetime',
+			'password' => 'hashed',
+		];
 	}
 }

@@ -15,11 +15,37 @@ class HomeController
 		return view('world.home', [
 			'show_1080p' => $request->has('1080p'),
 			'points' => Cache::remember(
-				key: 'homepage-points', 
-				ttl: now()->addDay(), 
+				key: 'homepage-points',
+				ttl: now()->addDay(),
 				callback: fn() => $this->maximizeDistance($this->points()),
 			),
 		]);
+	}
+	
+	function maximizeDistance(Collection $points)
+	{
+		$result = collect([$points->first()]);
+		$remaining = $points->slice(1);
+		
+		while ($remaining->isNotEmpty()) {
+			$furthest = $remaining->sortByDesc(function($point) use ($result) {
+				$targets = $result->take(-2);
+				
+				$distance = $this->distance($targets->pop(), $point);
+				
+				if ($targets->isNotEmpty()) {
+					$distance += $this->distance($targets->pop(), $point);
+					$distance = $distance / 2;
+				}
+				
+				return $distance;
+			})->first();
+			
+			$result->push($furthest);
+			$remaining = $remaining->filter(fn($point) => $point !== $furthest);
+		}
+		
+		return $result;
 	}
 	
 	protected function points()
@@ -57,31 +83,5 @@ class HomeController
 		$c = 2 * atan2(sqrt($a), sqrt(1 - $a));
 		
 		return $earth * $c;
-	}
-	
-	function maximizeDistance(Collection $points)
-	{
-		$result = collect([$points->first()]);
-		$remaining = $points->slice(1);
-		
-		while ($remaining->isNotEmpty()) {
-			$furthest = $remaining->sortByDesc(function($point) use ($result) {
-				$targets = $result->take(-2);
-				
-				$distance = $this->distance($targets->pop(), $point);
-				
-				if ($targets->isNotEmpty()) {
-					$distance += $this->distance($targets->pop(), $point);
-					$distance = $distance / 2;
-				}
-				
-				return $distance;
-			})->first();
-			
-			$result->push($furthest);
-			$remaining = $remaining->filter(fn($point) => $point !== $furthest);
-		}
-		
-		return $result;
 	}
 }

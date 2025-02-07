@@ -33,7 +33,7 @@ class ListRsvps
 				->limit(50)
 				->get()
 				->mapWithKeys(fn(Meetup $meetup) => [
-					$meetup->getKey() => "{$meetup->group->name} @ {$meetup->location} on {$meetup->range()}"
+					$meetup->getKey() => "{$meetup->group->name} @ {$meetup->location} on {$meetup->range()}",
 				]);
 			
 			$meetup_id = select('Which meetup?', $options);
@@ -44,7 +44,7 @@ class ListRsvps
 		$headers = ['Name', 'Email', 'Speaker?'];
 		
 		$rows = $users->map(fn(User $user) => [
-			$user->name, 
+			$user->name,
 			$user->email,
 			$user->is_potential_speaker ? '✅' : '',
 		]);

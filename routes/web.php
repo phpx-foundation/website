@@ -4,8 +4,6 @@ use App\Enums\RootDomains;
 use App\Http\Controllers\World\HomeController;
 use App\Http\Middleware\SetGroupFromDomainMiddleware;
 use App\Http\Middleware\ShareNextMeetupMiddleware;
-use App\Models\ExternalGroup;
-use App\Models\Group;
 use App\Models\Meetup;
 use Illuminate\Support\Facades\Route;
 

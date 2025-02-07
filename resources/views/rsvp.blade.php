@@ -13,8 +13,8 @@
 		<meta property="og:description" content="Meetup @ {{ $meetup->location }} on {{ $meetup->range() }}" />
 		<meta name="twitter:description" content="Meetup @ {{ $meetup->location }} on {{ $meetup->range() }}" />
 		@if($meetup->open_graph_image_url)
-		<meta property="og:image" content="{{ $meetup->open_graph_image_url }}" />
-		<meta name="twitter:image" content="{{ $meetup->open_graph_image_url }}" />
+			<meta property="og:image" content="{{ $meetup->open_graph_image_url }}" />
+			<meta name="twitter:image" content="{{ $meetup->open_graph_image_url }}" />
 		@endif
 	</x-slot:og>
 	
