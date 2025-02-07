@@ -30,5 +30,3 @@ Route::middleware([SetGroupFromDomainMiddleware::class, ShareNextMeetupMiddlewar
 			return view('rsvp', ['meetup' => $meetup]);
 		});
 	});
-
-require __DIR__.'/auth.php';
