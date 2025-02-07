@@ -2,16 +2,15 @@
 
 namespace App\Providers\Filament;
 
+use App\Enums\RootDomains;
 use App\Http\Middleware\SetGroupFromDomainMiddleware;
-use DaniloPolani\FilamentPlausibleWidget\Widgets\PlausibleWidget;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
-use Filament\Pages;
+use Filament\Navigation\NavigationItem;
 use Filament\Panel;
 use Filament\PanelProvider;
 use Filament\Support\Colors\Color;
-use Filament\Widgets;
 use Illuminate\Cookie\Middleware\AddQueuedCookiesToResponse;
 use Illuminate\Cookie\Middleware\EncryptCookies;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
@@ -40,6 +39,30 @@ class AdminPanelProvider extends PanelProvider
 				// Pages\Dashboard::class,
 			])
 			->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+			->navigationItems(array_filter([
+				request()->attributes->has('group')
+					? NavigationItem::make('Homepage')
+						->group('Resources')
+						->url(url('/'))
+						->openUrlInNewTab()
+						->icon('heroicon-o-home')
+					: null,
+				NavigationItem::make('PHP×World')
+					->group('Resources')
+					->url('https://'.RootDomains::Production->value)
+					->openUrlInNewTab()
+					->icon('heroicon-o-globe-alt'),
+				NavigationItem::make('For Organizers')
+					->group('Resources')
+					->url('https://'.RootDomains::Production->value.'/organizers')
+					->openUrlInNewTab()
+					->icon('heroicon-o-document'),
+				NavigationItem::make('Running Events')
+					->group('Resources')
+					->url('https://'.RootDomains::Production->value.'/running-events')
+					->openUrlInNewTab()
+					->icon('heroicon-o-document')
+			]))
 			->widgets([
 				// Widgets\AccountWidget::class,
 				// PlausibleWidget::class,

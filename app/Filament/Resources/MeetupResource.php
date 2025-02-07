@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MeetupResource\Pages;
 use App\Filament\Resources\MeetupResource\RelationManagers;
+use App\Models\Group;
 use App\Models\Meetup;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -17,6 +18,16 @@ class MeetupResource extends Resource
 	protected static ?string $model = Meetup::class;
 	
 	protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+	
+	public static function getNavigationBadge(): ?string
+	{
+		return Meetup::query()
+			->when(
+				request()->attributes->get('group'), 
+				fn(Builder $query, Group $group) => $query->where('group_id', $group->getKey())
+			)
+			->count();
+	}
 	
 	public static function form(Form $form): Form
 	{

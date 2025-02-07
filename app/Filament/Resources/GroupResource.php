@@ -33,6 +33,15 @@ class GroupResource extends Resource
 		return parent::getNavigationIcon();
 	}
 	
+	public static function getNavigationBadge(): ?string
+	{
+		if (! request()->attributes->has('group')) {
+			return static::getModel()::count();
+		}
+		
+		return parent::getNavigationBadge();
+	}
+	
 	public static function getPluralModelLabel(): string
 	{
 		if ($group = request()->attributes->get('group')) {
