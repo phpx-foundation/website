@@ -13,6 +13,7 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Contracts\Support\Htmlable;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\HtmlString;
@@ -22,6 +23,24 @@ class GroupResource extends Resource
 	protected static ?string $model = Group::class;
 	
 	protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+	
+	public static function getNavigationIcon(): string|Htmlable|null
+	{
+		if (request()->attributes->has('group')) {
+			return 'heroicon-o-cog';
+		}
+		
+		return parent::getNavigationIcon();
+	}
+	
+	public static function getPluralModelLabel(): string
+	{
+		if ($group = request()->attributes->get('group')) {
+			return $group->name;
+		}
+		
+		return parent::getPluralModelLabel();
+	}
 	
 	public static function form(Form $form): Form
 	{
