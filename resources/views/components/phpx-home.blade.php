@@ -1,6 +1,6 @@
 <div class="flex justify-center">
 	<div class="relative">
-		<a 
+		<a
 			href="/"
 			class="flex items-center gap-2 bg-black border-2 border-white text-white font-mono font-bold"
 		>

@@ -23,7 +23,7 @@ class MeetupPolicy
 	
 	public function create(User $user): bool
 	{
-		return $user->isSuperAdmin() 
+		return $user->isSuperAdmin()
 			|| $user->groups->contains(fn(Group $group) => $group->group_membership->isAdmin());
 	}
 	

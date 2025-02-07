@@ -94,10 +94,10 @@ function ease(k) {
 	return .5 * (Math.sin((k - .5) * Math.PI) + 1);
 }
 
-function easeInOut (frame, frames, min, max) {
+function easeInOut(frame, frames, min, max) {
 	let eased = min + (max - min) * Math.sin(Math.PI * (frame / frames)) * Math.sin(Math.PI * (frame / frames));
 	
-	if (frame > (frames /2 )) {
+	if (frame > (frames / 2)) {
 		eased = Math.max(eased, default_z);
 	}
 	
@@ -130,8 +130,7 @@ let current_z = default_z;
 let last_z = default_z;
 let fps = 60;
 
-function move(frame)
-{
+function move(frame) {
 	const prev = 0 === point_index ? points[points.length - 1] : points[point_index - 1];
 	const next = points[point_index];
 	
@@ -156,8 +155,7 @@ function move(frame)
 	return false;
 }
 
-function pause(frame)
-{
+function pause(frame) {
 	camera.position.z = last_z - (frame / 100);
 	
 	if (frame >= (frames_per_point / 2)) {
@@ -175,7 +173,7 @@ function pause(frame)
 	if ('move' === mode && move(frame)) {
 		mode = 'pause';
 		frame = 0;
-	} else if('pause' === mode && pause(frame)) {
+	} else if ('pause' === mode && pause(frame)) {
 		mode = 'move';
 		frame = 0;
 	}

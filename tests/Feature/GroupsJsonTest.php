@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use App\Enums\Continent;
 use App\Enums\GroupStatus;
+use DateTimeZone;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Str;
 use Illuminate\Testing\Assert;
@@ -28,7 +29,7 @@ class GroupsJsonTest extends TestCase
 		
 		Assert::assertNotEmpty(data_get($config, 'name'));
 		Assert::assertNotEmpty(data_get($config, 'description'));
-		Assert::assertContains(data_get($config, 'timezone'), \DateTimeZone::listIdentifiers());
+		Assert::assertContains(data_get($config, 'timezone'), DateTimeZone::listIdentifiers());
 		
 		if ($status = data_get($config, 'status')) {
 			Assert::assertNotNull(GroupStatus::from($status));

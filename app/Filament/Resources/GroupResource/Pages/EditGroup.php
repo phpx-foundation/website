@@ -31,7 +31,8 @@ class EditGroup extends EditRecord
 			$data['mailcoach_list'] = $record->mailcoach_list;
 			
 			$data['bsky_app_password'] = $record->bsky_app_password;
-		} catch (Throwable) {}
+		} catch (Throwable) {
+		}
 		
 		return $data;
 	}
