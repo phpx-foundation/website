@@ -39,6 +39,12 @@ trait BelongsToGroups
 			->isAdmin() ?? false;
 	}
 	
+	public function isAnyGroupAdmin(): bool
+	{
+		return $this->groups
+			->contains(fn(Group $candidate) => $candidate->group_membership->isAdmin());
+	}
+	
 	public function current_group(): BelongsTo
 	{
 		return $this->belongsTo(Group::class, 'current_group_id');
