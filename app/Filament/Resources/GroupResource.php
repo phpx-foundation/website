@@ -124,6 +124,7 @@ class GroupResource extends Resource
 						->rules(['required', 'numeric', 'between:-90,90', 'decimal:2,8']),
 					Forms\Components\TextInput::make('longitude')
 						->numeric()
+						->required()
 						->rules(['required', 'numeric', 'between:-180,180', 'decimal:2,8']),
 				]),
 				Forms\Components\Section::make('Third-Party Integrations')->schema([
