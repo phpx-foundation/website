@@ -8,14 +8,11 @@ use App\Models\Group;
 use App\Models\Meetup;
 use App\Rules\CanUpdateGroup;
 use Filament\Forms;
-use Filament\Forms\Components\Field;
-use Filament\Forms\Components\Select;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
-use UnexpectedValueException;
 
 class MeetupResource extends Resource
 {
@@ -49,7 +46,8 @@ class MeetupResource extends Resource
 					->searchable()
 					->preload()
 					->label('Group')
-					->rules(['required', new CanUpdateGroup()])
+					->required()
+					->rules(['required', 'exists:groups,id', new CanUpdateGroup()])
 					->columnSpanFull(),
 				Forms\Components\TextInput::make('location')
 					->required()
@@ -141,6 +139,5 @@ class MeetupResource extends Resource
 			'edit' => Pages\EditMeetup::route('/{record}/edit'),
 		];
 	}
-	
 	
 }
