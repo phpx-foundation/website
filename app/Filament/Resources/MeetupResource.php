@@ -47,11 +47,13 @@ class MeetupResource extends Resource
 				Forms\Components\DateTimePicker::make('starts_at')
 					->label('Start')
 					->required()
-					->rules(['required', 'date', 'before_or_equal:ends_at']),
+					->beforeOrEqual('ends_at')
+					->rules(['required', 'date']),
 				Forms\Components\DateTimePicker::make('ends_at')
 					->label('End')
 					->required()
-					->rules(['required', 'date', 'after_or_equal:starts_at']),
+					->afterOrEqual('starts_at')
+					->rules(['required', 'date']),
 				Forms\Components\MarkdownEditor::make('description')
 					->required()
 					->columnSpanFull(),
