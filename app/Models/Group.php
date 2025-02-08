@@ -24,10 +24,12 @@ class Group extends Model
 	use HasFactory;
 	use HasSnowflakes;
 	use HasDomain;
+	use HasGroupMembership;
 	
 	protected $visible = [
 		'id',
 		'domain',
+		'domain_status',
 		'name',
 		'region',
 		'continent',
@@ -35,6 +37,12 @@ class Group extends Model
 		'timezone',
 		'frequency',
 		'status',
+		'bsky_url',
+		'bsky_did',
+		'twitter_url',
+		'meetup_url',
+		'latitude',
+		'longitude',
 		'created_at',
 	];
 	
@@ -47,22 +55,22 @@ class Group extends Model
 		static::saved(fn() => Cache::forget('phpx-network'));
 	}
 	
-	public function isActive()
+	public function isActive(): bool
 	{
 		return GroupStatus::Active === $this->status;
 	}
 	
-	public function isPlanned()
+	public function isPlanned(): bool
 	{
 		return GroupStatus::Planned === $this->status;
 	}
 	
-	public function isProspective()
+	public function isProspective(): bool
 	{
 		return GroupStatus::Prospective === $this->status;
 	}
 	
-	public function isDisbanded()
+	public function isDisbanded(): bool
 	{
 		return GroupStatus::Disbanded === $this->status;
 	}
@@ -101,7 +109,7 @@ class Group extends Model
 	{
 		return $this->belongsToMany(User::class, 'group_memberships')
 			->as('group_membership')
-			->withPivot('id', 'is_subscribed')
+			->withPivot('id', 'role', 'is_subscribed')
 			->withTimestamps()
 			->using(GroupMembership::class);
 	}

@@ -2,7 +2,9 @@
 
 namespace App\Enums;
 
-enum GroupStatus: string
+use Filament\Support\Contracts\HasDescription;
+
+enum GroupStatus: string implements HasDescription
 {
 	case Active = 'active';
 	
@@ -11,4 +13,14 @@ enum GroupStatus: string
 	case Prospective = 'prospective';
 	
 	case Disbanded = 'disbanded';
+	
+	public function getDescription(): ?string
+	{
+		return match ($this) {
+			self::Active => 'Group has had meetings recently',
+			self::Planned => 'Group plans to hold a meeting soon',
+			self::Prospective => 'Group would like to organize, but may need co-organizers',
+			self::Disbanded => 'Group is no longer active',
+		};
+	}
 }

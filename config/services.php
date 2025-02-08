@@ -36,5 +36,9 @@ return [
 		'server' => env('FORGE_SERVER_ID'),
 		'site' => env('FORGE_SITE_ID'),
 	],
+	
+	'plausible' => [
+		'api_key' => env('PLAUSIBLE_API_KEY'),
+	],
 
 ];

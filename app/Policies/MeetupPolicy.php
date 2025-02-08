@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Models\Group;
 use App\Models\Meetup;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
@@ -22,22 +23,23 @@ class MeetupPolicy
 	
 	public function create(User $user): bool
 	{
-		return false;
+		return $user->isSuperAdmin()
+			|| $user->groups->contains(fn(Group $group) => $group->group_membership->isAdmin());
 	}
 	
 	public function update(User $user, Meetup $meetup): bool
 	{
-		return false;
+		return $user->isSuperAdmin() || $user->isGroupAdmin($meetup->group);
 	}
 	
 	public function delete(User $user, Meetup $meetup): bool
 	{
-		return false;
+		return $this->update($user, $meetup);
 	}
 	
 	public function restore(User $user, Meetup $meetup): bool
 	{
-		return false;
+		return $this->update($user, $meetup);
 	}
 	
 	public function forceDelete(User $user, Meetup $meetup): bool

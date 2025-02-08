@@ -5,7 +5,6 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Glhd\Bits\Database\HasSnowflakes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -17,24 +16,17 @@ class User extends Authenticatable
 	use Notifiable;
 	use HasSnowflakes;
 	use SoftDeletes;
+	use BelongsToGroups;
+	use HasGroupMembership;
 	
 	protected $hidden = [
 		'password',
 		'remember_token',
 	];
 	
-	public function current_group(): BelongsTo
+	public function isSuperAdmin(): bool
 	{
-		return $this->belongsTo(Group::class, 'current_group_id');
-	}
-	
-	public function groups(): BelongsToMany
-	{
-		return $this->belongsToMany(Group::class, 'group_memberships')
-			->as('group_membership')
-			->withPivot('id', 'is_subscribed')
-			->withTimestamps()
-			->using(GroupMembership::class);
+		return $this->hasVerifiedEmail() && in_array($this->email, config('auth.super_admins'));
 	}
 	
 	public function meetups(): BelongsToMany

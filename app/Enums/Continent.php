@@ -2,7 +2,9 @@
 
 namespace App\Enums;
 
-enum Continent: string
+use Filament\Support\Contracts\HasLabel;
+
+enum Continent: string implements HasLabel
 {
 	case Africa = 'Africa';
 	
@@ -17,4 +19,9 @@ enum Continent: string
 	case Antarctica = 'Antarctica';
 	
 	case Australia = 'Australia';
+	
+	public function getLabel(): ?string
+	{
+		return $this->value;
+	}
 }
