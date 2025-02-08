@@ -4,8 +4,10 @@ namespace App\Filament\Resources\MeetupResource\Pages;
 
 use App\Actions\GenerateOpenGraphImage;
 use App\Filament\Resources\MeetupResource;
+use App\Models\Meetup;
 use Filament\Actions;
 use Filament\Resources\Pages\EditRecord;
+use Filament\Support\Enums\IconPosition;
 
 class EditMeetup extends EditRecord
 {
@@ -15,6 +17,11 @@ class EditMeetup extends EditRecord
 	{
 		return [
 			Actions\DeleteAction::make(),
+			Actions\Action::make('view')
+				->icon('heroicon-o-arrow-top-right-on-square')
+				->iconPosition(IconPosition::After)
+				->url(fn(Meetup $record) => $record->rsvp_url)
+				->openUrlInNewTab(),
 		];
 	}
 	
