@@ -27,6 +27,7 @@ class Meetup extends Model implements Htmlable
 	protected $visible = [
 		'id',
 		'group',
+		'group_id',
 		'description',
 		'location',
 		'capacity',
@@ -80,6 +81,10 @@ class Meetup extends Model implements Htmlable
 	
 	public function range(): string
 	{
+		if (! $this->starts_at) {
+			return '';
+		}
+		
 		if ($this->starts_at->eq($this->ends_at)) {
 			return $this->starts_at->format("l, F jS Y \a\\t g:ia T");
 		}
@@ -100,7 +105,7 @@ class Meetup extends Model implements Htmlable
 	protected function startsAt(): Attribute
 	{
 		return Attribute::make(
-			get: fn($value) => $this->asDateTime($value)->shiftTimezone(config('app.timezone'))->timezone($this->group->timezone),
+			get: fn($value) => $value ? $this->asDateTime($value)->shiftTimezone(config('app.timezone'))->timezone($this->group->timezone) : null,
 			set: fn($value) => $this->asDateTime($value)->timezone(config('app.timezone')),
 		);
 	}
@@ -139,12 +144,12 @@ class Meetup extends Model implements Htmlable
 	
 	protected function rsvpUrl(): Attribute
 	{
-		return Attribute::get(fn() => $this->group->url("meetups/{$this->getKey()}/rsvps"));
+		return Attribute::get(fn() => $this->group?->url("meetups/{$this->getKey()}/rsvps"));
 	}
 	
 	protected function dateDay(): Attribute
 	{
-		return Attribute::get(fn() => $this->starts_at->timezone(config('app.timezone'))->format('F jS'));
+		return Attribute::get(fn() => $this->starts_at?->timezone(config('app.timezone'))->format('F jS'));
 	}
 	
 	protected function dateRange(): Attribute

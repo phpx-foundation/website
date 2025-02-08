@@ -14,6 +14,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
+use UnexpectedValueException;
 
 class MeetupResource extends Resource
 {
@@ -37,7 +38,8 @@ class MeetupResource extends Resource
 			->schema([
 				Forms\Components\Select::make('group_id')
 					->relationship(name: 'group', titleAttribute: 'name')
-					->columnSpanFull(), // FIXME
+					->label('Group')
+					->columnSpanFull(),
 				Forms\Components\TextInput::make('location')
 					->required()
 					->maxLength(255),
