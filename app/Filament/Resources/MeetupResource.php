@@ -6,6 +6,7 @@ use App\Filament\Resources\MeetupResource\Pages;
 use App\Filament\Resources\MeetupResource\RelationManagers;
 use App\Models\Group;
 use App\Models\Meetup;
+use App\Rules\CanUpdateGroup;
 use Filament\Forms;
 use Filament\Forms\Components\Field;
 use Filament\Forms\Components\Select;
@@ -38,7 +39,17 @@ class MeetupResource extends Resource
 			->schema([
 				Forms\Components\Select::make('group_id')
 					->relationship(name: 'group', titleAttribute: 'name')
+					->default(function() {
+						if ($group = request()->attributes->get('group')) {
+							return (string) $group->getKey();
+						}
+						
+						return null;
+					})
+					->searchable()
+					->preload()
 					->label('Group')
+					->rules(['required', new CanUpdateGroup()])
 					->columnSpanFull(),
 				Forms\Components\TextInput::make('location')
 					->required()

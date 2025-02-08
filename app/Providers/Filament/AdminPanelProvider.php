@@ -70,7 +70,6 @@ class AdminPanelProvider extends PanelProvider
 				EncryptCookies::class,
 				AddQueuedCookiesToResponse::class,
 				StartSession::class,
-				SetGroupFromDomainMiddleware::class,
 				AuthenticateSession::class,
 				ShareErrorsFromSession::class,
 				VerifyCsrfToken::class,
@@ -78,6 +77,9 @@ class AdminPanelProvider extends PanelProvider
 				DisableBladeIconComponents::class,
 				DispatchServingFilamentEvent::class,
 			])
+			->middleware([
+				SetGroupFromDomainMiddleware::class,
+			], isPersistent: true)
 			->authMiddleware([
 				Authenticate::class,
 			]);
