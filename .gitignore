@@ -3,6 +3,7 @@
 /public/build
 /public/hot
 /public/storage
+/public/js/filament/*
 /storage/*.key
 /vendor
 .env
