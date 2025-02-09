@@ -3,6 +3,7 @@
 namespace App\Providers\Filament;
 
 use App\Enums\RootDomains;
+use App\Http\Middleware\ApplyFilamentScopes;
 use App\Http\Middleware\SetGroupFromDomainMiddleware;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
@@ -40,7 +41,7 @@ class AdminPanelProvider extends PanelProvider
 			])
 			->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
 			->navigationItems([
-				NavigationItem::make('Homepage')
+				NavigationItem::make(fn() => request()->attributes->get('group')?->name)
 					->group('Resources')
 					->url(url('/'))
 					->openUrlInNewTab()
@@ -79,6 +80,7 @@ class AdminPanelProvider extends PanelProvider
 			])
 			->middleware([
 				SetGroupFromDomainMiddleware::class,
+				ApplyFilamentScopes::class,
 			], isPersistent: true)
 			->authMiddleware([
 				Authenticate::class,

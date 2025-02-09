@@ -22,12 +22,7 @@ class MeetupResource extends Resource
 	
 	public static function getNavigationBadge(): ?string
 	{
-		return Meetup::query()
-			->when(
-				request()->attributes->get('group'),
-				fn(Builder $query, Group $group) => $query->where('group_id', $group->getKey())
-			)
-			->count();
+		return Meetup::count();
 	}
 	
 	public static function form(Form $form): Form
@@ -108,11 +103,6 @@ class MeetupResource extends Resource
 					->toggleable(isToggledHiddenByDefault: true),
 			])
 			->defaultSort('starts_at', 'desc')
-			->modifyQueryUsing(function(Builder $query) {
-				if ($group = request()->attributes->get('group')) {
-					$query->where('group_id', $group->id);
-				}
-			})
 			->filters([])
 			->actions([
 				Tables\Actions\EditAction::make(),

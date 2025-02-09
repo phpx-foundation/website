@@ -24,31 +24,9 @@ class GroupResource extends Resource
 	
 	protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 	
-	public static function getNavigationIcon(): string|Htmlable|null
-	{
-		if (request()->attributes->has('group')) {
-			return 'heroicon-o-cog';
-		}
-		
-		return parent::getNavigationIcon();
-	}
-	
 	public static function getNavigationBadge(): ?string
 	{
-		if (! request()->attributes->has('group')) {
-			return static::getModel()::count();
-		}
-		
-		return parent::getNavigationBadge();
-	}
-	
-	public static function getPluralModelLabel(): string
-	{
-		if ($group = request()->attributes->get('group')) {
-			return $group->name;
-		}
-		
-		return parent::getPluralModelLabel();
+		return Group::count();
 	}
 	
 	public static function form(Form $form): Form
@@ -199,11 +177,6 @@ class GroupResource extends Resource
 					->searchable()
 					->toggleable(isToggledHiddenByDefault: true),
 			])
-			->modifyQueryUsing(function(Builder $query) {
-				if ($group = request()->attributes->get('group')) {
-					$query->where('id', $group->id);
-				}
-			})
 			->filters([
 				//
 			])
