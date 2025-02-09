@@ -17,13 +17,4 @@ class ListGroups extends ListRecords
 			Actions\CreateAction::make(),
 		];
 	}
-	
-	public function table(Table $table): Table
-	{
-		if ($group = request()->attributes->get('group')) {
-			redirect()->to(GroupResource::getUrl('edit', ['record' => $group]));
-		}
-		
-		return parent::table($table);
-	}
 }

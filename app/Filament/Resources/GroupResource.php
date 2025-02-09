@@ -13,8 +13,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Contracts\Support\Htmlable;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\HtmlString;
 
@@ -45,12 +43,14 @@ class GroupResource extends Resource
 						->required()
 						->maxLength(255)
 						->disabled(fn() => ! Auth::user()->isSuperAdmin())
+						->dehydrated(fn() => ! Auth::user()->isSuperAdmin())
 						->rules(['']),
 					Forms\Components\Select::make('domain_status')
 						->required()
 						->options(DomainStatus::class)
 						->default(DomainStatus::Pending)
-						->disabled(fn() => ! Auth::user()->isSuperAdmin()),
+						->disabled(fn() => ! Auth::user()->isSuperAdmin())
+						->dehydrated(fn() => ! Auth::user()->isSuperAdmin()),
 					Forms\Components\Select::make('continent')
 						->required()
 						->options(Continent::class)
