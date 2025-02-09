@@ -124,6 +124,20 @@
         "latitude": 10.2935639,
         "longitude": 123.9019209
     },
+    "amsterdamphp.nl": {
+        "external": true,
+        "name": "PHP×Amsterdam",
+        "region": "Amsterdam",
+        "continent": "Europe",
+        "description": "An English-speaking group for PHP Developers in and around Amsterdam.",
+        "timezone": "Europe/Amsterdam",
+        "bsky_url": "https://bsky.app/profile/amsterdamphp.bsky.social",
+        "meetup_url": "https://www.meetup.com/amsterdamphp",
+        "status": "active",
+        "frequency": "monthly",
+        "latitude": 52.2229,
+        "longitude": 4.53429
+    },
     "phpxbru.com": {
         "external": false,
         "name": "PHP×BRU",
