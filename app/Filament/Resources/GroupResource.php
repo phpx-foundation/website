@@ -19,14 +19,14 @@ use Illuminate\Support\HtmlString;
 class GroupResource extends Resource
 {
 	protected static ?string $model = Group::class;
-	
+
 	protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-	
+
 	public static function getNavigationBadge(): ?string
 	{
 		return Group::count();
 	}
-	
+
 	public static function form(Form $form): Form
 	{
 		return $form
@@ -35,7 +35,9 @@ class GroupResource extends Resource
 					Forms\Components\TextInput::make('name')
 						->columnSpanFull()
 						->required()
-						->maxLength(255),
+                        ->maxLength(255)
+                        ->unique('groups', 'name')
+                        ->rule(['required','unique:groups,name']),
 					Forms\Components\Textarea::make('description')
 						->columnSpanFull()
 						->required(),
@@ -44,7 +46,8 @@ class GroupResource extends Resource
 						->maxLength(255)
 						->disabled(fn() => ! Auth::user()->isSuperAdmin())
 						->dehydrated(fn() => ! Auth::user()->isSuperAdmin())
-						->rules(['']),
+                        ->unique('groups', 'domain')
+						->rules(['required','unique:groups,domain']),
 					Forms\Components\Select::make('domain_status')
 						->required()
 						->options(DomainStatus::class)
@@ -131,7 +134,7 @@ class GroupResource extends Resource
 				]),
 			]);
 	}
-	
+
 	public static function table(Table $table): Table
 	{
 		return $table
@@ -189,14 +192,14 @@ class GroupResource extends Resource
 				]),
 			]);
 	}
-	
+
 	public static function getRelations(): array
 	{
 		return [
 			RelationManagers\UsersRelationManager::class,
 		];
 	}
-	
+
 	public static function getPages(): array
 	{
 		return [
@@ -205,5 +208,5 @@ class GroupResource extends Resource
 			'edit' => Pages\EditGroup::route('/{record}/edit'),
 		];
 	}
-	
+
 }
