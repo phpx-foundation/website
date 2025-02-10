@@ -43,7 +43,7 @@ class SyncAllUsersToMailcoach
 		
 		$this->handle($group, function(User $user) use ($command) {
 			$command->line(sprintf(
-				" - [%s] %s <%s>",
+				' - [%s] %s <%s>',
 				$user->group_membership->is_subscribed ? '<info>subscribed</info>' : '<error>unsubscribed</error>',
 				$user->name,
 				$user->email,

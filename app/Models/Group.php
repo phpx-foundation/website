@@ -172,4 +172,3 @@ class Group extends Model
 			->toArray());
 	}
 }
-

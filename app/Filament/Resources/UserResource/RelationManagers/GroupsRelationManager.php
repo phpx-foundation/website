@@ -48,7 +48,7 @@ class GroupsRelationManager extends RelationManager
 					->label('Newsletter'),
 			])
 			->filters([
-				//
+				
 			])
 			->headerActions([
 				Tables\Actions\AttachAction::make()
@@ -59,7 +59,7 @@ class GroupsRelationManager extends RelationManager
 							->required(),
 						Forms\Components\Toggle::make('is_subscribed')
 							->label('Subscribed to newsletter'),
-					])
+					]),
 			])
 			->actions([
 				Tables\Actions\EditAction::make()

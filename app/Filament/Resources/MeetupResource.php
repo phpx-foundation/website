@@ -4,7 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MeetupResource\Pages;
 use App\Filament\Resources\MeetupResource\RelationManagers;
-use App\Models\Group;
 use App\Models\Meetup;
 use App\Rules\CanUpdateGroup;
 use Filament\Forms;
@@ -12,7 +11,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 
 class MeetupResource extends Resource
 {
@@ -129,5 +127,4 @@ class MeetupResource extends Resource
 			'edit' => Pages\EditMeetup::route('/{record}/edit'),
 		];
 	}
-	
 }

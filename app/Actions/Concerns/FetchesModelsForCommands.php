@@ -25,14 +25,16 @@ trait FetchesModelsForCommands
 		if (! $id = $command->argument('meetup')) {
 			$group ??= Group::find(select('Which group?', Group::pluck('name', 'id')));
 			
-			$id = select('Which meetup?',
+			$id = select(
+				'Which meetup?',
 				$group->meetups()
 					->when($upcoming, fn($query) => $query->where('starts_at', '>', now()))
 					->orderByDesc('starts_at')
 					->get()
 					->mapWithKeys(fn(Meetup $meetup) => [
 						$meetup->getKey() => "{$meetup->location} ({$meetup->date_day})",
-					]));
+					])
+			);
 		}
 		
 		return $group

@@ -22,7 +22,7 @@ class HomeController
 		]);
 	}
 	
-	function maximizeDistance(Collection $points)
+	public function maximizeDistance(Collection $points)
 	{
 		$result = collect([$points->first()]);
 		$remaining = $points->slice(1);

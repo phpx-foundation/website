@@ -12,11 +12,11 @@ class CanUpdateGroup implements ValidationRule
 	public function validate(string $attribute, mixed $value, Closure $fail): void
 	{
 		if (! $group = Group::find($value)) {
-			$fail("This is not a valid group.");
+			$fail('This is not a valid group.');
 		}
 		
 		if (! Auth::user()->can('update', $group)) {
-			$fail("This is not a group you are an organizer of.");
+			$fail('This is not a group you are an organizer of.');
 		}
 	}
 }

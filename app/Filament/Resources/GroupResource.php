@@ -178,7 +178,7 @@ class GroupResource extends Resource
 					->toggleable(isToggledHiddenByDefault: true),
 			])
 			->filters([
-				//
+				
 			])
 			->actions([
 				Tables\Actions\EditAction::make(),
@@ -205,5 +205,4 @@ class GroupResource extends Resource
 			'edit' => Pages\EditGroup::route('/{record}/edit'),
 		];
 	}
-	
 }
