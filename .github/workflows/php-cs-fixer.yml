@@ -1,11 +1,15 @@
 name: Code Style
 
-on: [ pull_request, push ]
+on:
+  push:
+    branches:
+      - main
+  pull_request:
 
 jobs:
   coverage:
     runs-on: ubuntu-latest
-
+    timeout-minutes: 10
     name: Run code style checks
 
     steps:
@@ -17,9 +21,15 @@ jobs:
         with:
           php-version: 8.3
           extensions: dom, curl, libxml, mbstring, zip, pcntl, bcmath, intl, iconv
+          tools: composer:v2
+
+      - name: Register composer cache directory
+        id: composer-cache-files-dir
+        run: |
+          echo "dir=$(composer config cache-files-dir)" >> $GITHUB_OUTPUT
 
       - name: Cache dependencies
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         with:
           path: |
             vendor
@@ -29,9 +39,7 @@ jobs:
             ${{ runner.os }}-composer-
 
       - name: Install dependencies
-        env:
-          COMPOSER_DISCARD_CHANGES: true
-        run: composer require --no-progress --no-interaction --prefer-dist --update-with-all-dependencies "laravel/framework:10.*" "orchestra/testbench:8.*"
+        run: composer install
 
       - name: Check code style
         run: composer run check-style
