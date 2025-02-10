@@ -10,13 +10,13 @@ use Illuminate\Http\Request;
 
 class ApplyFilamentScopes
 {
-	public function handle(Request $request, Closure $next)
-	{
-		$scope = new OrganizedByAuthenticatedUser();
-		
-		Group::addGlobalScope($scope);
-		Meetup::addGlobalScope($scope);
-		
-		return $next($request);
-	}
+    public function handle(Request $request, Closure $next)
+    {
+        $scope = new OrganizedByAuthenticatedUser;
+
+        Group::addGlobalScope($scope);
+        Meetup::addGlobalScope($scope);
+
+        return $next($request);
+    }
 }

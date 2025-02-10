@@ -22,68 +22,68 @@ use Illuminate\View\Middleware\ShareErrorsFromSession;
 
 class AdminPanelProvider extends PanelProvider
 {
-	public function panel(Panel $panel): Panel
-	{
-		return $panel
-			->default()
-			->login()
-			// ->registration()
-			->passwordReset()
-			->emailVerification()
-			->profile()
-			->id('admin')
-			->path('admin')
-			->colors(['primary' => Color::Amber])
-			->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
-			->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
-			->pages([
-				// Pages\Dashboard::class,
-			])
-			->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
-			->navigationItems([
-				NavigationItem::make(fn() => request()->attributes->get('group')?->name)
-					->group('Resources')
-					->url(url('/'))
-					->openUrlInNewTab()
-					->icon('heroicon-o-home')
-					->hidden(fn() => ! request()->attributes->has('group')),
-				NavigationItem::make('PHP×World')
-					->group('Resources')
-					->url('https://'.RootDomains::Production->value)
-					->openUrlInNewTab()
-					->icon('heroicon-o-globe-alt'),
-				NavigationItem::make('For Organizers')
-					->group('Resources')
-					->url('https://'.RootDomains::Production->value.'/organizers')
-					->openUrlInNewTab()
-					->icon('heroicon-o-document'),
-				NavigationItem::make('Running Events')
-					->group('Resources')
-					->url('https://'.RootDomains::Production->value.'/running-events')
-					->openUrlInNewTab()
-					->icon('heroicon-o-document'),
-			])
-			->widgets([
-				// Widgets\AccountWidget::class,
-				// PlausibleWidget::class,
-			])
-			->middleware([
-				EncryptCookies::class,
-				AddQueuedCookiesToResponse::class,
-				StartSession::class,
-				AuthenticateSession::class,
-				ShareErrorsFromSession::class,
-				VerifyCsrfToken::class,
-				SubstituteBindings::class,
-				DisableBladeIconComponents::class,
-				DispatchServingFilamentEvent::class,
-			])
-			->middleware([
-				SetGroupFromDomainMiddleware::class,
-				ApplyFilamentScopes::class,
-			], isPersistent: true)
-			->authMiddleware([
-				Authenticate::class,
-			]);
-	}
+    public function panel(Panel $panel): Panel
+    {
+        return $panel
+            ->default()
+            ->login()
+            // ->registration()
+            ->passwordReset()
+            ->emailVerification()
+            ->profile()
+            ->id('admin')
+            ->path('admin')
+            ->colors(['primary' => Color::Amber])
+            ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
+            ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+            ->pages([
+                // Pages\Dashboard::class,
+            ])
+            ->discoverWidgets(in: app_path('Filament/Widgets'), for: 'App\\Filament\\Widgets')
+            ->navigationItems([
+                NavigationItem::make(fn () => request()->attributes->get('group')?->name)
+                    ->group('Resources')
+                    ->url(url('/'))
+                    ->openUrlInNewTab()
+                    ->icon('heroicon-o-home')
+                    ->hidden(fn () => ! request()->attributes->has('group')),
+                NavigationItem::make('PHP×World')
+                    ->group('Resources')
+                    ->url('https://'.RootDomains::Production->value)
+                    ->openUrlInNewTab()
+                    ->icon('heroicon-o-globe-alt'),
+                NavigationItem::make('For Organizers')
+                    ->group('Resources')
+                    ->url('https://'.RootDomains::Production->value.'/organizers')
+                    ->openUrlInNewTab()
+                    ->icon('heroicon-o-document'),
+                NavigationItem::make('Running Events')
+                    ->group('Resources')
+                    ->url('https://'.RootDomains::Production->value.'/running-events')
+                    ->openUrlInNewTab()
+                    ->icon('heroicon-o-document'),
+            ])
+            ->widgets([
+                // Widgets\AccountWidget::class,
+                // PlausibleWidget::class,
+            ])
+            ->middleware([
+                EncryptCookies::class,
+                AddQueuedCookiesToResponse::class,
+                StartSession::class,
+                AuthenticateSession::class,
+                ShareErrorsFromSession::class,
+                VerifyCsrfToken::class,
+                SubstituteBindings::class,
+                DisableBladeIconComponents::class,
+                DispatchServingFilamentEvent::class,
+            ])
+            ->middleware([
+                SetGroupFromDomainMiddleware::class,
+                ApplyFilamentScopes::class,
+            ], isPersistent: true)
+            ->authMiddleware([
+                Authenticate::class,
+            ]);
+    }
 }

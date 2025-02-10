@@ -9,24 +9,24 @@ use Illuminate\Support\Facades\Route;
 
 // Register the phpx.world routes
 foreach (RootDomains::cases() as $case) {
-	Route::domain($case->value)->group(function() {
-		Route::get('/', HomeController::class);
-		Route::view('/organizers', 'world.organizers');
-		Route::view('/running-events', 'world.running-events');
-		Route::view('/venues', 'world.venues');
-		Route::view('/sponsors', 'world.sponsors');
-		Route::view('/terms', 'world.terms');
-	});
+    Route::domain($case->value)->group(function () {
+        Route::get('/', HomeController::class);
+        Route::view('/organizers', 'world.organizers');
+        Route::view('/running-events', 'world.running-events');
+        Route::view('/venues', 'world.venues');
+        Route::view('/sponsors', 'world.sponsors');
+        Route::view('/terms', 'world.terms');
+    });
 }
 
 // Register the individual group routes
 Route::middleware([SetGroupFromDomainMiddleware::class, ShareNextMeetupMiddleware::class])
-	->group(function() {
-		Route::view('/', 'welcome');
-		Route::view('/join', 'join');
-		Route::view('/terms', 'world.terms');
-		
-		Route::get('meetups/{meetup}/rsvps', function(Meetup $meetup) {
-			return view('rsvp', ['meetup' => $meetup]);
-		});
-	});
+    ->group(function () {
+        Route::view('/', 'welcome');
+        Route::view('/join', 'join');
+        Route::view('/terms', 'world.terms');
+
+        Route::get('meetups/{meetup}/rsvps', function (Meetup $meetup) {
+            return view('rsvp', ['meetup' => $meetup]);
+        });
+    });

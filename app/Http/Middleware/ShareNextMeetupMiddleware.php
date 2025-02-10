@@ -10,14 +10,14 @@ use Illuminate\Support\Facades\View;
 
 class ShareNextMeetupMiddleware
 {
-	public function handle(Request $request, Closure $next)
-	{
-		$group = $request->attributes->get('group');
-		
-		if ($group instanceof Group) {
-			View::share('next_meetup', GetNextMeetup::run($group));
-		}
-		
-		return $next($request);
-	}
+    public function handle(Request $request, Closure $next)
+    {
+        $group = $request->attributes->get('group');
+
+        if ($group instanceof Group) {
+            View::share('next_meetup', GetNextMeetup::run($group));
+        }
+
+        return $next($request);
+    }
 }

@@ -8,12 +8,12 @@ use Filament\Resources\Pages\ListRecords;
 
 class ListMeetups extends ListRecords
 {
-	protected static string $resource = MeetupResource::class;
-	
-	protected function getHeaderActions(): array
-	{
-		return [
-			Actions\CreateAction::make(),
-		];
-	}
+    protected static string $resource = MeetupResource::class;
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\CreateAction::make(),
+        ];
+    }
 }

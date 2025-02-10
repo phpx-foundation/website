@@ -4,7 +4,7 @@ namespace App\Enums;
 
 enum RootDomains: string
 {
-	case Production = 'phpx.world';
-	
-	case Local = 'phpx.test';
+    case Production = 'phpx.world';
+
+    case Local = 'phpx.test';
 }

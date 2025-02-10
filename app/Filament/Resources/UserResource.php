@@ -10,8 +10,6 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class UserResource extends Resource
 {
@@ -25,26 +23,26 @@ class UserResource extends Resource
             ->schema([
                 Forms\Components\Select::make('current_group_id')
                     ->relationship('current_group', 'name')
-	                ->label('Current Group')
-	                ->default(function() {
-		                if ($group = request()->attributes->get('group')) {
-			                return (string) $group->getKey();
-		                }
-		                
-		                return null;
-	                })
-	                ->searchable()
-	                ->preload()
-	                ->dehydrated(false)
-	                ->disabled()
-	                ->columnSpanFull(),
+                    ->label('Current Group')
+                    ->default(function () {
+                        if ($group = request()->attributes->get('group')) {
+                            return (string) $group->getKey();
+                        }
+
+                        return null;
+                    })
+                    ->searchable()
+                    ->preload()
+                    ->dehydrated(false)
+                    ->disabled()
+                    ->columnSpanFull(),
                 Forms\Components\TextInput::make('name')
                     ->required()
                     ->maxLength(255),
-	            Forms\Components\TextInput::make('password')
-		            ->password()
-		            ->required()
-		            ->maxLength(255),
+                Forms\Components\TextInput::make('password')
+                    ->password()
+                    ->required()
+                    ->maxLength(255),
                 Forms\Components\TextInput::make('email')
                     ->email()
                     ->required()
@@ -63,15 +61,15 @@ class UserResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('email')
                     ->searchable(),
-	            Tables\Columns\TextColumn::make('current_group.name')
-		            ->numeric()
-		            ->sortable(),
+                Tables\Columns\TextColumn::make('current_group.name')
+                    ->numeric()
+                    ->sortable(),
                 Tables\Columns\IconColumn::make('is_potential_speaker')
                     ->boolean(),
-	            Tables\Columns\TextColumn::make('email_verified_at')
-		            ->dateTime()
-		            ->sortable()
-		            ->toggleable(isToggledHiddenByDefault: true),
+                Tables\Columns\TextColumn::make('email_verified_at')
+                    ->dateTime()
+                    ->sortable()
+                    ->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

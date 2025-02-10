@@ -14,43 +14,43 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable implements FilamentUser
 {
-	use HasFactory;
-	use Notifiable;
-	use HasSnowflakes;
-	use SoftDeletes;
-	use BelongsToGroups;
-	use HasGroupMembership;
-	
-	protected $hidden = [
-		'password',
-		'remember_token',
-	];
-	
-	public function canAccessPanel(Panel $panel): bool
-	{
-		return $this->isSuperAdmin()
-			|| ($this->hasVerifiedEmail() && $this->isAnyGroupAdmin());
-	}
-	
-	public function isSuperAdmin(): bool
-	{
-		return $this->hasVerifiedEmail() && in_array($this->email, config('auth.super_admins'));
-	}
-	
-	public function meetups(): BelongsToMany
-	{
-		return $this->belongsToMany(Meetup::class, 'rsvps')
-			->as('meetups')
-			->withTimestamps()
-			->using(Rsvp::class);
-	}
-	
-	protected function casts(): array
-	{
-		return [
-			'is_potential_speaker' => 'boolean',
-			'email_verified_at' => 'datetime',
-			'password' => 'hashed',
-		];
-	}
+    use BelongsToGroups;
+    use HasFactory;
+    use HasGroupMembership;
+    use HasSnowflakes;
+    use Notifiable;
+    use SoftDeletes;
+
+    protected $hidden = [
+        'password',
+        'remember_token',
+    ];
+
+    public function canAccessPanel(Panel $panel): bool
+    {
+        return $this->isSuperAdmin()
+            || ($this->hasVerifiedEmail() && $this->isAnyGroupAdmin());
+    }
+
+    public function isSuperAdmin(): bool
+    {
+        return $this->hasVerifiedEmail() && in_array($this->email, config('auth.super_admins'));
+    }
+
+    public function meetups(): BelongsToMany
+    {
+        return $this->belongsToMany(Meetup::class, 'rsvps')
+            ->as('meetups')
+            ->withTimestamps()
+            ->using(Rsvp::class);
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'is_potential_speaker' => 'boolean',
+            'email_verified_at' => 'datetime',
+            'password' => 'hashed',
+        ];
+    }
 }

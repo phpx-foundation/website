@@ -10,33 +10,33 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ExternalGroup extends Model
 {
-	use HasSnowflakes;
-	use SoftDeletes;
-	use HasDomain;
-	
-	protected $appends = [
-		'label',
-	];
-	
-	protected static function booted()
-	{
-		static::creating(function(self $external) {
-			if (Group::whereDomain($external->domain)->exists()) {
-				throw new Exception('Cannot create an external group with a domain for an existing group.');
-			}
-		});
-	}
-	
-	protected function casts(): array
-	{
-		return [
-			'latitude' => 'float',
-			'longitude' => 'float',
-		];
-	}
-	
-	protected function label(): Attribute
-	{
-		return Attribute::get(fn() => $this->region ?? str($this->name)->afterLast('×')->trim()->toString());
-	}
+    use HasDomain;
+    use HasSnowflakes;
+    use SoftDeletes;
+
+    protected $appends = [
+        'label',
+    ];
+
+    protected static function booted()
+    {
+        static::creating(function (self $external) {
+            if (Group::whereDomain($external->domain)->exists()) {
+                throw new Exception('Cannot create an external group with a domain for an existing group.');
+            }
+        });
+    }
+
+    protected function casts(): array
+    {
+        return [
+            'latitude' => 'float',
+            'longitude' => 'float',
+        ];
+    }
+
+    protected function label(): Attribute
+    {
+        return Attribute::get(fn () => $this->region ?? str($this->name)->afterLast('×')->trim()->toString());
+    }
 }

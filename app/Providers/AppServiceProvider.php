@@ -16,49 +16,50 @@ use Lorisleiva\Actions\Facades\Actions;
 
 class AppServiceProvider extends ServiceProvider
 {
-	public function register(): void
-	{
-		//
-	}
-	
-	public function boot(): void
-	{
-		Model::unguard();
-		
-		if (App::isProduction()) {
-			URL::forceScheme('https');
-		}
-		
-		Actions::registerCommands();
-		
-		Route::middleware('web')->group(fn() => Actions::registerRoutes());
-		
-		$this->sharePhpxNetwork();
-	}
-	
-	protected function sharePhpxNetwork(): void
-	{
-		$this->callAfterResolving(Factory::class, function(Factory $view) {
-			$data = Cache::remember('phpx-network', now()->addWeek(), function() {
-				$groups = Group::query()
-					->where('domain_status', DomainStatus::Confirmed)
-					->get()
-					->map(fn(Group $group) => [$group::class, $group->attributesToArray()]);
-				
-				$external = ExternalGroup::query()->get()
-					->map(fn(ExternalGroup $group) => [$group::class, $group->attributesToArray()]);
-				
-				return $groups->merge($external)->values()->toArray();
-			});
-			
-			/** @var \Illuminate\Support\Collection<string, Group|ExternalGroup> $network */
-			$network = collect($data)
-				->map(function(array $record) {
-					[$fqcn, $attributes] = $record;
-					return (new $fqcn())->newFromBuilder($attributes);
-				});
-			
-			$view->share('phpx_network', $network);
-		});
-	}
+    public function register(): void
+    {
+        //
+    }
+
+    public function boot(): void
+    {
+        Model::unguard();
+
+        if (App::isProduction()) {
+            URL::forceScheme('https');
+        }
+
+        Actions::registerCommands();
+
+        Route::middleware('web')->group(fn () => Actions::registerRoutes());
+
+        $this->sharePhpxNetwork();
+    }
+
+    protected function sharePhpxNetwork(): void
+    {
+        $this->callAfterResolving(Factory::class, function (Factory $view) {
+            $data = Cache::remember('phpx-network', now()->addWeek(), function () {
+                $groups = Group::query()
+                    ->where('domain_status', DomainStatus::Confirmed)
+                    ->get()
+                    ->map(fn (Group $group) => [$group::class, $group->attributesToArray()]);
+
+                $external = ExternalGroup::query()->get()
+                    ->map(fn (ExternalGroup $group) => [$group::class, $group->attributesToArray()]);
+
+                return $groups->merge($external)->values()->toArray();
+            });
+
+            /** @var \Illuminate\Support\Collection<string, Group|ExternalGroup> $network */
+            $network = collect($data)
+                ->map(function (array $record) {
+                    [$fqcn, $attributes] = $record;
+
+                    return (new $fqcn)->newFromBuilder($attributes);
+                });
+
+            $view->share('phpx_network', $network);
+        });
+    }
 }

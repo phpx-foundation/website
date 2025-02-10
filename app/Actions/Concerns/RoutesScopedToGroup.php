@@ -7,8 +7,8 @@ use App\Http\Middleware\ShareNextMeetupMiddleware;
 
 trait RoutesScopedToGroup
 {
-	public function getControllerMiddleware(): array
-	{
-		return [SetGroupFromDomainMiddleware::class, ShareNextMeetupMiddleware::class];
-	}
+    public function getControllerMiddleware(): array
+    {
+        return [SetGroupFromDomainMiddleware::class, ShareNextMeetupMiddleware::class];
+    }
 }

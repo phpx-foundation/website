@@ -11,22 +11,22 @@ use Filament\Support\Enums\IconPosition;
 
 class EditMeetup extends EditRecord
 {
-	protected static string $resource = MeetupResource::class;
-	
-	protected function getHeaderActions(): array
-	{
-		return [
-			Actions\DeleteAction::make(),
-			Actions\Action::make('view')
-				->icon('heroicon-o-arrow-top-right-on-square')
-				->iconPosition(IconPosition::After)
-				->url(fn(Meetup $record) => $record->rsvp_url)
-				->openUrlInNewTab(),
-		];
-	}
-	
-	protected function afterSave()
-	{
-		GenerateOpenGraphImage::run($this->getRecord());
-	}
+    protected static string $resource = MeetupResource::class;
+
+    protected function getHeaderActions(): array
+    {
+        return [
+            Actions\DeleteAction::make(),
+            Actions\Action::make('view')
+                ->icon('heroicon-o-arrow-top-right-on-square')
+                ->iconPosition(IconPosition::After)
+                ->url(fn (Meetup $record) => $record->rsvp_url)
+                ->openUrlInNewTab(),
+        ];
+    }
+
+    protected function afterSave()
+    {
+        GenerateOpenGraphImage::run($this->getRecord());
+    }
 }
