@@ -35,7 +35,8 @@ class GroupResource extends Resource
 					Forms\Components\TextInput::make('name')
 						->columnSpanFull()
 						->required()
-						->maxLength(255),
+						->maxLength(255)
+						->unique(ignoreRecord: true),
 					Forms\Components\Textarea::make('description')
 						->columnSpanFull()
 						->required(),
@@ -44,7 +45,7 @@ class GroupResource extends Resource
 						->maxLength(255)
 						->disabled(fn() => ! Auth::user()->isSuperAdmin())
 						->dehydrated(fn() => ! Auth::user()->isSuperAdmin())
-						->rules(['']),
+						->unique(ignoreRecord: true),
 					Forms\Components\Select::make('domain_status')
 						->required()
 						->options(DomainStatus::class)
