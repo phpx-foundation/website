@@ -11,19 +11,18 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
 
 class MeetupResource extends Resource
 {
 	protected static ?string $model = Meetup::class;
-
+	
 	protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+	
 	public static function getNavigationBadge(): ?string
 	{
 		return Meetup::count();
 	}
-
+	
 	public static function form(Form $form): Form
 	{
 		return $form
@@ -34,7 +33,7 @@ class MeetupResource extends Resource
 						if ($group = request()->attributes->get('group')) {
 							return (string) $group->getKey();
 						}
-
+						
 						return null;
 					})
 					->searchable()
@@ -49,7 +48,7 @@ class MeetupResource extends Resource
 				Forms\Components\TextInput::make('capacity')
 					->required()
 					->numeric()
-                    ->minValue(0),
+					->minValue(0),
 				Forms\Components\DateTimePicker::make('starts_at')
 					->label('Start')
 					->required()
@@ -65,7 +64,7 @@ class MeetupResource extends Resource
 					->columnSpanFull(),
 			]);
 	}
-
+	
 	public static function table(Table $table): Table
 	{
 		return $table
@@ -113,14 +112,14 @@ class MeetupResource extends Resource
 				]),
 			]);
 	}
-
+	
 	public static function getRelations(): array
 	{
 		return [
 			RelationManagers\UsersRelationManager::class,
 		];
 	}
-
+	
 	public static function getPages(): array
 	{
 		return [
@@ -129,5 +128,4 @@ class MeetupResource extends Resource
 			'edit' => Pages\EditMeetup::route('/{record}/edit'),
 		];
 	}
-
 }

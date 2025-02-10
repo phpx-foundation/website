@@ -64,7 +64,6 @@ class Markdown extends Component
 					{$this->sidebar()}
 				</div>
 				HTML;
-				
 			}
 			
 			return new HtmlString($html);
@@ -119,8 +118,9 @@ class Markdown extends Component
 	
 	protected function addSpecialBlockQuotes(Environment $environment)
 	{
-		$environment->addRenderer(BlockQuote::class,
-			new class implements NodeRendererInterface {
+		$environment->addRenderer(
+			BlockQuote::class,
+			new class() implements NodeRendererInterface {
 				public function render(Node $node, ChildNodeRendererInterface $childRenderer)
 				{
 					$renderer = new BlockQuoteRenderer();
@@ -184,7 +184,8 @@ class Markdown extends Component
 					
 					return [null, null, null, null];
 				}
-			});
+			}
+		);
 	}
 	
 	protected function config(): array

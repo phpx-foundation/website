@@ -97,7 +97,7 @@ class Meetup extends Model implements Htmlable
 		}
 		
 		$start = $this->starts_at->format('F jS');
-		$end = $this->ends_at->format("F jS Y");
+		$end = $this->ends_at->format('F jS Y');
 		
 		return "{$start}–{$end}";
 	}

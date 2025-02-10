@@ -25,7 +25,7 @@ class GenerateOpenGraphImage
 		
 		(new Filesystem())->ensureDirectoryExists(dirname($filename));
 		
-		$font = new class implements Font {
+		$font = new class() implements Font {
 			public function path(): string
 			{
 				return resource_path('og/fonts/FiraSans-Regular.ttf');

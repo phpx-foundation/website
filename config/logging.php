@@ -6,7 +6,6 @@ use Monolog\Handler\SyslogUdpHandler;
 use Monolog\Processor\PsrLogMessageProcessor;
 
 return [
-	
 	/*
 	|--------------------------------------------------------------------------
 	| Default Log Channel

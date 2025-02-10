@@ -18,7 +18,7 @@ class OrganizedByAuthenticatedUser implements Scope
 			return;
 		}
 		
-		match($model::class) {
+		match ($model::class) {
 			Group::class => $builder->whereHas('users', $this->subquery(...)),
 			Meetup::class => $builder->whereHas('group.users', $this->subquery(...)),
 		};

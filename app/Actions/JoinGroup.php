@@ -29,7 +29,8 @@ class JoinGroup
 		$user = User::firstOrCreate(
 			[
 				'email' => $email,
-			], [
+			],
+			[
 				'name' => $name,
 				'password' => Hash::make(Str::random(32)),
 			]

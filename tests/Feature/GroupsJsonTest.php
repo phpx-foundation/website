@@ -69,8 +69,8 @@ class GroupsJsonTest extends TestCase
 	
 	protected function assertValidDomain($value): void
 	{
-		Assert::assertIsString($value, "Domain must be a string.");
-		Assert::assertTrue(false !== filter_var($value, FILTER_VALIDATE_DOMAIN), "Domain format is invalid.");
+		Assert::assertIsString($value, 'Domain must be a string.');
+		Assert::assertTrue(false !== filter_var($value, FILTER_VALIDATE_DOMAIN), 'Domain format is invalid.');
 		
 		$records = dns_get_record("{$value}.", DNS_A | DNS_AAAA);
 		

@@ -5,7 +5,6 @@ namespace App\Filament\Resources\GroupResource\Pages;
 use App\Filament\Resources\GroupResource;
 use Filament\Actions;
 use Filament\Resources\Pages\ListRecords;
-use Filament\Tables\Table;
 
 class ListGroups extends ListRecords
 {

@@ -1,7 +1,6 @@
 <?php
 
 return [
-	
 	/*
 	|--------------------------------------------------------------------------
 	| Authentication Defaults
@@ -125,5 +124,5 @@ return [
 	'super_admins' => [
 		...array_filter(array_map('trim', explode(',', env('AUTH_SUPER_ADMINS', '')))),
 	],
-	
+
 ];

@@ -3,7 +3,7 @@
 use App\Models\Meetup;
 use Illuminate\Database\Migrations\Migration;
 
-return new class extends Migration {
+return new class() extends Migration {
 	public function up(): void
 	{
 		$this->changeTimezones('America/New_York', 'UTC');
