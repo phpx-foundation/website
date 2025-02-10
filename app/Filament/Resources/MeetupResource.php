@@ -47,7 +47,8 @@ class MeetupResource extends Resource
 					->maxLength(255),
 				Forms\Components\TextInput::make('capacity')
 					->required()
-					->numeric(),
+					->numeric()
+					->minValue(0),
 				Forms\Components\DateTimePicker::make('starts_at')
 					->label('Start')
 					->required()
