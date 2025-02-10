@@ -32,16 +32,27 @@ class ListGroups
 	
 	public function asController(ActionRequest $request)
 	{
-		$groups = $this->handle()->mapWithKeys(function(Group|ExternalGroup $group) {
-			return [
-				$group->domain => [
-					'domain' => $group->domain,
-					'name' => $group->name,
-					'region' => $group->region,
-					'external' => $group instanceof ExternalGroup,
-				],
-			];
-		});
+		$groups = $this->handle(include_external: ! $request->boolean('no_external'))
+			->mapWithKeys(function(Group|ExternalGroup $group) {
+				return [
+					$group->domain => [
+						'domain' => $group->domain,
+						'name' => $group->name,
+						'description' => $group->description,
+						'continent' => $group->continent,
+						'region' => $group->region,
+						'timezone' => $group->timezone,
+						'status' => $group->status,
+						'frequency' => $group->frequency,
+						'links' => [
+							'bluesky' => $group->bsky_url,
+							'meetup' => $group->meetup_url,
+						],
+						'coords' => ['latitude' => $group->latitude, 'longitude' => $group->longitude],
+						'external' => $group instanceof ExternalGroup,
+					],
+				];
+			});
 		
 		return response()->json(['groups' => $groups]);
 	}
