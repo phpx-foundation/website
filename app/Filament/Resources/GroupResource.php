@@ -36,8 +36,8 @@ class GroupResource extends Resource
 						->columnSpanFull()
 						->required()
                         ->maxLength(255)
-                        ->unique('groups', 'name')
-                        ->rule(['required','unique:groups,name']),
+                        ->unique( ignoreRecord: true)
+                        ->rules(['required']),
 					Forms\Components\Textarea::make('description')
 						->columnSpanFull()
 						->required(),
@@ -45,9 +45,9 @@ class GroupResource extends Resource
 						->required()
 						->maxLength(255)
 						->disabled(fn() => ! Auth::user()->isSuperAdmin())
-						->dehydrated(fn() => ! Auth::user()->isSuperAdmin())
-                        ->unique('groups', 'domain')
-						->rules(['required','unique:groups,domain']),
+						->dehydrated(fn(string $operation) => $operation !== 'edit' || !Auth::user()->isSuperAdmin())
+                        ->unique( ignoreRecord: true)
+						->rules(['required']),
 					Forms\Components\Select::make('domain_status')
 						->required()
 						->options(DomainStatus::class)
