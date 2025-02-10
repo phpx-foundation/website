@@ -126,7 +126,7 @@ return (new PhpCsFixer\Config())
 	])
 	->setFinder(
 		PhpCsFixer\Finder::create()
-			->exclude('.circleci')
+			->exclude('bootstrap/cache')
 			->exclude('bin')
 			->exclude('node_modules')
 			->exclude('vendor')
