@@ -50,17 +50,17 @@ class MeetupResource extends Resource
 					->numeric()
 					->minValue(0),
 				Forms\Components\DateTimePicker::make('starts_at')
-                    ->timezone(function(Meetup $record){
-                        return $record->group?->timezone ?? 'UTC';
-                    })
+					->timezone(function(Meetup $record) {
+						return $record->group?->timezone ?? 'UTC';
+					})
 					->label('Start')
 					->required()
 					->beforeOrEqual('ends_at')
 					->rules(['required', 'date']),
 				Forms\Components\DateTimePicker::make('ends_at')
-                    ->timezone(function(Meetup $record){
-                        return $record->group?->timezone ?? 'UTC';
-                    })
+					->timezone(function(Meetup $record) {
+						return $record->group?->timezone ?? 'UTC';
+					})
 					->label('End')
 					->required()
 					->afterOrEqual('starts_at')
