@@ -2,6 +2,7 @@
 export default {
 	content: [
 		"./app/View/**/*.php",
+		"./app/Support/Markdown/**/*.php",
 		"./resources/**/*.php",
 		"./resources/**/*.js",
 		"./resources/**/*.jsx",
