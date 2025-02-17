@@ -112,6 +112,19 @@
         "latitude": -34.9281805,
         "longitude": 138.5999312
     },
+    "phpxsyd.com": {
+        "external": false,
+        "name": "PHP×SYD",
+        "region": "Sydney",
+        "timezone": "Australia/Sydney",
+        "description": "A Sydney, Australia PHP/Laravel meetup for artisans who want to learn and connect.",
+        "continent": "Australia",
+        "status": "active",
+        "meetup_url": "https://www.meetup.com/sydphp/",
+        "frequency": "bi-monthly(ish)",
+        "latitude": -33.8688,
+        "longitude": 151.2093
+    },
     "phpxcebu.com": {
         "external": false,
         "name": "PHP×CEBU",
