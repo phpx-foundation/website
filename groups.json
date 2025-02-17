@@ -370,5 +370,18 @@
         "frequency": "quarterly",
         "latitude": 52.4823,
         "longitude": 1.8900
-    }
+    },
+    "phpsw.uk": {
+        "external": true,
+        "name": "PHP SW",
+        "meetup_url": "https://www.meetup.com/php-sw/",
+        "region": "Bristol",
+        "continent": "Europe",
+        "description": "PHP-SW is based in Bristol, UK. We meet on the 2nd Wednesday of every month",
+        "timezone": "Europe/London",
+        "status": "active",
+        "frequency": "monthly",
+        "latitude": 51.4533,
+        "longitude": -2.5910
+    },
 }
