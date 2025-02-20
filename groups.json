@@ -176,6 +176,18 @@
         "latitude": 18.5204301,
         "longitude": 73.8564637
     },
+    "phpxchd.com": {
+        "external": false,
+        "name": "PHP×CHD",
+        "region": "Chandigarh",
+        "description": "A meetup for web-devs around Chandigarh tri-city area who want to learn, teach and have some fun doing that",
+        "timezone": "Asia/Kolkata",
+        "status": "planned",
+        "frequency": "bi-monthly",
+        "bsky_url": "https://bsky.app/profile/phpxchd.com",
+        "latitude": 30.6976952,
+        "longitude": 76.6910445
+    },
     "phpxvie.com": {
         "external": false,
         "name": "PHP×VIE",
