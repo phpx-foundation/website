@@ -70,21 +70,18 @@ reach out to Chris Morrell on Discord to check in on each of these:
 
 ### Set up Mailcoach
 
-The folks at [Mailcoach](https://www.mailcoach.app/) have generously offered free accounts to all
+The folks at [Mailcoach](https://www.mailcoach.app/?utm_source=github&utm_medium=website&utm_campaign=phpxworld_organizers) have generously offered free accounts to all
 PHP× organizers. Reach out to Chris Morrell on the Discord to get the coupon code.
 
 #### Get a free Mailcoach account
 
-Once you have your coupon code, register at [Mailcoach](https://www.mailcoach.app/).
+Once you have your coupon code, register at [Mailcoach](https://www.mailcoach.app/?utm_source=github&utm_medium=website&utm_campaign=phpxworld_organizers).
 
-- When registering, you can choose "Let us handle sending."
-- Go to billing and choose the base plan. At checkout, use the PHP× coupon code that you received
-  from Chris. That will cover the monthly fee and the first 2,000 emails.
-- You will still need to provide a credit card and will be billed if you send more than 2,000
-  emails in a given month.
-- Finally, you will have to go thru a short approval process to get out of test mode (this is
-  to mitigate spam).
-
+- When registering, select "Let us handle sending."
+- Go to Billing and choose the base plan. At checkout, use the PHP× coupon code you received from Chris. This covers the monthly fee and the first 2,000 emails.
+- You will still need to provide a credit card and will be billed if you send more than 2,000 emails in a given month.
+- **Before you can send emails, you must be approved**. Click the "Test Mode" badge in the upper navigation, then click "Request approval" and fill in the questions. Under "What made you choose Mailcoach?" mention "PHPxWorld" so they can spot your request more easily.
+  
 Once your account is set up, you will want to go through the Mailcoach settings and configure it
 however you choose. A few things you will probably want to do:
 
@@ -122,7 +119,6 @@ We'd like to gather lots of organizer resources so that each person isn't in it 
 
 Some things already in the works:
 
-- Free [Mailcoach](https://www.mailcoach.app/) accounts for organizers
 - Listing on [Laravel News](https://laravel-news.com/events)
 - Collaboration with [Laravel](https://laravel.com/) to give meetups exposure and help find speakers (both in-person and virtual)
 
