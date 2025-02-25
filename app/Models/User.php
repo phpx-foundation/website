@@ -73,7 +73,7 @@ class User extends Authenticatable implements FilamentUser
 		return $query->whereHas('groups', fn(Builder $query) => $query->whereIn('groups.id', $group_ids));
 	}
 	
-	protected function scopeWhereVisibleToOrganizer(Builder $query, ?User $user = null): Builder
+	protected function scopeWhereVisibleToUser(Builder $query, ?User $user = null): Builder
 	{
 		$user ??= Auth::user();
 		

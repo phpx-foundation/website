@@ -20,7 +20,7 @@ class UserResource extends Resource
 	
 	public static function getNavigationBadge(): ?string
 	{
-		return User::whereVisibleToOrganizer()->count();
+		return User::whereVisibleToUser()->count();
 	}
 	
 	public static function form(Form $form): Form
@@ -89,7 +89,7 @@ class UserResource extends Resource
 					->sortable()
 					->toggleable(isToggledHiddenByDefault: true),
 			])
-			->modifyQueryUsing(fn(Builder $query) => $query->with('groups')->whereVisibleToOrganizer())
+			->modifyQueryUsing(fn(Builder $query) => $query->with('groups')->whereVisibleToUser())
 			->filters([])
 			->actions([
 				Tables\Actions\EditAction::make(),
