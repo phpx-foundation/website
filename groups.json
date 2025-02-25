@@ -179,6 +179,7 @@
     "phpxchd.com": {
         "external": false,
         "name": "PHP×CHD",
+        "continent": "Asia",
         "region": "Chandigarh",
         "description": "A meetup for web-devs around Chandigarh tri-city area who want to learn, teach and have some fun doing that",
         "timezone": "Asia/Kolkata",
