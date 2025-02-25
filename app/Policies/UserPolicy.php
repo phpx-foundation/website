@@ -16,7 +16,7 @@ class UserPolicy
 	
 	public function view(User $user, User $target): bool
 	{
-		return $user->is($target) 
+		return $user->is($target)
 			|| $user->isSuperAdmin()
 			|| $user->isOrganizerOfAnyGroupUserBelongsTo($target);
 	}

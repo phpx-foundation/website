@@ -3,7 +3,6 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
-use App\Enums\GroupRole;
 use Filament\Models\Contracts\FilamentUser;
 use Filament\Panel;
 use Glhd\Bits\Database\HasSnowflakes;
@@ -91,7 +90,7 @@ class User extends Authenticatable implements FilamentUser
 	protected function organizedGroupIds(): Attribute
 	{
 		return Attribute::get(fn() => Cache::remember(
-			key: "user:{$this->getKey()}:organized_group_ids", 
+			key: "user:{$this->getKey()}:organized_group_ids",
 			ttl: now()->addDay(),
 			callback: fn() => $this->organized_groups->pluck('id'),
 		));
