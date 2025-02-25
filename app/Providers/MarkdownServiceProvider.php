@@ -46,7 +46,6 @@ class MarkdownServiceProvider extends ServiceProvider
 	
 	public function boot(): void
 	{
-		
 	}
 	
 	protected function registerMarkdownRoutes(): void
@@ -63,9 +62,10 @@ class MarkdownServiceProvider extends ServiceProvider
 				
 				foreach (RootDomains::cases() as $case) {
 					Route::domain($case->value)
-						->group(fn() => Route::get("{$subdirectory}/{$name}", MarkdownController::class)
-							->defaults('subdirectory', $subdirectory)
-							->defaults('name', $name)
+						->group(
+							fn() => Route::get("{$subdirectory}/{$name}", MarkdownController::class)
+								->defaults('subdirectory', $subdirectory)
+								->defaults('name', $name)
 						);
 				}
 			}
