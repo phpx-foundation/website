@@ -12,7 +12,7 @@
         "frequency": "monthly",
         "meetup_url": "https://www.meetup.com/sandiegophp/",
         "bsky_url": "https://bsky.app/profile/phparch.com",
-        "latitude": 33.017301, 
+        "latitude": 33.017301,
         "longitude": -117.099801
     },
     "phpxaz.com": {
@@ -112,6 +112,19 @@
         "latitude": -34.9281805,
         "longitude": 138.5999312
     },
+    "phpxsyd.com": {
+        "external": false,
+        "name": "PHP×SYD",
+        "region": "Sydney",
+        "timezone": "Australia/Sydney",
+        "description": "A Sydney, Australia PHP/Laravel meetup for artisans who want to learn and connect.",
+        "continent": "Australia",
+        "status": "active",
+        "meetup_url": "https://www.meetup.com/sydphp/",
+        "frequency": "bi-monthly(ish)",
+        "latitude": -33.8688,
+        "longitude": 151.2093
+    },
     "phpxcebu.com": {
         "external": false,
         "name": "PHP×CEBU",
@@ -162,6 +175,19 @@
         "bsky_url": "https://bsky.app/profile/phpxpnq.com",
         "latitude": 18.5204301,
         "longitude": 73.8564637
+    },
+    "phpxchd.com": {
+        "external": false,
+        "name": "PHP×CHD",
+        "continent": "Asia",
+        "region": "Chandigarh",
+        "description": "A meetup for web-devs around Chandigarh tri-city area who want to learn, teach and have some fun doing that",
+        "timezone": "Asia/Kolkata",
+        "status": "planned",
+        "frequency": "bi-monthly",
+        "bsky_url": "https://bsky.app/profile/phpxchd.com",
+        "latitude": 30.6976952,
+        "longitude": 76.6910445
     },
     "phpxvie.com": {
         "external": false,
@@ -358,5 +384,30 @@
         "frequency": "monthly",
         "latitude": 35.652832,
         "longitude": 139.839478
+    },
+    "brumphp.co.uk": {
+        "external": true,
+        "name": "BrumPHP",
+        "region": "Birmingham",
+        "continent": "Europe",
+        "description": "BrumPHP meetups are designed to bring the community together, to discuss and learn developer life and share thoughts and ideas about Symfony, Laravel, developer culture, and of course, Birmingham",
+        "timezone": "Europe/London",
+        "status": "active",
+        "frequency": "quarterly",
+        "latitude": 52.4823,
+        "longitude": 1.8900
+    },
+    "phpsw.uk": {
+        "external": true,
+        "name": "PHP SW",
+        "meetup_url": "https://www.meetup.com/php-sw/",
+        "region": "Bristol",
+        "continent": "Europe",
+        "description": "PHP-SW is based in Bristol, UK. We meet on the 2nd Wednesday of every month",
+        "timezone": "Europe/London",
+        "status": "active",
+        "frequency": "monthly",
+        "latitude": 51.4533,
+        "longitude": -2.5910
     }
 }
