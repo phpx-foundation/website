@@ -10,13 +10,19 @@ use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
+use Illuminate\Database\Eloquent\Builder;
 
 class UserResource extends Resource
 {
 	protected static ?string $model = User::class;
-
+	
 	protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+	
+	public static function getNavigationBadge(): ?string
+	{
+		return User::whereVisibleToOrganizer()->count();
+	}
+	
 	public static function form(Form $form): Form
 	{
 		return $form
@@ -52,7 +58,7 @@ class UserResource extends Resource
 					->required(),
 			]);
 	}
-
+	
 	public static function table(Table $table): Table
 	{
 		return $table
@@ -83,9 +89,8 @@ class UserResource extends Resource
 					->sortable()
 					->toggleable(isToggledHiddenByDefault: true),
 			])
-			->filters([
-				
-			])
+			->modifyQueryUsing(fn(Builder $query) => $query->with('groups')->whereVisibleToOrganizer())
+			->filters([])
 			->actions([
 				Tables\Actions\EditAction::make(),
 			])
@@ -95,14 +100,14 @@ class UserResource extends Resource
 				]),
 			]);
 	}
-
+	
 	public static function getRelations(): array
 	{
 		return [
 			RelationManagers\GroupsRelationManager::class,
 		];
 	}
-
+	
 	public static function getPages(): array
 	{
 		return [
