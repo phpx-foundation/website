@@ -82,9 +82,7 @@ class User extends Authenticatable implements FilamentUser
 	
 	protected function organizedGroups(): Attribute
 	{
-		return Attribute::get(fn() => once(function() {
-			return $this->groups->filter(fn(Group $group) => $group->group_membership->isAdmin());
-		}));
+		return Attribute::get(fn() => $this->groups->filter(fn(Group $group) => $group->group_membership->isAdmin()));
 	}
 	
 	protected function organizedGroupIds(): Attribute
