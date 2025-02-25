@@ -21,7 +21,7 @@ events. If you run a company that would like to be added, please reach out!
 - [JetBrains](https://www.jetbrains.com/community/events-partnership/) will provide
   free product licenses to events with over 50 attendees
 - [MailCoach](https://www.mailcoach.app/) is offering all PHP× groups a free account
-  to use for sending out event announcements (see [the organizers page](/resources/markdown/pages/organizers.md)
+  to use for sending out event announcements (see [the organizers page](/organizers)
   for more details)
 - [Warp](https://warpdev.notion.site/Hosting-a-Warp-Sponsored-Meetup-18843263616d80a896f3c610837edfb8)
   will reimburse groups up to $300 for in-person developer meetups, but requires
