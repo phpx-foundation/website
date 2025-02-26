@@ -129,6 +129,13 @@ class GroupResource extends Resource
 						Forms\Components\TextInput::make('bsky_app_password')
 							->label('App Password'),
 					]),
+					Forms\Components\Fieldset::make('Cloudflare Turnstile')->schema([
+						Forms\Components\TextInput::make('turnstile_site_key')
+							->label('Site Key')
+							->maxLength(255),
+						Forms\Components\TextInput::make('turnstile_secret_key')
+							->label('Secret Key'),
+					]),
 				]),
 			]);
 	}

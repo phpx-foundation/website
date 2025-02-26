@@ -129,6 +129,7 @@ class Group extends Model
 		return [
 			'mailcoach_token' => 'encrypted',
 			'bsky_app_password' => 'encrypted',
+			'turnstile_secret_key' => 'encrypted',
 			'status' => GroupStatus::class,
 			'domain_status' => DomainStatus::class,
 			'latitude' => 'float',

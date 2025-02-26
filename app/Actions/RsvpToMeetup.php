@@ -6,6 +6,7 @@ use App\Actions\Concerns\RoutesScopedToGroup;
 use App\Actions\Emails\SendRsvpReceipt;
 use App\Models\Meetup;
 use App\Models\User;
+use App\Rules\TurnstileRule;
 use Illuminate\Console\Command;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Session;
@@ -31,12 +32,12 @@ class RsvpToMeetup
 	
 	public function rules(): array
 	{
-		return [
+		return array_merge([
 			'name' => ['required', 'string', 'max:255'],
 			'email' => ['required', 'string', 'email', 'max:255'],
 			'subscribe' => ['nullable', 'boolean'],
 			'speaker' => ['nullable', 'boolean'],
-		];
+		], TurnstileRule::rules());
 	}
 	
 	public function asController(ActionRequest $request, Meetup $meetup)

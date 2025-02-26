@@ -68,6 +68,8 @@
 			</label>
 		</div>
 		
+		<x-turnstile class="mt-5" />
+		
 		<div class="mt-5">
 			<button class="bg-white px-3 py-1.5 text-black font-semibold transform opacity-90 hover:opacity-100 focus:opacity-100">
 				RSVP

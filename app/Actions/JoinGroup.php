@@ -5,6 +5,7 @@ namespace App\Actions;
 use App\Actions\Concerns\RoutesScopedToGroup;
 use App\Models\Group;
 use App\Models\User;
+use App\Rules\TurnstileRule;
 use Illuminate\Console\Command;
 use Illuminate\Contracts\Database\Query\Builder;
 use Illuminate\Routing\Router;
@@ -50,12 +51,12 @@ class JoinGroup
 	
 	public function rules(): array
 	{
-		return [
+		return array_merge([
 			'name' => ['required', 'string', 'max:255'],
 			'email' => ['required', 'string', 'email', 'max:255'],
 			'subscribe' => ['nullable', 'boolean'],
 			'speaker' => ['nullable', 'boolean'],
-		];
+		], TurnstileRule::rules());
 	}
 	
 	public function asController(ActionRequest $request, Group $group)
