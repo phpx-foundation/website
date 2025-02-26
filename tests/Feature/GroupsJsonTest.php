@@ -14,6 +14,9 @@ class GroupsJsonTest extends TestCase
 {
 	public function test_json_is_valid(): void
 	{
+		// We need to make requests to domains to verify that they exist
+		Http::preventStrayRequests(false);
+		
 		$json = json_decode(file_get_contents(base_path('groups.json')), true);
 		
 		foreach ($json as $domain => $config) {
