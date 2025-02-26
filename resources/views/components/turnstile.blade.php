@@ -13,8 +13,4 @@
 		'data-sitekey' => $site_key,	
 	]) }}></div>
 
-@else
-	
-	@dump(app(\App\Models\Group::class))
-
 @endunless
