@@ -31,6 +31,9 @@ class EditGroup extends EditRecord
 			$data['mailcoach_list'] = $record->mailcoach_list;
 			
 			$data['bsky_app_password'] = $record->bsky_app_password;
+			
+			$data['turnstile_site_key'] = $record->turnstile_site_key;
+			$data['turnstile_secret_key'] = $record->turnstile_secret_key;
 		} catch (Throwable) {
 		}
 		

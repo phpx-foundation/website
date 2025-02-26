@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use App\Models\Group;
 use App\Models\Meetup;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class RsvpToMeetupTest extends TestCase
@@ -45,5 +46,36 @@ class RsvpToMeetupTest extends TestCase
 		
 		$user_meetup = $philly_user->meetups()->sole();
 		$this->assertTrue($user_meetup->is($meetup));
+	}
+	
+	public function test_turnstile_is_required_when_configured(): void
+	{
+		Http::fakeSequence('*.cloudflare.com/turnstile/*')
+			->push(['success' => false])
+			->push(['success' => true]);
+		
+		$philly = Group::findByDomain('phpxphilly.com');
+		$philly->update(['turnstile_site_key' => '1', 'turnstile_secret_key' => '2']);
+		
+		$meetup = Meetup::factory()->for($philly)->create([
+			'location' => 'Test Meetup Location',
+			'capacity' => 100,
+			'starts_at' => now()->addDay()->hour(18)->minute(30),
+			'ends_at' => now()->addDay()->hour(20)->minute(0),
+		]);
+		
+		$payload = [
+			'name' => 'Chris Morrell',
+			'email' => 'chris@phpxphilly.com',
+			'subscribe' => '1',
+			'speaker' => '1',
+			'cf-turnstile-response' => '123',
+		];
+		
+		$this->post("https://phpxphilly.com/meetups/{$meetup->id}/rsvps", $payload)
+			->assertSessionHasErrors('cf-turnstile-response');
+		
+		$this->post("https://phpxphilly.com/meetups/{$meetup->id}/rsvps", $payload)
+			->assertSessionHasNoErrors();
 	}
 }

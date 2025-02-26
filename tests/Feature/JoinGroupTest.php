@@ -3,7 +3,9 @@
 namespace Tests\Feature;
 
 use App\Models\Group;
+use App\Models\Meetup;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
 
 class JoinGroupTest extends TestCase
@@ -92,5 +94,29 @@ class JoinGroupTest extends TestCase
 		$this->assertEquals('chris@phpxphilly.com', $nyc_user->email);
 		$this->assertFalse($nyc_user->group_membership->is_subscribed);
 		$this->assertTrue($nyc_user->current_group()->is($nyc));
+	}
+	
+	public function test_turnstile_is_required_when_configured(): void
+	{
+		Http::fakeSequence('*.cloudflare.com/turnstile/*')
+			->push(['success' => false])
+			->push(['success' => true]);
+		
+		$philly = Group::findByDomain('phpxphilly.com');
+		$philly->update(['turnstile_site_key' => '1', 'turnstile_secret_key' => '2']);
+		
+		$payload = [
+			'name' => 'Chris Morrell',
+			'email' => 'chris@phpxphilly.com',
+			'subscribe' => '1',
+			'speaker' => '0',
+			'cf-turnstile-response' => '123',
+		];
+		
+		$this->post('https://phpxphilly.com/join', $payload)
+			->assertSessionHasErrors('cf-turnstile-response');
+		
+		$this->post('https://phpxphilly.com/join', $payload)
+			->assertSessionHasNoErrors();
 	}
 }
