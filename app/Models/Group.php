@@ -52,7 +52,10 @@ class Group extends Model
 	
 	protected static function booted()
 	{
-		static::saved(fn() => Cache::forget('phpx-network'));
+		static::saved(function(Group $group) {
+			Cache::forget('phpx-network');
+			Cache::forget("group:{$group->domain}");
+		});
 	}
 	
 	public function isActive(): bool
