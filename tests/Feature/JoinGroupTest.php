@@ -3,7 +3,6 @@
 namespace Tests\Feature;
 
 use App\Models\Group;
-use App\Models\Meetup;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Http;
 use Tests\TestCase;
