@@ -91,13 +91,12 @@ class UserResource extends Resource
 			])
 			->modifyQueryUsing(fn(Builder $query) => $query->with('groups')->whereVisibleToUser())
 			->filters([
-				Tables\Filters\Filter::make('name')
+				Tables\Filters\Filter::make('likely_bots')
 					->label('Likely bots')
-					->query(fn(Builder $query) => $query->where(function(Builder $query) {
-						$query
-							->where('name', 'NOT LIKE', '% %')
-							->where('name', 'REGEXP', '^.[A-Z]');
-					})),
+					->query(fn(Builder $query) => $query->whereRaw("REGEXP_LIKE (`name`, '^[[:alpha:]]+[[:lower:]][[:alpha:]]*[[:upper:]][[:alpha:]]+$', 'c')")),
+				Tables\Filters\Filter::make('common_emails')
+					->label('Common email domains')
+					->query(fn(Builder $query) => $query->where('email', 'REGEXP', '(gmail.com|outlook.com|yahoo.com|msn.com|live.com|hotmail.com|hotmail.co.uk)$')),
 			])
 			->actions([
 				Tables\Actions\EditAction::make(),
