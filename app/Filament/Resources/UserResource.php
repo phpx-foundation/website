@@ -90,9 +90,19 @@ class UserResource extends Resource
 					->toggleable(isToggledHiddenByDefault: true),
 			])
 			->modifyQueryUsing(fn(Builder $query) => $query->with('groups')->whereVisibleToUser())
-			->filters([])
+			->filters([
+				Tables\Filters\Filter::make('name')
+					->label('Likely bots')
+					->query(fn(Builder $query) => $query->where(function(Builder $query) {
+						$query
+							->whereNotNull('email_verified_at')
+							->where('name', 'NOT LIKE', '% %')
+							->where('name', 'REGEXP', '^.[A-Z]');
+					})),
+			])
 			->actions([
 				Tables\Actions\EditAction::make(),
+				Tables\Actions\DeleteAction::make(),
 			])
 			->bulkActions([
 				Tables\Actions\BulkActionGroup::make([

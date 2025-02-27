@@ -30,6 +30,14 @@ class User extends Authenticatable implements FilamentUser
 		'remember_token',
 	];
 	
+	protected static function booted()
+	{
+		static::deleted(function (User $user) {
+			GroupMembership::query()->where('user_id', $user->getKey())->delete();
+			Rsvp::query()->where('user_id', $user->getKey())->delete();
+		});
+	}
+	
 	public function canAccessPanel(Panel $panel): bool
 	{
 		return $this->isSuperAdmin()
