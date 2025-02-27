@@ -95,7 +95,7 @@ class UserResource extends Resource
 					->label('Likely bots')
 					->query(fn(Builder $query) => $query->where(function(Builder $query) {
 						$query
-							->whereNotNull('email_verified_at')
+							->whereNull('email_verified_at')
 							->where('name', 'NOT LIKE', '% %')
 							->where('name', 'REGEXP', '^.[A-Z]');
 					})),
