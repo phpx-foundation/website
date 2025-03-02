@@ -76,6 +76,9 @@ class GroupResource extends Resource
 						)
 						->required()
 						->default('America/New_York'),
+					Forms\Components\FileUpload::make('custom_open_graph_image')
+						->image()
+						->directory('og/custom'),
 				]),
 				Forms\Components\Fieldset::make('Contact')->schema([
 					Forms\Components\TextInput::make('email')

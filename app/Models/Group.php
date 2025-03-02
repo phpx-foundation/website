@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Stringable;
 use Revolution\Bluesky\Contracts\Factory;
 use Revolution\Bluesky\Facades\Bluesky;
@@ -41,6 +42,7 @@ class Group extends Model
 		'bsky_did',
 		'twitter_url',
 		'meetup_url',
+		'custom_open_graph_image',
 		'latitude',
 		'longitude',
 		'created_at',
@@ -155,13 +157,15 @@ class Group extends Model
 	protected function openGraphImageUrl(): Attribute
 	{
 		return Attribute::get(function() {
-			$filename = $this->airport_code->lower()->finish('.png');
-			$path = public_path("og/{$filename}");
-			
-			if (file_exists($path)) {
-				return asset("og/{$filename}").'?t='.filemtime($path);
+			if ($this->custom_open_graph_image && Storage::disk('public')->exists($this->custom_open_graph_image)) {
+				return Storage::disk('public')->url($this->custom_open_graph_image);
 			}
-			
+
+			$defaultPath = 'og/' . $this->airport_code->lower()->finish('.png');
+			if (file_exists(public_path($defaultPath))) {
+				return asset($defaultPath);
+			}
+
 			return null;
 		});
 	}
