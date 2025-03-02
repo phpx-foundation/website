@@ -161,7 +161,7 @@ class Group extends Model
 				return Storage::disk('public')->url($this->custom_open_graph_image);
 			}
 
-			$defaultPath = 'og/' . $this->airport_code->lower()->finish('.png');
+			$defaultPath = 'og/'.$this->airport_code->lower()->finish('.png');
 			if (file_exists(public_path($defaultPath))) {
 				return asset($defaultPath);
 			}
