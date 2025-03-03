@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Glhd\Bits\Database\HasSnowflakes;
 use Illuminate\Contracts\Support\Htmlable;
@@ -92,20 +93,20 @@ class Meetup extends Model implements Htmlable
 		if ($this->starts_at->isSameDay($this->ends_at)) {
 			$start = $this->starts_at->format("l, F jS Y \\f\\r\o\m g:ia");
 			$end = $this->ends_at->format('g:ia T');
-			
-			return "$start to $end";
+
+			return "{$start} to {$end}";
 		}
 		
 		$start = $this->starts_at->format('F jS');
 		$end = $this->ends_at->format('F jS Y');
-		
+
 		return "{$start}–{$end}";
 	}
 	
 	protected function startsAt(): Attribute
 	{
 		return Attribute::make(
-			get: fn($value) => $value ? $this->asDateTime($value)->shiftTimezone(config('app.timezone'))->timezone($this->group->timezone) : null,
+			get: fn($value) => $value ? CarbonImmutable::make($value)->timezone($this->group->timezone) : null,
 			set: fn($value) => $this->asDateTime($value)->timezone(config('app.timezone')),
 		);
 	}
@@ -113,7 +114,7 @@ class Meetup extends Model implements Htmlable
 	protected function endsAt(): Attribute
 	{
 		return Attribute::make(
-			get: fn($value) => $this->asDateTime($value)->shiftTimezone(config('app.timezone'))->timezone($this->group->timezone),
+			get: fn($value) => $value ? CarbonImmutable::make($value)->timezone($this->group->timezone) : null,
 			set: fn($value) => $this->asDateTime($value)->timezone(config('app.timezone')),
 		);
 	}

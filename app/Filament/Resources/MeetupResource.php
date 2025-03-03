@@ -52,11 +52,13 @@ class MeetupResource extends Resource
 				Forms\Components\DateTimePicker::make('starts_at')
 					->label('Start')
 					->required()
+					->timezone(fn(Meetup $meetup) => $meetup->group->timezone)
 					->beforeOrEqual('ends_at')
 					->rules(['required', 'date']),
 				Forms\Components\DateTimePicker::make('ends_at')
 					->label('End')
 					->required()
+					->timezone(fn(Meetup $meetup) => $meetup->group->timezone)
 					->afterOrEqual('starts_at')
 					->rules(['required', 'date']),
 				Forms\Components\MarkdownEditor::make('description')
