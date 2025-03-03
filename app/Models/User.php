@@ -85,6 +85,11 @@ class User extends Authenticatable implements FilamentUser
 	{
 		$user ??= Auth::user();
 		
+		// Super admins can view all users
+		if ($user->isSuperAdmin()) {
+			return $query;
+		}
+		
 		return $this->scopeWhereMemberOfGroup($query, $user->organized_group_ids);
 	}
 	
