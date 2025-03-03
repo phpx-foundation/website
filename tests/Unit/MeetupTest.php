@@ -29,7 +29,7 @@ class MeetupTest extends TestCase
 		return [
 			['2025-01-01 15:00 UTC', '2025-01-01 15:00 UTC', 'Wednesday, January 1st 2025 at 10:00am EST'],
 			['2025-01-01 15:00 UTC', '2025-01-01 16:00 UTC', 'Wednesday, January 1st 2025 from 10:00am to 11:00am EST'],
-			['2025-01-01 15:00 UTC', '2025-01-02 16:00 UTC', 'January 1st – January 2nd 2025'],
+			['2025-01-01 15:00 UTC', '2025-01-02 16:00 UTC', 'January 1st–January 2nd 2025'],
 		];
 	}
 }
