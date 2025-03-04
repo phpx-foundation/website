@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MeetupResource\Pages;
 use App\Filament\Resources\MeetupResource\RelationManagers;
+use App\Models\Group;
 use App\Models\Meetup;
 use App\Rules\CanUpdateGroup;
 use Filament\Forms;
@@ -25,17 +26,13 @@ class MeetupResource extends Resource
 	
 	public static function form(Form $form): Form
 	{
+		$group = app(Group::class);
+		
 		return $form
 			->schema([
 				Forms\Components\Select::make('group_id')
 					->relationship(name: 'group', titleAttribute: 'name')
-					->default(function() {
-						if ($group = request()->attributes->get('group')) {
-							return (string) $group->getKey();
-						}
-						
-						return null;
-					})
+					->default(fn() => $group->getKey())
 					->searchable()
 					->preload()
 					->label('Group')
@@ -52,13 +49,13 @@ class MeetupResource extends Resource
 				Forms\Components\DateTimePicker::make('starts_at')
 					->label('Start')
 					->required()
-					->timezone(fn(Meetup $meetup) => $meetup->group->timezone)
+					->timezone(fn(Meetup $meetup) => $meetup->group?->timezone ?? $group->timezone ?? config('app.timezone'))
 					->beforeOrEqual('ends_at')
 					->rules(['required', 'date']),
 				Forms\Components\DateTimePicker::make('ends_at')
 					->label('End')
 					->required()
-					->timezone(fn(Meetup $meetup) => $meetup->group->timezone)
+					->timezone(fn(Meetup $meetup) => $meetup->group?->timezone ?? $group->timezone ?? config('app.timezone'))
 					->afterOrEqual('starts_at')
 					->rules(['required', 'date']),
 				Forms\Components\MarkdownEditor::make('description')
