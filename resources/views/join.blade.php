@@ -57,6 +57,18 @@
 		
 		<x-turnstile class="mt-5" />
 		
+		@empty(app(\App\Models\Group::class)->turnstile_site_key)
+			<div class="mt-5 flex flex-col gap-2 opacity-20">
+				<label class="block font-mono font-bold text-white" for="name">
+					Leave this blank, please
+				</label>
+				<input
+					class="font-mono text-black p-2 font-semibold w-full"
+					type="text" name="full_name" id="full_name"
+				/>
+			</div>
+		@endempty
+		
 		<div class="mt-3">
 			<button class="bg-white px-3 py-1.5 text-black font-semibold transform opacity-90 hover:opacity-100 focus:opacity-100">
 				Get Updates

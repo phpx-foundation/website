@@ -52,7 +52,8 @@ class JoinGroup
 	public function rules(): array
 	{
 		return array_merge([
-			'name' => ['required', 'string', 'max:255'],
+			'name' => ['required', 'string', 'max:255', 'not_regex:/https?:\/\//i'],
+			'full_name' => ['prohibited'],
 			'email' => ['required', 'string', 'email', 'max:255'],
 			'subscribe' => ['nullable', 'boolean'],
 			'speaker' => ['nullable', 'boolean'],
