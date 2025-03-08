@@ -10,6 +10,7 @@ use App\Rules\TurnstileRule;
 use Illuminate\Console\Command;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Session;
+use LogicException;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -25,6 +26,10 @@ class RsvpToMeetup
 	
 	public function handle(Meetup $meetup, User $user): void
 	{
+		if (null !== $meetup->external_rsvp_url) {
+			throw new LogicException('This meetup uses external RSVPs');
+		}
+		
 		$meetup->users()->syncWithoutDetaching($user->getKey());
 		
 		SendRsvpReceipt::run($meetup, $user);

@@ -61,6 +61,13 @@ class MeetupResource extends Resource
 				Forms\Components\MarkdownEditor::make('description')
 					->required()
 					->columnSpanFull(),
+				Forms\Components\TextInput::make('external_rsvp_url')
+					->label('External RSVP URL')
+					->columnSpanFull()
+					->url()
+					->helperText('If you provide an external RSVP URL (like Meetup or Eventy), we will link 
+						out to that rather than accepting RSVPs on PHP×. Keep in mind that you will have to manually
+						handle newsletter registrations if you use an external RSVP system.'),
 			]);
 	}
 	

@@ -103,6 +103,18 @@ class Meetup extends Model implements Htmlable
 		return "{$start}–{$end}";
 	}
 	
+	public function externalRsvpPlatformName(): ?string
+	{
+		return match (true) {
+			null === $this->external_rsvp_url => null,
+			Str::contains($this->external_rsvp_url, 'meetup.com') => 'Meetup',
+			Str::contains($this->external_rsvp_url, 'eventy.io') => 'Eventy',
+			Str::contains($this->external_rsvp_url, 'guild.host') => 'Guild',
+			Str::contains($this->external_rsvp_url, 'lu.ma') => 'luma',
+			default => null,
+		};
+	}
+	
 	protected function startsAt(): Attribute
 	{
 		return Attribute::make(
