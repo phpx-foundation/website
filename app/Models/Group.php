@@ -169,7 +169,7 @@ class Group extends Model
 
 	public function meetups(): HasMany
 	{
-		return $this->hasMany(Meetup::class)->orderBy('created_at','desc');
+		return $this->hasMany(Meetup::class)->orderBy('start_at','desc');
 	}
 
 	public function mailcoach_transactional_emails(): HasMany
