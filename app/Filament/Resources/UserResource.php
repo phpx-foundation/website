@@ -94,6 +94,12 @@ class UserResource extends Resource
 				Tables\Filters\Filter::make('likely_bots')
 					->label('Likely bots')
 					->query(fn(Builder $query) => $query->whereRaw("REGEXP_LIKE (`name`, '^[[:alpha:]]+[[:upper:]][[:alpha:]]+$', 'c')")),
+				Tables\Filters\Filter::make('likely_spam')
+					->label('Likely spam')
+					->query(fn(Builder $query) => $query->where(fn(Builder $query) => $query
+						->orWhereLike('name', 'http:')
+						->orWhereLike('name', 'https:')
+					)),
 				Tables\Filters\Filter::make('common_emails')
 					->label('Common email domains')
 					->query(fn(Builder $query) => $query->where('email', 'REGEXP', '(gmail.com|outlook.com|yahoo.com|msn.com|live.com|hotmail.com|hotmail.co.uk)$')),

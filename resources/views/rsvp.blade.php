@@ -42,39 +42,60 @@
 		{{ $meetup }}
 	</div>
 	
-	<form
-		action="/meetups/{{ $meetup->getKey() }}/rsvps"
-		method="post"
-		class="w-full transform -rotate-1 md:ml-8"
-	>
-		@csrf
-		
-		<div class="max-w-md">
-			<x-input name="name" label="Your Name" />
+	@empty($meetup->external_rsvp_url)
+		<form
+			action="/meetups/{{ $meetup->getKey() }}/rsvps"
+			method="post"
+			class="w-full transform -rotate-1 md:ml-8"
+		>
+			@csrf
+			
+			<div class="max-w-md">
+				<x-input name="name" label="Your Name" />
+			</div>
+			
+			<div class="mt-5 max-w-md">
+				<x-input name="email" label="Email" type="email" :placeholder="'you@'.$group->domain" />
+			</div>
+			
+			<div class="mt-5 flex flex-col gap-2">
+				<label class="font-mono text-lg text-white font-semibold">
+					<input type="checkbox" name="speaker" value="1" />
+					I'm interested in speaking
+				</label>
+				<label class="font-mono text-lg text-white font-semibold">
+					<input type="checkbox" name="subscribe" value="1" checked />
+					Send me updates
+				</label>
+			</div>
+			
+			<x-turnstile class="mt-5" />
+			
+			<div class="mt-5">
+				<button class="bg-white px-3 py-1.5 text-black font-semibold transform opacity-90 hover:opacity-100 focus:opacity-100">
+					RSVP
+				</button>
+			</div>
+		</form>
+	@else
+		<div>
+			<a
+				class="group inline-flex font-semibold justify-center gap-2 items-stretch border-2 border-white"
+				href="{{ $meetup->external_rsvp_url }}"
+				target="_blank"
+			>
+				<span class="text-white text-lg font-mono font-bold px-6 py-3 transition-transform transform group-hover:-rotate-2">
+					@if($platform_name = $meetup->externalRsvpPlatformName())
+						RSVP on {{ $platform_name }}
+					@else
+						RSVP_
+					@endif
+				</span>
+				<span class="bg-white px-6 py-3 border-l-2 border-gray-200 transition-transform transform group-hover:translate-x-2 group-hover:-translate-y-2 group-hover:-rotate-1">
+					<x-icon.arrow-top-right-on-square class="size-5 text-black" />
+				</span>
+			</a>
 		</div>
-		
-		<div class="mt-5 max-w-md">
-			<x-input name="email" label="Email" type="email" :placeholder="'you@'.$group->domain" />
-		</div>
-		
-		<div class="mt-5 flex flex-col gap-2">
-			<label class="font-mono text-lg text-white font-semibold">
-				<input type="checkbox" name="speaker" value="1" />
-				I'm interested in speaking
-			</label>
-			<label class="font-mono text-lg text-white font-semibold">
-				<input type="checkbox" name="subscribe" value="1" checked />
-				Send me updates
-			</label>
-		</div>
-		
-		<x-turnstile class="mt-5" />
-		
-		<div class="mt-5">
-			<button class="bg-white px-3 py-1.5 text-black font-semibold transform opacity-90 hover:opacity-100 focus:opacity-100">
-				RSVP
-			</button>
-		</div>
-	</form>
+	@endempty
 
 </x-layout>
