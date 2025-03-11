@@ -100,33 +100,27 @@ class GroupResource extends Resource
 
 	public static function getContactTab(): Tab
 	{
-		return Tab::make('Contact')->schema(
+		return Tab::make('Contact/Links')->schema(
 
 			[
 				Forms\Components\TextInput::make('email')
 					->email()
 					->maxLength(255),
+				Forms\Components\TextInput::make('bsky_url')
+					->url()
+					->label('Bluesky')
+					->maxLength(255),
+				Forms\Components\TextInput::make('twitter_url')
+					->url()
+					->label('Twitter')
+					->maxLength(255)
+					->hidden(fn() => ! Auth::user()->isSuperAdmin()),
+				Forms\Components\TextInput::make('meetup_url')
+					->url()
+					->label('Meetup')
+					->maxLength(255),
 			]
 		);
-	}
-
-	public static function getLinksTab(): Tab
-	{
-		return Tab::make('Links')->schema([
-			Forms\Components\TextInput::make('bsky_url')
-				->url()
-				->label('Bluesky')
-				->maxLength(255),
-			Forms\Components\TextInput::make('twitter_url')
-				->url()
-				->label('Twitter')
-				->maxLength(255)
-				->hidden(fn() => ! Auth::user()->isSuperAdmin()),
-			Forms\Components\TextInput::make('meetup_url')
-				->url()
-				->label('Meetup')
-				->maxLength(255),
-		]);
 	}
 
 	public static function getIntegrationsTab(): Tab
@@ -199,7 +193,6 @@ class GroupResource extends Resource
 					static::getGeneralTab(),
 					static::getDefaultsTab(),
 					static::getContactTab(),
-					static::getLinksTab(),
 					static::getIntegrationsTab()
 				])->columnSpanFull()
 			]);
