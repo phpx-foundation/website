@@ -16,18 +16,18 @@ use Filament\Tables\Table;
 class MeetupResource extends Resource
 {
 	protected static ?string $model = Meetup::class;
-	
+
 	protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-	
+
 	public static function getNavigationBadge(): ?string
 	{
 		return Meetup::count();
 	}
-	
+
 	public static function form(Form $form): Form
 	{
 		$group = app(Group::class);
-		
+
 		return $form
 			->schema([
 				Forms\Components\Select::make('group_id')
@@ -41,20 +41,24 @@ class MeetupResource extends Resource
 					->columnSpanFull(),
 				Forms\Components\TextInput::make('location')
 					->required()
+					->default(fn() => $group->default_location)
 					->maxLength(255),
 				Forms\Components\TextInput::make('capacity')
 					->required()
+					->default(fn() => $group->default_capacity)
 					->numeric()
 					->minValue(0),
 				Forms\Components\DateTimePicker::make('starts_at')
 					->label('Start')
 					->required()
+					->default(fn() => $group->defaultStartDate)
 					->timezone(fn(Meetup $meetup) => $meetup->group?->timezone ?? $group->timezone ?? config('app.timezone'))
 					->beforeOrEqual('ends_at')
 					->rules(['required', 'date']),
 				Forms\Components\DateTimePicker::make('ends_at')
 					->label('End')
 					->required()
+					->default(fn() => $group->defaultEndDate)
 					->timezone(fn(Meetup $meetup) => $meetup->group?->timezone ?? $group->timezone ?? config('app.timezone'))
 					->afterOrEqual('starts_at')
 					->rules(['required', 'date']),
@@ -70,7 +74,7 @@ class MeetupResource extends Resource
 						handle newsletter registrations if you use an external RSVP system.'),
 			]);
 	}
-	
+
 	public static function table(Table $table): Table
 	{
 		return $table
@@ -118,14 +122,14 @@ class MeetupResource extends Resource
 				]),
 			]);
 	}
-	
+
 	public static function getRelations(): array
 	{
 		return [
 			RelationManagers\UsersRelationManager::class,
 		];
 	}
-	
+
 	public static function getPages(): array
 	{
 		return [
