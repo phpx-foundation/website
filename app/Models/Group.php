@@ -63,9 +63,11 @@ class Group extends Model
 
 	public function latestMeetup(): Attribute
 	{
-		return Attribute::make(function(){
+		return Attribute::make(function() {
 			// Persisting to the instance in memory to reduce db lookups
-			if($this->mostRecentMeetup) return $this->mostRecentMeetup;
+			if ($this->mostRecentMeetup) {
+				return $this->mostRecentMeetup;
+			}
 			$this->mostRecentMeetup = $this->meetups()->first();
 			return $this->mostRecentMeetup;
 		});
@@ -169,7 +171,7 @@ class Group extends Model
 
 	public function meetups(): HasMany
 	{
-		return $this->hasMany(Meetup::class)->orderBy('start_at','desc');
+		return $this->hasMany(Meetup::class)->orderBy('start_at', 'desc');
 	}
 
 	public function mailcoach_transactional_emails(): HasMany
