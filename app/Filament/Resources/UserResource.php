@@ -98,8 +98,8 @@ class UserResource extends Resource
 					->label('Likely spam')
 					->query(fn(Builder $query) => $query->where(
 						fn(Builder $query) => $query
-						->orWhereLike('name', 'http:')
-						->orWhereLike('name', 'https:')
+							->orWhereLike('name', 'http:')
+							->orWhereLike('name', 'https:')
 					)),
 				Tables\Filters\Filter::make('common_emails')
 					->label('Common email domains')
