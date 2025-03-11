@@ -57,7 +57,7 @@ class Group extends Model
 
 	protected static function booted()
 	{
-		static::saved(function (Group $group) {
+		static::saved(function(Group $group) {
 			Cache::forget('phpx-network');
 			Cache::forget("group:{$group->domain}");
 		});
@@ -65,8 +65,10 @@ class Group extends Model
 
 	public function defaultStartDate(): Attribute
 	{
-		return Attribute::make(function () {
-			if (empty($this->default_start)) return null;
+		return Attribute::make(function() {
+			if (empty($this->default_start)) {
+				return null;
+			}
 			// Otherwise, today with the start time
 			return (new Carbon())->setTimezone($this->timezone ?? config('app.timezone'))->setTimeFromTimeString($this->default_start);
 		});
@@ -74,8 +76,10 @@ class Group extends Model
 
 	public function defaultEndDate(): Attribute
 	{
-		return Attribute::make(function () {
-			if (empty($this->default_end)) return null;
+		return Attribute::make(function() {
+			if (empty($this->default_end)) {
+				return null;
+			}
 			// Otherwise, today with the start time
 			return (new Carbon())->setTimezone($this->timezone ?? config('app.timezone'))->setTimeFromTimeString($this->default_end);
 		});
@@ -124,7 +128,7 @@ class Group extends Model
 		$generator = app(UrlGenerator::class);
 
 		try {
-			$generator->forceRootUrl('https://' . $this->domain);
+			$generator->forceRootUrl('https://'.$this->domain);
 			return $generator->to($path, $parameters, $secure);
 		} finally {
 			$generator->forceRootUrl(null);
@@ -177,12 +181,12 @@ class Group extends Model
 
 	protected function openGraphImageUrl(): Attribute
 	{
-		return Attribute::get(function () {
+		return Attribute::get(function() {
 			$filename = $this->airport_code->lower()->finish('.png');
 			$path = public_path("og/{$filename}");
 
 			if (file_exists($path)) {
-				return asset("og/{$filename}") . '?t=' . filemtime($path);
+				return asset("og/{$filename}").'?t='.filemtime($path);
 			}
 
 			return null;

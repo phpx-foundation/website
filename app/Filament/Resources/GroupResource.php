@@ -9,7 +9,6 @@ use App\Filament\Resources\GroupResource\Pages;
 use App\Filament\Resources\GroupResource\RelationManagers;
 use App\Models\Group;
 use Filament\Forms;
-use Filament\Forms\Components\Fieldset;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
@@ -66,7 +65,7 @@ class GroupResource extends Resource
 						->options(DomainStatus::class)
 						->default(DomainStatus::Pending)
 						->disabled(fn() => ! Auth::user()->isSuperAdmin())
-						->dehydrated(fn() => ! Auth::user()->isSuperAdmin())
+						->dehydrated(fn() => ! Auth::user()->isSuperAdmin()),
 				]),
 				Section::make('Location')->collapsible()->collapsed()->columns(3)->schema([
 					Forms\Components\Select::make('continent')
@@ -92,7 +91,7 @@ class GroupResource extends Resource
 					Forms\Components\TextInput::make('longitude')
 						->numeric()
 						->required()
-						->rules(['required', 'numeric', 'between:-180,180', 'decimal:2,8'])
+						->rules(['required', 'numeric', 'between:-180,180', 'decimal:2,8']),
 				]),
 			]
 		);
@@ -101,7 +100,6 @@ class GroupResource extends Resource
 	public static function getContactTab(): Tab
 	{
 		return Tab::make('Contact/Links')->schema(
-
 			[
 				Forms\Components\TextInput::make('email')
 					->email()
@@ -126,12 +124,12 @@ class GroupResource extends Resource
 	public static function getIntegrationsTab(): Tab
 	{
 		return Tab::make('Integrations')->schema([
-			Section::make('MailCoach')->collapsible()->iconColor(function ($record) {
+			Section::make('MailCoach')->collapsible()->iconColor(function($record) {
 				return static::emptyFields($record, ['mailcoach_token', 'mailcoach_endpoint', 'mailcoach_list']) ? 'warning' : 'success';
-			})->icon(function ($record) {
+			})->icon(function($record) {
 				return static::getIntegrationIcon($record, ['mailcoach_token', 'mailcoach_endpoint', 'mailcoach_list']);
-			})->collapsed(function ($record) {
-				return !static::emptyFields($record, ['mailcoach_token', 'mailcoach_endpoint', 'mailcoach_list']);
+			})->collapsed(function($record) {
+				return ! static::emptyFields($record, ['mailcoach_token', 'mailcoach_endpoint', 'mailcoach_list']);
 			})->schema([
 				Forms\Components\TextInput::make('mailcoach_token')
 					->label('Token')
@@ -146,12 +144,12 @@ class GroupResource extends Resource
 					->maxLength(255)
 					->rules(['nullable', 'uuid']),
 			]),
-			Section::make('Bluesky')->collapsible()->iconColor(function ($record) {
+			Section::make('Bluesky')->collapsible()->iconColor(function($record) {
 				return static::emptyFields($record, ['bsky_did', 'bsky_app_password']) ? 'warning' : 'success';
-			})->icon(function ($record) {
+			})->icon(function($record) {
 				return static::getIntegrationIcon($record, ['bsky_did', 'bsky_app_password']);
-			})->collapsed(function ($record) {
-				return !static::emptyFields($record, ['bsky_did', 'bsky_app_password']);
+			})->collapsed(function($record) {
+				return ! static::emptyFields($record, ['bsky_did', 'bsky_app_password']);
 			})->schema([
 				Forms\Components\TextInput::make('bsky_did')
 					->label('DID')
@@ -159,11 +157,11 @@ class GroupResource extends Resource
 				Forms\Components\TextInput::make('bsky_app_password')
 					->label('App Password'),
 			]),
-			Section::make('Cloudflare Turnstile')->collapsible()->collapsed(function ($record) {
-				return !static::emptyFields($record, ['turnstile_site_key', 'turnstile_secret_key']);
-			})->iconColor(function ($record) {
+			Section::make('Cloudflare Turnstile')->collapsible()->collapsed(function($record) {
+				return ! static::emptyFields($record, ['turnstile_site_key', 'turnstile_secret_key']);
+			})->iconColor(function($record) {
 				return static::emptyFields($record, ['turnstile_site_key', 'turnstile_secret_key']) ? 'warning' : 'success';
-			})->icon(function ($record) {
+			})->icon(function($record) {
 				return static::getIntegrationIcon($record, ['turnstile_site_key', 'turnstile_secret_key']);
 			})->schema([
 				Forms\Components\TextInput::make('turnstile_site_key')
@@ -181,7 +179,7 @@ class GroupResource extends Resource
 			TextInput::make('default_location'),
 			TextInput::make('default_capacity')->numeric(),
 			TimePicker::make('default_start'),
-			TimePicker::make('default_end')
+			TimePicker::make('default_end'),
 		]);
 	}
 
@@ -193,8 +191,8 @@ class GroupResource extends Resource
 					static::getGeneralTab(),
 					static::getDefaultsTab(),
 					static::getContactTab(),
-					static::getIntegrationsTab()
-				])->columnSpanFull()
+					static::getIntegrationsTab(),
+				])->columnSpanFull(),
 			]);
 	}
 
@@ -221,7 +219,7 @@ class GroupResource extends Resource
 					->searchable()
 					->toggleable(isToggledHiddenByDefault: true),
 				Tables\Columns\TextColumn::make('timezone')
-					->formatStateUsing(function (string $state) {
+					->formatStateUsing(function(string $state) {
 						[$prefix, $zone] = explode('/', $state, 2);
 						$zone = str_replace(['_', '/'], [' ', ', '], $zone);
 						return new HtmlString("<div class='opacity-50 text-xs'>{$prefix}</div><div>{$zone}</div>");
@@ -272,7 +270,6 @@ class GroupResource extends Resource
 
 	protected static function emptyFields($record, $fields)
 	{
-
 		foreach ($fields as $field) {
 			if (empty($record->{$field})) {
 				return true;
@@ -283,7 +280,6 @@ class GroupResource extends Resource
 
 	protected static function getIntegrationIcon($record, $fields)
 	{
-
 		return static::emptyFields($record, $fields) ? 'heroicon-m-link-slash' : 'heroicon-m-link';
 	}
 }
