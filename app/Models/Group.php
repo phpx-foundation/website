@@ -34,6 +34,7 @@ class Group extends Model
 		'default_location',
 		'default_start',
 		'default_end',
+		'default_capacity',
 		'name',
 		'region',
 		'continent',
