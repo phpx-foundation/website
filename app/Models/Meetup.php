@@ -13,6 +13,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Meetup extends Model implements Htmlable
@@ -37,6 +38,7 @@ class Meetup extends Model implements Htmlable
 		'date_range',
 		'starts_at',
 		'ends_at',
+		'custom_open_graph_image',
 	];
 	
 	protected $appends = [
@@ -144,14 +146,16 @@ class Meetup extends Model implements Htmlable
 	protected function openGraphImageUrl(): Attribute
 	{
 		return Attribute::get(function() {
-			$filename = "og/meetups/{$this->getKey()}.png";
-			$path = storage_path("app/public/{$filename}");
-			
-			if (file_exists($path)) {
-				return asset("storage/{$filename}").'?t='.filemtime($path);
+			if ($this->custom_open_graph_image && Storage::disk('public')->exists($this->custom_open_graph_image)) {
+				return Storage::disk('public')->url($this->custom_open_graph_image);
 			}
-			
-			return null;
+
+			$defaultPath = "og/meetups/{$this->getKey()}.png";
+			if (Storage::disk('public')->exists($defaultPath)) {
+				return Storage::disk('public')->url($defaultPath);
+			}
+
+			return $this->group->open_graph_image_url;
 		});
 	}
 	
