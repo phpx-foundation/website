@@ -31,10 +31,6 @@ class Group extends Model
 		'id',
 		'domain',
 		'domain_status',
-		'default_location',
-		'default_start',
-		'default_end',
-		'default_capacity',
 		'name',
 		'region',
 		'continent',
@@ -55,12 +51,39 @@ class Group extends Model
 		'label',
 	];
 
+	protected $mostRecentMeetup = null;
+
 	protected static function booted()
 	{
 		static::saved(function(Group $group) {
 			Cache::forget('phpx-network');
 			Cache::forget("group:{$group->domain}");
 		});
+	}
+
+	public function latestMeetup(): Attribute
+	{
+		return Attribute::make(function(){
+			// Persisting to the instance in memory to reduce db lookups
+			if($this->mostRecentMeetup) return $this->mostRecentMeetup;
+			$this->mostRecentMeetup = $this->meetups()->first();
+			return $this->mostRecentMeetup;
+		});
+	}
+
+	public function defaultLocation(): Attribute
+	{
+		return Attribute::make(fn() => $this->latestMeetup?->location);
+	}
+
+	public function defaultStart(): Attribute
+	{
+		return Attribute::make(fn() => $this->latestMeetup?->starts_at?->toTimeString());
+	}
+
+	public function defaultEnd(): Attribute
+	{
+		return Attribute::make(fn() => $this->latestMeetup?->ends_at?->toTimeString());
 	}
 
 	public function defaultStartDate(): Attribute
@@ -146,7 +169,7 @@ class Group extends Model
 
 	public function meetups(): HasMany
 	{
-		return $this->hasMany(Meetup::class);
+		return $this->hasMany(Meetup::class)->orderBy('created_at','desc');
 	}
 
 	public function mailcoach_transactional_emails(): HasMany
