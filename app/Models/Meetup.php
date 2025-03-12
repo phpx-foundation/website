@@ -94,13 +94,13 @@ class Meetup extends Model implements Htmlable
 		if ($this->starts_at->isSameDay($this->ends_at)) {
 			$start = $this->starts_at->format("l, F jS Y \\f\\r\o\m g:ia");
 			$end = $this->ends_at->format('g:ia T');
-
+			
 			return "{$start} to {$end}";
 		}
 		
 		$start = $this->starts_at->format('F jS');
 		$end = $this->ends_at->format('F jS Y');
-
+		
 		return "{$start}–{$end}";
 	}
 	
