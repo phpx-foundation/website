@@ -51,62 +51,11 @@ class Group extends Model
 		'label',
 	];
 	
-	protected $mostRecentMeetup = null;
-	
 	protected static function booted()
 	{
 		static::saved(function(Group $group) {
 			Cache::forget('phpx-network');
 			Cache::forget("group:{$group->domain}");
-		});
-	}
-	
-	public function latestMeetup(): Attribute
-	{
-		return Attribute::make(function() {
-			// Persisting to the instance in memory to reduce db lookups
-			if ($this->mostRecentMeetup) {
-				return $this->mostRecentMeetup;
-			}
-			$this->mostRecentMeetup = $this->meetups()->first();
-			return $this->mostRecentMeetup;
-		});
-	}
-	
-	public function defaultLocation(): Attribute
-	{
-		return Attribute::make(fn() => $this->latestMeetup?->location);
-	}
-	
-	public function defaultStart(): Attribute
-	{
-		return Attribute::make(fn() => $this->latestMeetup?->starts_at?->toTimeString());
-	}
-	
-	public function defaultEnd(): Attribute
-	{
-		return Attribute::make(fn() => $this->latestMeetup?->ends_at?->toTimeString());
-	}
-	
-	public function defaultStartDate(): Attribute
-	{
-		return Attribute::make(function() {
-			if (empty($this->default_start)) {
-				return null;
-			}
-			// Otherwise, today with the start time
-			return (new Carbon())->setTimezone($this->timezone ?? config('app.timezone'))->setTimeFromTimeString($this->default_start);
-		});
-	}
-	
-	public function defaultEndDate(): Attribute
-	{
-		return Attribute::make(function() {
-			if (empty($this->default_end)) {
-				return null;
-			}
-			// Otherwise, today with the start time
-			return (new Carbon())->setTimezone($this->timezone ?? config('app.timezone'))->setTimeFromTimeString($this->default_end);
 		});
 	}
 	

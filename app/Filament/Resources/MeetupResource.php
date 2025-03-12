@@ -27,6 +27,7 @@ class MeetupResource extends Resource
 	public static function form(Form $form): Form
 	{
 		$group = app(Group::class);
+		$latest_meetup = $group->meetups()->latest()->first();
 		
 		return $form
 			->schema([
@@ -41,24 +42,24 @@ class MeetupResource extends Resource
 					->columnSpanFull(),
 				Forms\Components\TextInput::make('location')
 					->required()
-					->default(fn() => $group->default_location)
+					->default(fn() => $latest_meetup?->location)
 					->maxLength(255),
 				Forms\Components\TextInput::make('capacity')
 					->required()
-					->default(fn() => $group->default_capacity)
+					->default(fn() => $latest_meetup?->capacity)
 					->numeric()
 					->minValue(0),
 				Forms\Components\DateTimePicker::make('starts_at')
 					->label('Start')
 					->required()
-					->default(fn() => $group->defaultStartDate)
+					->default(fn() => $latest_meetup?->starts_at->avoidMutation()->setDateFrom(now()->addWeek()))
 					->timezone(fn(Meetup $meetup) => $meetup->group?->timezone ?? $group->timezone ?? config('app.timezone'))
 					->beforeOrEqual('ends_at')
 					->rules(['required', 'date']),
 				Forms\Components\DateTimePicker::make('ends_at')
 					->label('End')
 					->required()
-					->default(fn() => $group->defaultEndDate)
+					->default(fn() => $latest_meetup?->ends_at->avoidMutation()->setDateFrom(now()->addWeek()))
 					->timezone(fn(Meetup $meetup) => $meetup->group?->timezone ?? $group->timezone ?? config('app.timezone'))
 					->afterOrEqual('starts_at')
 					->rules(['required', 'date']),
