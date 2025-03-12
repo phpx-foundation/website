@@ -26,7 +26,7 @@ class Group extends Model
 	use HasSnowflakes;
 	use HasDomain;
 	use HasGroupMembership;
-
+	
 	protected $visible = [
 		'id',
 		'domain',
@@ -46,13 +46,13 @@ class Group extends Model
 		'longitude',
 		'created_at',
 	];
-
+	
 	protected $appends = [
 		'label',
 	];
-
+	
 	protected $mostRecentMeetup = null;
-
+	
 	protected static function booted()
 	{
 		static::saved(function(Group $group) {
@@ -60,7 +60,7 @@ class Group extends Model
 			Cache::forget("group:{$group->domain}");
 		});
 	}
-
+	
 	public function latestMeetup(): Attribute
 	{
 		return Attribute::make(function() {
@@ -72,22 +72,22 @@ class Group extends Model
 			return $this->mostRecentMeetup;
 		});
 	}
-
+	
 	public function defaultLocation(): Attribute
 	{
 		return Attribute::make(fn() => $this->latestMeetup?->location);
 	}
-
+	
 	public function defaultStart(): Attribute
 	{
 		return Attribute::make(fn() => $this->latestMeetup?->starts_at?->toTimeString());
 	}
-
+	
 	public function defaultEnd(): Attribute
 	{
 		return Attribute::make(fn() => $this->latestMeetup?->ends_at?->toTimeString());
 	}
-
+	
 	public function defaultStartDate(): Attribute
 	{
 		return Attribute::make(function() {
@@ -98,7 +98,7 @@ class Group extends Model
 			return (new Carbon())->setTimezone($this->timezone ?? config('app.timezone'))->setTimeFromTimeString($this->default_start);
 		});
 	}
-
+	
 	public function defaultEndDate(): Attribute
 	{
 		return Attribute::make(function() {
@@ -109,49 +109,49 @@ class Group extends Model
 			return (new Carbon())->setTimezone($this->timezone ?? config('app.timezone'))->setTimeFromTimeString($this->default_end);
 		});
 	}
-
+	
 	public function isActive(): bool
 	{
 		return GroupStatus::Active === $this->status;
 	}
-
+	
 	public function isPlanned(): bool
 	{
 		return GroupStatus::Planned === $this->status;
 	}
-
+	
 	public function isProspective(): bool
 	{
 		return GroupStatus::Prospective === $this->status;
 	}
-
+	
 	public function isDisbanded(): bool
 	{
 		return GroupStatus::Disbanded === $this->status;
 	}
-
+	
 	public function mailcoach(): ?Mailcoach
 	{
 		if (! isset($this->mailcoach_token, $this->mailcoach_list, $this->mailcoach_endpoint)) {
 			return null;
 		}
-
+		
 		return new Mailcoach($this->mailcoach_token, $this->mailcoach_endpoint);
 	}
-
+	
 	public function bsky(): Factory|Bluesky|null
 	{
 		if (! isset($this->bsky_did, $this->bsky_app_password)) {
 			return null;
 		}
-
+		
 		return Bluesky::login($this->bsky_did, $this->bsky_app_password);
 	}
-
+	
 	public function url(string $path, array $parameters = [], bool $secure = true): string
 	{
 		$generator = app(UrlGenerator::class);
-
+		
 		try {
 			$generator->forceRootUrl('https://'.$this->domain);
 			return $generator->to($path, $parameters, $secure);
@@ -159,7 +159,7 @@ class Group extends Model
 			$generator->forceRootUrl(null);
 		}
 	}
-
+	
 	public function users(): BelongsToMany
 	{
 		return $this->belongsToMany(User::class, 'group_memberships')
@@ -168,17 +168,17 @@ class Group extends Model
 			->withTimestamps()
 			->using(GroupMembership::class);
 	}
-
+	
 	public function meetups(): HasMany
 	{
 		return $this->hasMany(Meetup::class)->orderBy('starts_at', 'desc');
 	}
-
+	
 	public function mailcoach_transactional_emails(): HasMany
 	{
 		return $this->hasMany(MailcoachTransactionalEmail::class);
 	}
-
+	
 	protected function casts(): array
 	{
 		return [
@@ -191,33 +191,33 @@ class Group extends Model
 			'longitude' => 'float',
 		];
 	}
-
+	
 	protected function label(): Attribute
 	{
 		return Attribute::get(fn() => $this->region ?? str($this->name)->afterLast('×')->trim()->toString());
 	}
-
+	
 	protected function airportCode(): Attribute
 	{
 		return Attribute::get(
 			fn(): Stringable => str($this->name)->afterLast('×')->trim()->upper(),
 		);
 	}
-
+	
 	protected function openGraphImageUrl(): Attribute
 	{
 		return Attribute::get(function() {
 			$filename = $this->airport_code->lower()->finish('.png');
 			$path = public_path("og/{$filename}");
-
+			
 			if (file_exists($path)) {
 				return asset("og/{$filename}").'?t='.filemtime($path);
 			}
-
+			
 			return null;
 		});
 	}
-
+	
 	protected function meetupUrlArray(): Attribute
 	{
 		return Attribute::get(fn() => str($this->meetup_url)
