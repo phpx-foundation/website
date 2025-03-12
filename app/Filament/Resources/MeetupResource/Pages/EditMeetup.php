@@ -26,6 +26,7 @@ class EditMeetup extends EditRecord
 		return [
 			Actions\DeleteAction::make(),
 			Actions\Action::make('bsky')->label('Announce on Bluesky')
+				->visible($this->record->group->isBskyConnected())
 				->form($this->getBskyFormFields())->action(function($form) {
 					$state = $form->getState();
 					if ($state['include_image']) {

@@ -58,6 +58,11 @@ class Group extends Model
 		});
 	}
 
+	public function isBskyConnected(): bool
+	{
+		return isset($this->bsky_did, $this->bsky_app_password);
+	}
+
 	public function isActive(): bool
 	{
 		return GroupStatus::Active === $this->status;
@@ -89,7 +94,7 @@ class Group extends Model
 
 	public function bsky(): Factory|Bluesky|null
 	{
-		if (! isset($this->bsky_did, $this->bsky_app_password)) {
+		if (! $this->isBskyConnected()) {
 			return null;
 		}
 
