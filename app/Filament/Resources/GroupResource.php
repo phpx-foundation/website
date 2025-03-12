@@ -39,7 +39,6 @@ class GroupResource extends Resource
 				Tabs::make()
 					->schema([
 						static::getFormGeneralTab(),
-						static::getFormDefaultsTab(),
 						static::getFormContactTab(),
 						static::getFormIntegrationsTab(),
 					])
@@ -251,16 +250,6 @@ class GroupResource extends Resource
 					Forms\Components\TextInput::make('turnstile_secret_key')
 						->label('Secret Key'),
 				]),
-		]);
-	}
-	
-	protected static function getFormDefaultsTab(): Tab
-	{
-		return Tab::make('Meetup Defaults')->columns(2)->schema([
-			TextInput::make('default_location'),
-			TextInput::make('default_capacity')->numeric(),
-			TimePicker::make('default_start'),
-			TimePicker::make('default_end'),
 		]);
 	}
 	
