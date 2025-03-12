@@ -12,7 +12,6 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Routing\UrlGenerator;
-use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Stringable;
 use Revolution\Bluesky\Contracts\Factory;
@@ -120,7 +119,7 @@ class Group extends Model
 	
 	public function meetups(): HasMany
 	{
-		return $this->hasMany(Meetup::class)->orderBy('starts_at', 'desc');
+		return $this->hasMany(Meetup::class);
 	}
 	
 	public function mailcoach_transactional_emails(): HasMany
