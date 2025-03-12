@@ -96,9 +96,10 @@ class UserResource extends Resource
 					->query(fn(Builder $query) => $query->whereRaw("REGEXP_LIKE (`name`, '^[[:alpha:]]+[[:upper:]][[:alpha:]]+$', 'c')")),
 				Tables\Filters\Filter::make('likely_spam')
 					->label('Likely spam')
-					->query(fn(Builder $query) => $query->where(fn(Builder $query) => $query
-						->orWhereLike('name', 'http:')
-						->orWhereLike('name', 'https:')
+					->query(fn(Builder $query) => $query->where(
+						fn(Builder $query) => $query
+							->orWhereLike('name', 'http:')
+							->orWhereLike('name', 'https:')
 					)),
 				Tables\Filters\Filter::make('common_emails')
 					->label('Common email domains')
