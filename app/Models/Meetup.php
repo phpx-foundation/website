@@ -37,6 +37,7 @@ class Meetup extends Model implements Htmlable
 		'date_range',
 		'starts_at',
 		'ends_at',
+		'external_url',
 	];
 	
 	protected $appends = [
