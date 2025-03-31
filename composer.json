@@ -15,7 +15,7 @@
         "laravel/tinker": "^2.9",
         "lorisleiva/laravel-actions": "^2.8",
         "monicahq/laravel-cloudflare": "^3.7",
-        "revolution/laravel-bluesky": "^0.12.0",
+        "revolution/laravel-bluesky": "~1.0",
         "simonhamp/the-og": "^0.5.5",
         "spatie/laravel-mailcoach-sdk": "^1.2",
         "symfony/http-client": "^7.2",

@@ -24,5 +24,5 @@ Route::middleware([SetGroupFromDomainMiddleware::class, ShareNextMeetupMiddlewar
 		
 		Route::get('meetups/{meetup}/rsvps', function(Meetup $meetup) {
 			return view('rsvp', ['meetup' => $meetup]);
-		});
+		})->name('meetup.show-rsvp');
 	});
