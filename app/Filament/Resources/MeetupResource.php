@@ -66,6 +66,9 @@ class MeetupResource extends Resource
 				Forms\Components\MarkdownEditor::make('description')
 					->required()
 					->columnSpanFull(),
+				Forms\Components\FileUpload::make('custom_open_graph_image')
+					->image()
+					->directory('og/custom'),
 				Forms\Components\TextInput::make('external_rsvp_url')
 					->label('External RSVP URL')
 					->columnSpanFull()
