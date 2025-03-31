@@ -8,7 +8,7 @@
         "continent": "North America",
         "active": "true",
         "status": "active",
-        "frequency": "monthly(ish)",
+        "frequency": "monthly",
         "meetup_url": "https://www.meetup.com/sandiegophp/",
         "bsky_url": "https://bsky.app/profile/phparch.com",
         "latitude": 33.017301,
