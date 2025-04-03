@@ -59,10 +59,10 @@ class UsersRelationManager extends RelationManager
 					->color(Color::Red)
 					->requiresConfirmation()
 					->modalDescription('Are you sure you want to remove this user\'s administrative access to the group?')
-					->action(function (Model $record) {
+					->action(function(Model $record) {
 						$record->setGroupRole($this->ownerRecord, GroupRole::Attendee);
 					})
-					->visible(function (Model $record) {
+					->visible(function(Model $record) {
 						return $record->id != auth()->user()->id && $record->group_membership->role == GroupRole::Admin;
 					}),
 				Tables\Actions\Action::make('make-admin')
@@ -70,12 +70,12 @@ class UsersRelationManager extends RelationManager
 					->icon('heroicon-m-shield-check')
 					->requiresConfirmation()
 					->modalDescription('Are you sure you want to give this user administrative access to the group?')
-					->action(function (Model $record) {
+					->action(function(Model $record) {
 						$record->setGroupRole($this->ownerRecord, GroupRole::Admin);
 					})
-					->visible(function (Model $record) {
+					->visible(function(Model $record) {
 						return $record->id != auth()->user()->id && $record->group_membership->role !== GroupRole::Admin;
-					})
+					}),
 			])
 			->bulkActions([
 				Tables\Actions\BulkActionGroup::make([
