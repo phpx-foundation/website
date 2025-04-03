@@ -2,13 +2,16 @@
 
 namespace App\Filament\Resources;
 
+use App\Actions\SyncUserToMailcoach;
 use App\Enums\Continent;
 use App\Enums\DomainStatus;
 use App\Enums\GroupStatus;
 use App\Filament\Resources\GroupResource\Pages;
 use App\Filament\Resources\GroupResource\RelationManagers;
 use App\Models\Group;
+use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
@@ -22,14 +25,14 @@ use Illuminate\Support\HtmlString;
 class GroupResource extends Resource
 {
 	protected static ?string $model = Group::class;
-	
+
 	protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-	
+
 	public static function getNavigationBadge(): ?string
 	{
 		return Group::count();
 	}
-	
+
 	public static function form(Form $form): Form
 	{
 		return $form
@@ -43,7 +46,7 @@ class GroupResource extends Resource
 					->columnSpanFull(),
 			]);
 	}
-	
+
 	public static function table(Table $table): Table
 	{
 		return $table
@@ -99,14 +102,14 @@ class GroupResource extends Resource
 				]),
 			]);
 	}
-	
+
 	public static function getRelations(): array
 	{
 		return [
 			RelationManagers\UsersRelationManager::class,
 		];
 	}
-	
+
 	public static function getPages(): array
 	{
 		return [
@@ -115,7 +118,7 @@ class GroupResource extends Resource
 			'edit' => Pages\EditGroup::route('/{record}/edit'),
 		];
 	}
-	
+
 	protected static function getFormGeneralTab(): Tab
 	{
 		return Tab::make('General')->columns(2)->schema(
@@ -133,11 +136,11 @@ class GroupResource extends Resource
 						->required()
 						->maxLength(255)
 						->default('bi-monthly'),
-					
+
 					Forms\Components\Textarea::make('description')
 						->columnSpanFull()
 						->required(),
-					
+
 					Forms\Components\TextInput::make('domain')
 						->required()
 						->maxLength(255)
@@ -183,7 +186,7 @@ class GroupResource extends Resource
 			]
 		);
 	}
-	
+
 	protected static function getFormContactTab(): Tab
 	{
 		return Tab::make('Contact/Links')->schema(
@@ -207,7 +210,7 @@ class GroupResource extends Resource
 			]
 		);
 	}
-	
+
 	protected static function getFormIntegrationsTab(): Tab
 	{
 		return Tab::make('Integrations')->schema([
@@ -228,6 +231,14 @@ class GroupResource extends Resource
 						->label('List UUID')
 						->maxLength(255)
 						->rules(['nullable', 'uuid']),
+				])->headerActions([
+					Action::make('Sync Now')
+						->visible(fn($record) => ! static::anyFieldIsEmpty($record, ['mailcoach_token', 'mailcoach_endpoint', 'mailcoach_list']))
+						->action(function($record) {
+							$record->users()->eachById(function(User $user) use ($record) {
+								SyncUserToMailcoach::run($record, $user);
+							});
+						}),
 				]),
 			Section::make('Bluesky')
 				->collapsible()
@@ -253,7 +264,7 @@ class GroupResource extends Resource
 				]),
 		]);
 	}
-	
+
 	protected static function anyFieldIsEmpty($record, array $fields): bool
 	{
 		foreach ($fields as $field) {
@@ -261,10 +272,10 @@ class GroupResource extends Resource
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
-	
+
 	protected static function integrationIcon($fields): \Closure
 	{
 		return fn(Section $section) => $section
