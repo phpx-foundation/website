@@ -8,6 +8,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 trait BelongsToGroups
 {
+	public function setGroupRole(
+		Group $group,
+		GroupRole $role = GroupRole::Attendee
+	) {
+		$this->groups()->syncWithoutDetaching([
+			$group->getKey() => [
+				'role' => $role,
+			],
+		]);
+	}
+
 	public function joinGroup(
 		Group $group,
 		bool $current = false,
@@ -20,17 +31,17 @@ trait BelongsToGroups
 				'role' => $role,
 			],
 		]);
-		
+
 		$this->unsetRelation('groups');
-		
+
 		if ($current || null === $this->current_group_id) {
 			$this->update(['current_group_id' => $group->getKey()]);
 			$this->setRelation('current_group', $group);
 		}
-		
+
 		return $this;
 	}
-	
+
 	public function isGroupAdmin(Group $group): bool
 	{
 		return $this->groups
@@ -38,18 +49,18 @@ trait BelongsToGroups
 			?->group_membership
 			->isAdmin() ?? false;
 	}
-	
+
 	public function isAnyGroupAdmin(): bool
 	{
 		return $this->groups
 			->contains(fn(Group $candidate) => $candidate->group_membership->isAdmin());
 	}
-	
+
 	public function current_group(): BelongsTo
 	{
 		return $this->belongsTo(Group::class, 'current_group_id');
 	}
-	
+
 	public function groups(): BelongsToMany
 	{
 		return $this->belongsToMany(Group::class, 'group_memberships')
