@@ -16,7 +16,7 @@ class MeetupSeeder extends Seeder
 			Meetup::factory()->for($group)->create([
 				'location' => 'Past Location',
 				'starts_at' => $startsAt,
-				'ends_at' => $startsAt->addHours(3),
+				'ends_at' => $startsAt->clone()->addHours(3),
 			]);
 			
 			// One future meetup
@@ -24,7 +24,7 @@ class MeetupSeeder extends Seeder
 			Meetup::factory()->for($group)->create([
 				'location' => 'Future Location',
 				'starts_at' => $startsAt,
-				'ends_at' => $startsAt->addHours(3),
+				'ends_at' => $startsAt->clone()->addHours(3),
 			]);
 		});
 	}
