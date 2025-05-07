@@ -15,6 +15,7 @@ class MeetupTest extends TestCase
 	public function test_it_formats_a_date_range($startsAt, $endsAt, $expected)
 	{
 		$meetup = Meetup::factory()
+			->hasGroup()
 			->state([
 				'starts_at' => $startsAt,
 				'ends_at' => $endsAt,

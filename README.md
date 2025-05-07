@@ -46,12 +46,38 @@ As of November 17, 2024, the following features were loosely supported:
 - Connecting to individual [Mailcoach](https://www.mailcoach.app/) instances to send group announcements
 - Connecting to a Bluesky account to post meetups (partially)
 
+## Contributing to PHP×
+You're welcome
+to [PR changes](https://github.com/phpx-foundation/website), but it's best to talk it through with 
+group organizers first.
+
+You can find us on [Discord](https://discord.gg/wMy6Eeuwbu)! 
+
+### Running phpx.world and phpxcity.com locally
+Clone the repository into a folder named `phpx`:
+```bash
+git clone git@github.com:phpx-foundation/website.git phpx
+```
+
+Initialize the application:
+```bash
+cd phpx
+
+cp .env.example .env
+
+composer install
+
+php artisan migrate:fresh --seed
+
+npm install
+npm run build
+```
+The primary phpx.world website will be at [phpx.test](https://phpx.test) and a meetup site at [phpxcity.phpx.test](https://phpxcity.phpx.test). Both Valet and Herd will route the phpxcity. subdomain properly.
+
 ### TODO
 
 Next steps for the site:
 
-- Adding an admin UI (right now all admin is done via artisan commands)
-- Adding more per-group customizations (like theme/etc)
 - Improving the announcement integrations
 
 Other ideas:
@@ -60,10 +86,6 @@ Other ideas:
 - Add latitude/longitude to events to visualize
 - How do we ensure that groups that never meet eventually disappear from the site
 - We should have a "placeholder" concept for groups that are considering forming (maybe subdomains)
-
-If any of that sounds interesting, [join the Discord](https://discord.gg/wMy6Eeuwbu)! You're welcome
-to [PR changes](https://github.com/phpx-foundation/website), but it's best to talk it thru with 
-group organizers first.
 
 ## What's Next
 

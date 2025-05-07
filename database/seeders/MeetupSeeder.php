@@ -12,17 +12,19 @@ class MeetupSeeder extends Seeder
 	{
 		Group::eachById(function(Group $group) {
 			// One past meetup
+			$startsAt = now()->tz($group->timezone)->subWeek()->hour(18)->minute(0);
 			Meetup::factory()->for($group)->create([
 				'location' => 'Past Location',
-				'starts_at' => now()->subDay()->hour(18)->minute(0),
-				'ends_at' => now()->subDay()->hour(21)->minute(0),
+				'starts_at' => $startsAt,
+				'ends_at' => $startsAt->clone()->addHours(3),
 			]);
 			
 			// One future meetup
+			$startsAt = now()->tz($group->timezone)->addWeek()->hour(18)->minute(0);
 			Meetup::factory()->for($group)->create([
 				'location' => 'Future Location',
-				'starts_at' => now()->addWeek()->hour(18)->minute(0),
-				'ends_at' => now()->addWeek()->hour(21)->minute(0),
+				'starts_at' => $startsAt,
+				'ends_at' => $startsAt->clone()->addHours(3),
 			]);
 		});
 	}
