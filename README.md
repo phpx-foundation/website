@@ -46,6 +46,27 @@ As of November 17, 2024, the following features were loosely supported:
 - Connecting to individual [Mailcoach](https://www.mailcoach.app/) instances to send group announcements
 - Connecting to a Bluesky account to post meetups (partially)
 
+### Running phpx.world and phpxcity.com locally
+Clone the repository into a folder named `phpx`:
+```bash
+git clone git@github.com:phpx-foundation/website.git phpx
+```
+
+Initialize the application:
+```bash
+cd phpx
+
+cp .env.example .env
+
+composer install
+
+php artisan migrate:fresh --seed
+
+npm install
+npm run build
+```
+The primary phpx.world website will be at [phpx.test](https://phpx.test) and a meetup site at [phpxcity.phpx.test](https://phpxcity.phpx.test). Both Valet and Herd will route the phpxcity. subdomain properly.
+
 ### TODO
 
 Next steps for the site:
