@@ -17,7 +17,7 @@ class GroupSeeder extends Seeder
 			'bsky_url' => 'https://bsky.app/profile/phpxcity.com',
 			'meetup_url' => 'https://www.meetup.com/phpxcity/',
 			'description' => 'A PHP meetup for web artisans who want to learn and connect.',
-			'timezone' => 'America/Chicago',
+			'timezone' => 'America/New_York',
 		]);
 		
 		app()->instance('group:phpxcity.phpx.test', $testCity);

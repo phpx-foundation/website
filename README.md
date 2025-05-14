@@ -47,19 +47,22 @@ As of November 17, 2024, the following features were loosely supported:
 - Connecting to a Bluesky account to post meetups (partially)
 
 ## Contributing to PHP×
-You're welcome
-to [PR changes](https://github.com/phpx-foundation/website), but it's best to talk it through with 
-group organizers first.
 
-You can find us on [Discord](https://discord.gg/wMy6Eeuwbu)! 
+You're welcome to [PR changes](https://github.com/phpx-foundation/website), but it's best 
+to talk it through with group organizers first.
 
-### Running phpx.world and phpxcity.com locally
+You can find us on [Discord](https://discord.gg/wMy6Eeuwbu)!
+
+### Running PHP× locally
+
 Clone the repository into a folder named `phpx`:
+
 ```bash
 git clone git@github.com:phpx-foundation/website.git phpx
 ```
 
 Initialize the application:
+
 ```bash
 cd phpx
 
@@ -72,7 +75,9 @@ php artisan migrate:fresh --seed
 npm install
 npm run build
 ```
-The primary phpx.world website will be at [phpx.test](https://phpx.test) and a meetup site at [phpxcity.phpx.test](https://phpxcity.phpx.test). Both Valet and Herd will route the phpxcity. subdomain properly.
+
+If you're using Herd or Valet, the primary phpx.world website will be at 
+[phpx.test](https://phpx.test) and a group site will be at [phpxcity.phpx.test](https://phpxcity.phpx.test).
 
 ### TODO
 
