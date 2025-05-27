@@ -10,7 +10,6 @@ use Filament\Resources\RelationManagers\RelationManager;
 use Filament\Support\Colors\Color;
 use Filament\Tables;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Model;
 
 /** @property \App\Models\Group $ownerRecord */
 class UsersRelationManager extends RelationManager
