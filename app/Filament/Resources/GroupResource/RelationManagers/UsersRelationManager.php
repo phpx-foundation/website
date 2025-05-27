@@ -15,9 +15,9 @@ use Illuminate\Database\Eloquent\Model;
 class UsersRelationManager extends RelationManager
 {
 	protected static string $relationship = 'users';
-
+	
 	protected static ?string $title = 'Members';
-
+	
 	public function form(Form $form): Form
 	{
 		return $form
@@ -27,7 +27,7 @@ class UsersRelationManager extends RelationManager
 					->maxLength(255),
 			]);
 	}
-
+	
 	public function table(Table $table): Table
 	{
 		return $table
