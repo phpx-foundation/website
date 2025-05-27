@@ -25,14 +25,14 @@ use Illuminate\Support\HtmlString;
 class GroupResource extends Resource
 {
 	protected static ?string $model = Group::class;
-
+	
 	protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+	
 	public static function getNavigationBadge(): ?string
 	{
 		return Group::count();
 	}
-
+	
 	public static function form(Form $form): Form
 	{
 		return $form
@@ -46,7 +46,7 @@ class GroupResource extends Resource
 					->columnSpanFull(),
 			]);
 	}
-
+	
 	public static function table(Table $table): Table
 	{
 		return $table
@@ -102,14 +102,14 @@ class GroupResource extends Resource
 				]),
 			]);
 	}
-
+	
 	public static function getRelations(): array
 	{
 		return [
 			RelationManagers\UsersRelationManager::class,
 		];
 	}
-
+	
 	public static function getPages(): array
 	{
 		return [
@@ -118,7 +118,7 @@ class GroupResource extends Resource
 			'edit' => Pages\EditGroup::route('/{record}/edit'),
 		];
 	}
-
+	
 	protected static function getFormGeneralTab(): Tab
 	{
 		return Tab::make('General')->columns(2)->schema(
@@ -136,11 +136,11 @@ class GroupResource extends Resource
 						->required()
 						->maxLength(255)
 						->default('bi-monthly'),
-
+					
 					Forms\Components\Textarea::make('description')
 						->columnSpanFull()
 						->required(),
-
+					
 					Forms\Components\TextInput::make('domain')
 						->required()
 						->maxLength(255)
@@ -186,7 +186,7 @@ class GroupResource extends Resource
 			]
 		);
 	}
-
+	
 	protected static function getFormContactTab(): Tab
 	{
 		return Tab::make('Contact/Links')->schema(
@@ -210,7 +210,7 @@ class GroupResource extends Resource
 			]
 		);
 	}
-
+	
 	protected static function getFormIntegrationsTab(): Tab
 	{
 		return Tab::make('Integrations')->schema([
@@ -264,7 +264,7 @@ class GroupResource extends Resource
 				]),
 		]);
 	}
-
+	
 	protected static function anyFieldIsEmpty($record, array $fields): bool
 	{
 		foreach ($fields as $field) {
@@ -272,10 +272,10 @@ class GroupResource extends Resource
 				return true;
 			}
 		}
-
+		
 		return false;
 	}
-
+	
 	protected static function integrationIcon($fields): \Closure
 	{
 		return fn(Section $section) => $section
