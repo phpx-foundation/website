@@ -231,7 +231,8 @@ class GroupResource extends Resource
 						->label('List UUID')
 						->maxLength(255)
 						->rules(['nullable', 'uuid']),
-				])->headerActions([
+				])
+				->headerActions([
 					Action::make('Sync Now')
 						->visible(fn($record) => ! static::anyFieldIsEmpty($record, ['mailcoach_token', 'mailcoach_endpoint', 'mailcoach_list']))
 						->action(function($record) {
