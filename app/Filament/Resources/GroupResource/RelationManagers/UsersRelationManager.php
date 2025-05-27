@@ -12,6 +12,7 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
 
+/** @property \App\Models\Group $ownerRecord */
 class UsersRelationManager extends RelationManager
 {
 	protected static string $relationship = 'users';
@@ -58,23 +59,23 @@ class UsersRelationManager extends RelationManager
 					->icon('heroicon-m-shield-exclamation')
 					->color(Color::Red)
 					->requiresConfirmation()
-					->modalDescription('Are you sure you want to remove this user\'s administrative access to the group?')
-					->action(function(Model $record) {
+					->modalDescription('Are you sure you want to remove this user’s administrative access to the group?')
+					->action(function(User $record) {
 						$record->setGroupRole($this->ownerRecord, GroupRole::Attendee);
 					})
-					->visible(function(Model $record) {
-						return $record->id != auth()->user()->id && $record->group_membership->role == GroupRole::Admin;
+					->visible(function(User $record) {
+						return $record->isNot(auth()->user()) && $record->isGroupAdmin($this->ownerRecord);
 					}),
 				Tables\Actions\Action::make('make-admin')
 					->label('Make Admin')
 					->icon('heroicon-m-shield-check')
 					->requiresConfirmation()
 					->modalDescription('Are you sure you want to give this user administrative access to the group?')
-					->action(function(Model $record) {
+					->action(function(User $record) {
 						$record->setGroupRole($this->ownerRecord, GroupRole::Admin);
 					})
-					->visible(function(Model $record) {
-						return $record->id != auth()->user()->id && $record->group_membership->role !== GroupRole::Admin;
+					->visible(function(User $record) {
+						return $record->isNot(auth()->user()) && ! $record->isGroupAdmin($this->ownerRecord);
 					}),
 			])
 			->bulkActions([
