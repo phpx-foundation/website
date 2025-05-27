@@ -8,6 +8,17 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 trait BelongsToGroups
 {
+	public function setGroupRole(
+		Group $group,
+		GroupRole $role = GroupRole::Attendee
+	) {
+		$this->groups()->syncWithoutDetaching([
+			$group->getKey() => [
+				'role' => $role,
+			],
+		]);
+	}
+	
 	public function joinGroup(
 		Group $group,
 		bool $current = false,
