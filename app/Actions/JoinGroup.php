@@ -44,7 +44,7 @@ class JoinGroup
 			'is_potential_speaker' => $speaker,
 		]);
 		
-		SyncUserToMailcoach::run($group, $user);
+		rescue(fn() => SyncUserToMailcoach::run($group, $user));
 		
 		return $user;
 	}
