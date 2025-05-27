@@ -2,13 +2,16 @@
 
 namespace App\Filament\Resources;
 
+use App\Actions\SyncUserToMailcoach;
 use App\Enums\Continent;
 use App\Enums\DomainStatus;
 use App\Enums\GroupStatus;
 use App\Filament\Resources\GroupResource\Pages;
 use App\Filament\Resources\GroupResource\RelationManagers;
 use App\Models\Group;
+use App\Models\User;
 use Filament\Forms;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Tabs;
 use Filament\Forms\Components\Tabs\Tab;
@@ -228,6 +231,15 @@ class GroupResource extends Resource
 						->label('List UUID')
 						->maxLength(255)
 						->rules(['nullable', 'uuid']),
+				])
+				->headerActions([
+					Action::make('Sync Now')
+						->visible(fn($record) => ! static::anyFieldIsEmpty($record, ['mailcoach_token', 'mailcoach_endpoint', 'mailcoach_list']))
+						->action(function($record) {
+							$record->users()->eachById(function(User $user) use ($record) {
+								SyncUserToMailcoach::run($record, $user);
+							});
+						}),
 				]),
 			Section::make('Bluesky')
 				->collapsible()
