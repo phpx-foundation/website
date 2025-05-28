@@ -408,5 +408,18 @@
         "frequency": "monthly",
         "latitude": 51.4533,
         "longitude": -2.5910
+    },
+    "gta-php.org": {
+        "external": true,
+        "name": "Greater Toronto Area PHP",
+        "region": "Greater Toronto",
+        "continent": "North America",
+        "description": "We are a dedicated group of PHP developers who meet with some regularity. Our meet-ups are in the downtown area, but devs come from all around.",
+        "timezone": "America/Toronto",
+        "meetup_url": "https://www.meetup.com/gta-php-user-group-toronto/",
+        "status": "active",
+        "frequency": "bi-monthly",
+        "latitude": 43.642567,
+        "longitude": -79.387054
     }
 }
