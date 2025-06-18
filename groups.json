@@ -99,6 +99,19 @@
         "latitude": 39.9622601,
         "longitude": -83.0007065
     },
+    "phpxmel.com": {
+        "external": false,
+        "name": "PHP×MEL",
+        "region": "Melbourne",
+        "continent": "Australia",
+        "description": "A Melbourne, Australia PHP meetup for web artisans who love to learn, build, and connect.",
+        "timezone": "Australia/Melbourne",
+        "status": "active",
+        "frequency": "quarterly",
+        "bsky_url": "https://bsky.app/profile/phpxmel.com",
+        "latitude": -37.8045995,
+        "longitude": 144.9469932
+    },
     "phpxadl.com": {
         "external": false,
         "name": "PHP×ADL",
