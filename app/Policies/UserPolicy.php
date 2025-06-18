@@ -11,7 +11,7 @@ class UserPolicy
 	
 	public function viewAny(User $user): bool
 	{
-		return $user->isAnyGroupAdmin();
+		return $user->isSuperAdmin() || $user->isAnyGroupAdmin();
 	}
 	
 	public function view(User $user, User $target): bool
