@@ -446,5 +446,16 @@
         "frequency": "monthly",
         "latitude": 38.889805,
         "longitude": -77.009056
+    },
+    "phpxbean.com": {
+        "external": false,
+        "name": "PHP×Bean",
+        "region": "Eau Claire",
+        "description": "A Bean Island meetup for web artisans who want to paddle and care for our island.",
+        "timezone": "America/Chicago",
+        "status": "active",
+        "bsky_url": "https://bsky.app/profile/phpxbean.com",
+        "latitude": 44.7961667,
+        "longitude": -91.5335471
     }
 }
