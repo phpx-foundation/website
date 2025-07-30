@@ -435,6 +435,18 @@
         "latitude": 43.642567,
         "longitude": -79.387054
     },
+    "phpxdc.com": {
+        "external": false,
+        "name": "PHP×DC",
+        "region": "Washington D.C.",
+        "continent": "North America",
+        "description": "A DMV-area PHP meetup for web artisans who want to learn and connect.",
+        "timezone": "America/New_York",
+        "status": "prospective",
+        "frequency": "monthly",
+        "latitude": 38.889805,
+        "longitude": -77.009056
+    },
     "phpxbean.com": {
         "external": false,
         "name": "PHP×Bean",
