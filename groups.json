@@ -457,5 +457,44 @@
         "bsky_url": "https://bsky.app/profile/phpxbean.com",
         "latitude": 44.7961667,
         "longitude": -91.5335471
+    },
+    "laravelsweden.org/stockholm": {
+        "external": true,
+        "name": "Laravel Stockholm",
+        "region": "Stockholm",
+        "continent": "Europe",
+        "description": "An English-speaking group for Laravel lovers in Stockholm, Sweden. In collaboration with the Swedish Laravel Association.",
+        "timezone": "Europe/Amsterdam",
+        "meetup_url": "https://laravelsweden.org/stockholm",
+        "status": "active",
+        "frequency": "quarterly",
+        "latitude": 59.3399,
+        "longitude": 18.0634
+    },
+    "laravelsweden.org/malmo": {
+        "external": true,
+        "name": "Laravel Malmö",
+        "region": "Malmö",
+        "continent": "Europe",
+        "description": "An English-speaking group for Laravel lovers in Malmö, Sweden. In collaboration with the Swedish Laravel Association.",
+        "timezone": "Europe/Amsterdam",
+        "meetup_url": "https://laravelsweden.org/malmo",
+        "status": "active",
+        "frequency": "quarterly",
+        "latitude": 55.6027,
+        "longitude": 13.0027
+    },
+    "laravelsweden.org/norrkoping": {
+        "external": true,
+        "name": "Laravel Norrköping",
+        "region": "Norrköping",
+        "continent": "Europe",
+        "description": "Meetups for Laravel lovers in Norrköping, Sweden. In collaboration with the Swedish Laravel Association.",
+        "timezone": "Europe/Amsterdam",
+        "meetup_url": "https://laravelsweden.org/norrkoping",
+        "status": "active",
+        "frequency": "yearly",
+        "latitude": 58.5914,
+        "longitude": 16.1812
     }
 }
