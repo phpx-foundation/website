@@ -457,5 +457,19 @@
         "bsky_url": "https://bsky.app/profile/phpxbean.com",
         "latitude": 44.7961667,
         "longitude": -91.5335471
+    },
+    "phpxral.com": {
+        "external": false,
+        "name": "PHP×RAL",
+        "region": "Raleigh",
+        "description": "A Raleigh-area PHP meetup for web artisans who want to learn and connect.",
+        "timezone": "America/New_York",
+        "continent": "North America",
+        "active": "true",
+        "status": "planned",
+        "frequency": "quarterly",
+        "bsky_url": "https://bsky.app/profile/phpxral.bsky.social",
+        "latitude": 35.773731,
+        "longitude": -78.642831
     }
 }
