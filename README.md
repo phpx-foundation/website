@@ -27,11 +27,19 @@ to `true`.
 If you would like to start a new PHP× group, please check our [Organizers page](/organizers)
 for instructions and considerations.
 
+### Adding sponsorship packages
+
+PHP× groups can now display sponsorship information directly on their pages! Visit our
+[Sponsorships page](/sponsorships) to learn how to add sponsorship packages to your group
+and see best practices for working with sponsors.
+
 ## Sponsoring Groups
 
-If you are a company that would like to sponsor PHP and Laravel events, please get in
-touch. The best way to do that, right now, is [via the PHP× Discord](https://discord.gg/wMy6Eeuwbu).
-In the future, we plan to make it easier to connect groups with sponsors.
+If you are a company that would like to sponsor PHP and Laravel events, please visit our
+[Sponsorships page](/sponsorships) to see groups currently looking for sponsors and learn
+about the benefits of sponsoring PHP× meetups.
+
+You can also connect with organizers directly [via the PHP× Discord](https://discord.gg/wMy6Eeuwbu).
 
 ## The PHP× network of sites
 

@@ -2,6 +2,7 @@
 
 use App\Enums\RootDomains;
 use App\Http\Controllers\World\HomeController;
+use App\Http\Controllers\World\SponsorshipsController;
 use App\Http\Middleware\SetGroupFromDomainMiddleware;
 use App\Http\Middleware\ShareNextMeetupMiddleware;
 use App\Models\Meetup;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 foreach (RootDomains::cases() as $case) {
 	Route::domain($case->value)->group(function() {
 		Route::get('/', HomeController::class);
+		Route::get('/sponsorships', SponsorshipsController::class);
 		Route::view('/terms', 'world.terms');
 	});
 }
