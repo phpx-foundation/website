@@ -34,24 +34,34 @@ class ListGroups
 	{
 		$groups = $this->handle(include_external: ! $request->boolean('no_external'))
 			->mapWithKeys(function(Group|ExternalGroup $group) {
-				return [
-					$group->domain => [
-						'domain' => $group->domain,
-						'name' => $group->name,
-						'description' => $group->description,
-						'continent' => $group->continent,
-						'region' => $group->region,
-						'timezone' => $group->timezone,
-						'status' => $group->status,
-						'frequency' => $group->frequency,
-						'links' => [
-							'bluesky' => $group->bsky_url,
-							'meetup' => $group->meetup_url,
-						],
-						'coords' => ['latitude' => $group->latitude, 'longitude' => $group->longitude],
-						'external' => $group instanceof ExternalGroup,
+				$data = [
+					'domain' => $group->domain,
+					'name' => $group->name,
+					'description' => $group->description,
+					'continent' => $group->continent,
+					'region' => $group->region,
+					'timezone' => $group->timezone,
+					'status' => $group->status,
+					'frequency' => $group->frequency,
+					'links' => [
+						'bluesky' => $group->bsky_url,
+						'meetup' => $group->meetup_url,
 					],
+					'coords' => ['latitude' => $group->latitude, 'longitude' => $group->longitude],
+					'external' => $group instanceof ExternalGroup,
 				];
+				
+				// Add sponsorship data for non-external groups
+				if (!($group instanceof ExternalGroup) && $group->hasSponsorship()) {
+					$data['sponsorship'] = [
+						'enabled' => $group->sponsorships_enabled,
+						'packages' => $group->sponsorship_packages,
+						'contact_email' => $group->sponsorship_contact_email,
+						'description' => $group->sponsorship_description,
+					];
+				}
+				
+				return [$group->domain => $data];
 			});
 		
 		return response()->json(['groups' => $groups]);
