@@ -91,6 +91,8 @@ class SyncGroups
 			'longitude',
 		]));
 		
+		$this->syncSponsorship($group, $config);
+		
 		return $group;
 	}
 	
@@ -109,6 +111,23 @@ class SyncGroups
 		]));
 		
 		return $external_group;
+	}
+	
+	protected function syncSponsorship(Group $group, array $config): void
+	{
+		if (isset($config['sponsorships'])) {
+			$sponsorship = $config['sponsorships'];
+			
+			$group->sponsorships_enabled = (bool) ($sponsorship['enabled'] ?? false);
+			$group->sponsorship_packages = $sponsorship['packages'] ?? [];
+			$group->sponsorship_contact_email = $sponsorship['contact_email'] ?? null;
+			$group->sponsorship_description = $sponsorship['description'] ?? null;
+		} else {
+			$group->sponsorships_enabled = false;
+			$group->sponsorship_packages = [];
+			$group->sponsorship_contact_email = null;
+			$group->sponsorship_description = null;
+		}
 	}
 	
 	/** @return Collection<string, Group|ExternalGroup> */
