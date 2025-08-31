@@ -52,7 +52,7 @@ class ListGroups
 				];
 				
 				// Add sponsorship data for non-external groups
-				if (!($group instanceof ExternalGroup) && $group->hasSponsorship()) {
+				if (! ($group instanceof ExternalGroup) && $group->hasSponsorship()) {
 					$data['sponsorship'] = [
 						'enabled' => $group->sponsorships_enabled,
 						'packages' => $group->sponsorship_packages,

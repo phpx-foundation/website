@@ -47,7 +47,7 @@ class Group extends Model
 		'longitude',
 		'sponsorships_enabled',
 		'sponsorship_packages',
-		'sponsorship_contact_email', 
+		'sponsorship_contact_email',
 		'sponsorship_description',
 		'created_at',
 	];
