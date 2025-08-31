@@ -66,6 +66,11 @@
 			</a>
 		</div>
 	</div>
+
+	{{-- Sponsorship Info --}}
+	@if($group->hasSponsorship())
+		<x-sponsorship-info :group="$group" />
+	@endif
 	
 	{{-- Upcoming Meetup --}}
 	@isset($next_meetup)
