@@ -45,6 +45,10 @@ class Group extends Model
 		'custom_open_graph_image',
 		'latitude',
 		'longitude',
+		'sponsorships_enabled',
+		'sponsorship_packages',
+		'sponsorship_contact_email', 
+		'sponsorship_description',
 		'created_at',
 	];
 	
@@ -78,6 +82,16 @@ class Group extends Model
 	public function isDisbanded(): bool
 	{
 		return GroupStatus::Disbanded === $this->status;
+	}
+	
+	public function acceptsSponsorship(): bool
+	{
+		return $this->sponsorships_enabled;
+	}
+	
+	public function hasSponsorship(): bool
+	{
+		return $this->acceptsSponsorship() && ! empty($this->sponsorship_packages);
 	}
 	
 	public function mailcoach(): ?Mailcoach
@@ -139,6 +153,8 @@ class Group extends Model
 			'domain_status' => DomainStatus::class,
 			'latitude' => 'float',
 			'longitude' => 'float',
+			'sponsorships_enabled' => 'boolean',
+			'sponsorship_packages' => 'array',
 		];
 	}
 	
