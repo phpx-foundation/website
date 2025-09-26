@@ -152,10 +152,10 @@
      "phpxmanila.com": {
         "external": true,
         "name": "PHP×Manila",
+        "timezone": "Asia/Manila",
         "continent": "Asia",
         "region": "Manila",
-        "description": "A Metro Manila-Philippines PHP meetup for web artisans who want to learn and connect.",
-        "timezone": "Asia/Manila",
+        "description": "A Manila-based PHP & Laravel meetup for web artisans who want to learn and connect.",
         "bsky_url": "https://bsky.app/profile/phpxmanila.com",
         "frequency": "quarterly",
         "status": "planned",
