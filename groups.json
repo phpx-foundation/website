@@ -153,7 +153,7 @@
         "external": true,
         "name": "PHP×Manila",
         "continent": "Asia",
-         "region": "Manila",
+        "region": "Manila",
         "description": "A Metro Manila-Philippines PHP meetup for web artisans who want to learn and connect.",
         "timezone": "Asia/Manila",
         "bsky_url": "https://bsky.app/profile/phpxmanila.com",
