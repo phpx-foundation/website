@@ -149,6 +149,16 @@
         "latitude": 10.2935639,
         "longitude": 123.9019209
     },
+     "phpxmanila.com": {
+        "external": false,
+        "name": "PHP×Manila",
+        "region": "Manila",
+        "description": "A Metro Manila-Philippines PHP meetup for web artisans who want to learn and connect.",
+        "timezone": "Asia/Manila",
+        "bsky_url": "https://bsky.app/profile/phpxmanila.com",
+        "latitude": 14.617290,
+        "longitude": 121.059311
+    },
     "amsterdamphp.nl": {
         "external": true,
         "name": "PHP×Amsterdam",
