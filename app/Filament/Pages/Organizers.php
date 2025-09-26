@@ -2,8 +2,6 @@
 
 namespace App\Filament\Pages;
 
-use DaniloPolani\FilamentPlausibleWidget\Widgets\PlausibleWidget;
-use Filament\Actions\Action;
 use Filament\Pages\Page;
 use Illuminate\Support\Facades\Auth;
 
