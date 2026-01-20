@@ -189,18 +189,6 @@
         "latitude": 50.8465573,
         "longitude": 4.351697
     },
-    "phpxpnq.com": {
-        "external": false,
-        "name": "PHP×PNQ",
-        "region": "Pune",
-        "description": "A Pune-India PHP meetup for web artisans who want to learn and connect.",
-        "timezone": "Asia/Kolkata",
-        "status": "planned",
-        "frequency": "quarterly",
-        "bsky_url": "https://bsky.app/profile/phpxpnq.com",
-        "latitude": 18.5204301,
-        "longitude": 73.8564637
-    },
     "phpxchd.com": {
         "external": false,
         "name": "PHP×CHD",
@@ -346,18 +334,6 @@
         "bsky_url": null,
         "latitude": 36.16048,
         "longitude": -86.77842
-    },
-    "phpxvadodara.com": {
-        "external": false,
-        "name": "PHP×Vadodara",
-        "region": "Vadodara",
-        "continent": "Asia",
-        "description": "A vibrant PHP meetup in the cultural city of Vadodara, India, connecting developers, enthusiasts, and artisans to share knowledge, learn, and grow together.",
-        "timezone": "Asia/Kolkata",
-        "status": "planned",
-        "frequency": "monthly",
-        "latitude": 22.3174902,
-        "longitude": 73.1667258
     },
     "phpxmbs.com": {
         "external": false,
