@@ -189,18 +189,6 @@
         "latitude": 50.8465573,
         "longitude": 4.351697
     },
-    "phpxpnq.com": {
-        "external": false,
-        "name": "PHP×PNQ",
-        "region": "Pune",
-        "description": "A Pune-India PHP meetup for web artisans who want to learn and connect.",
-        "timezone": "Asia/Kolkata",
-        "status": "planned",
-        "frequency": "quarterly",
-        "bsky_url": "https://bsky.app/profile/phpxpnq.com",
-        "latitude": 18.5204301,
-        "longitude": 73.8564637
-    },
     "phpxchd.com": {
         "external": false,
         "name": "PHP×CHD",
