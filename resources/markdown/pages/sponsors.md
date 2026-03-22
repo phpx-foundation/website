@@ -1,3 +1,7 @@
+---
+title: Sponsoring PHP× Meetups
+---
+
 # Sponsors
 
 If you are a company interested in sponsoring PHP× events, please let us know. There

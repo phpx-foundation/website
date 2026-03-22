@@ -6,9 +6,8 @@
         "description": "AKA SDPHP - A San Diego California-area PHP meetup for PHP and other devs to hang out.",
         "timezone": "America/Los_Angeles",
         "continent": "North America",
-        "bsky_url": null,
         "active": "true",
-        "status": "planned",
+        "status": "active",
         "frequency": "monthly",
         "meetup_url": "https://www.meetup.com/sandiegophp/",
         "bsky_url": "https://bsky.app/profile/phparch.com",
@@ -100,6 +99,19 @@
         "latitude": 39.9622601,
         "longitude": -83.0007065
     },
+    "phpxmel.com": {
+        "external": false,
+        "name": "PHP×MEL",
+        "region": "Melbourne",
+        "continent": "Australia",
+        "description": "A Melbourne, Australia PHP meetup for web artisans who love to learn, build, and connect.",
+        "timezone": "Australia/Melbourne",
+        "status": "active",
+        "frequency": "quarterly",
+        "bsky_url": "https://bsky.app/profile/phpxmel.com",
+        "latitude": -37.8045995,
+        "longitude": 144.9469932
+    },
     "phpxadl.com": {
         "external": false,
         "name": "PHP×ADL",
@@ -112,6 +124,19 @@
         "latitude": -34.9281805,
         "longitude": 138.5999312
     },
+    "phpxsyd.com": {
+        "external": false,
+        "name": "PHP×SYD",
+        "region": "Sydney",
+        "timezone": "Australia/Sydney",
+        "description": "A Sydney, Australia PHP/Laravel meetup for artisans who want to learn and connect.",
+        "continent": "Australia",
+        "status": "active",
+        "meetup_url": "https://www.meetup.com/sydphp/",
+        "frequency": "bi-monthly(ish)",
+        "latitude": -33.8688,
+        "longitude": 151.2093
+    },
     "phpxcebu.com": {
         "external": false,
         "name": "PHP×CEBU",
@@ -123,6 +148,19 @@
         "frequency": "bi-monthly",
         "latitude": 10.2935639,
         "longitude": 123.9019209
+    },
+     "phpxmanila.com": {
+        "external": true,
+        "name": "PHP×Manila",
+        "timezone": "Asia/Manila",
+        "continent": "Asia",
+        "region": "Manila",
+        "description": "A Manila-based PHP & Laravel meetup for web artisans who want to learn and connect.",
+        "bsky_url": "https://bsky.app/profile/phpxmanila.com",
+        "frequency": "quarterly",
+        "status": "planned",
+        "latitude": 14.617290,
+        "longitude": 121.059311
     },
     "amsterdamphp.nl": {
         "external": true,
@@ -151,17 +189,18 @@
         "latitude": 50.8465573,
         "longitude": 4.351697
     },
-    "phpxpnq.com": {
+    "phpxchd.com": {
         "external": false,
-        "name": "PHP×PNQ",
-        "region": "Pune",
-        "description": "A Pune-India PHP meetup for web artisans who want to learn and connect.",
+        "name": "PHP×CHD",
+        "continent": "Asia",
+        "region": "Chandigarh",
+        "description": "A meetup for web-devs around Chandigarh tri-city area who want to learn, teach and have some fun doing that",
         "timezone": "Asia/Kolkata",
         "status": "planned",
-        "frequency": "quarterly",
-        "bsky_url": "https://bsky.app/profile/phpxpnq.com",
-        "latitude": 18.5204301,
-        "longitude": 73.8564637
+        "frequency": "bi-monthly",
+        "bsky_url": "https://bsky.app/profile/phpxchd.com",
+        "latitude": 30.6976952,
+        "longitude": 76.6910445
     },
     "phpxvie.com": {
         "external": false,
@@ -296,18 +335,6 @@
         "latitude": 36.16048,
         "longitude": -86.77842
     },
-    "phpxvadodara.com": {
-        "external": false,
-        "name": "PHP×Vadodara",
-        "region": "Vadodara",
-        "continent": "Asia",
-        "description": "A vibrant PHP meetup in the cultural city of Vadodara, India, connecting developers, enthusiasts, and artisans to share knowledge, learn, and grow together.",
-        "timezone": "Asia/Kolkata",
-        "status": "planned",
-        "frequency": "monthly",
-        "latitude": 22.3174902,
-        "longitude": 73.1667258
-    },
     "phpxmbs.com": {
         "external": false,
         "name": "PHP×MBS",
@@ -370,5 +397,80 @@
         "frequency": "quarterly",
         "latitude": 52.4823,
         "longitude": 1.8900
+    },
+    "phpsw.uk": {
+        "external": true,
+        "name": "PHP SW",
+        "meetup_url": "https://www.meetup.com/php-sw/",
+        "region": "Bristol",
+        "continent": "Europe",
+        "description": "PHP-SW is based in Bristol, UK. We meet on the 2nd Wednesday of every month",
+        "timezone": "Europe/London",
+        "status": "active",
+        "frequency": "monthly",
+        "latitude": 51.4533,
+        "longitude": -2.5910
+    },
+    "gtaphp.org": {
+        "external": true,
+        "name": "Greater Toronto Area PHP",
+        "region": "Greater Toronto",
+        "continent": "North America",
+        "description": "We are a dedicated group of PHP developers who meet with some regularity. Our meet-ups are in the downtown area, but devs come from all around.",
+        "timezone": "America/Toronto",
+        "meetup_url": "https://www.meetup.com/gta-php-user-group-toronto/",
+        "status": "active",
+        "frequency": "bi-monthly",
+        "latitude": 43.642567,
+        "longitude": -79.387054
+    },
+    "phpxdc.com": {
+        "external": false,
+        "name": "PHP×DC",
+        "region": "Washington D.C.",
+        "continent": "North America",
+        "description": "A DMV-area PHP meetup for web artisans who want to learn and connect.",
+        "timezone": "America/New_York",
+        "status": "prospective",
+        "frequency": "monthly",
+        "latitude": 38.889805,
+        "longitude": -77.009056
+    },
+    "phpxbean.com": {
+        "external": false,
+        "name": "PHP×Bean",
+        "region": "Eau Claire",
+        "description": "A Bean Island meetup for web artisans who want to paddle and care for our island.",
+        "timezone": "America/Chicago",
+        "status": "active",
+        "bsky_url": "https://bsky.app/profile/phpxbean.com",
+        "latitude": 44.7961667,
+        "longitude": -91.5335471
+    },
+    "phpxral.com": {
+        "external": false,
+        "name": "PHP×RAL",
+        "region": "Raleigh",
+        "description": "A Raleigh-area PHP meetup for web artisans who want to learn and connect.",
+        "timezone": "America/New_York",
+        "continent": "North America",
+        "active": "true",
+        "status": "planned",
+        "frequency": "quarterly",
+        "bsky_url": "https://bsky.app/profile/phpxral.bsky.social",
+        "latitude": 35.773731,
+        "longitude": -78.642831
+    },
+    "phpxibadan.com": {
+        "external": false,
+        "name": "PHP×Ibadan",
+        "region": "Ibadan",
+        "continent": "Africa",
+        "active": "true",
+        "description": "PHPxIbadan meetups are designed to bring the community together — to share experiences, learn about developer life, and exchange ideas around PHP, developer culture, and of course, Ibadan.",
+        "timezone": "Africa/Lagos",
+        "status": "active",
+        "latitude": 7.376736,
+        "longitude": 3.939786
     }
 }

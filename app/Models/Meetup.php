@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\CarbonImmutable;
 use Carbon\CarbonInterface;
 use Glhd\Bits\Database\HasSnowflakes;
 use Illuminate\Contracts\Support\Htmlable;
@@ -11,13 +12,16 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class Meetup extends Model implements Htmlable
 {
 	use HasSnowflakes;
 	use HasFactory;
+	use SoftDeletes;
 	
 	protected $casts = [
 		'starts_at' => 'datetime',
@@ -36,6 +40,7 @@ class Meetup extends Model implements Htmlable
 		'date_range',
 		'starts_at',
 		'ends_at',
+		'custom_open_graph_image',
 	];
 	
 	protected $appends = [
@@ -93,7 +98,7 @@ class Meetup extends Model implements Htmlable
 			$start = $this->starts_at->format("l, F jS Y \\f\\r\o\m g:ia");
 			$end = $this->ends_at->format('g:ia T');
 			
-			return "$start to $end";
+			return "{$start} to {$end}";
 		}
 		
 		$start = $this->starts_at->format('F jS');
@@ -102,10 +107,22 @@ class Meetup extends Model implements Htmlable
 		return "{$start}–{$end}";
 	}
 	
+	public function externalRsvpPlatformName(): ?string
+	{
+		return match (true) {
+			null === $this->external_rsvp_url => null,
+			Str::contains($this->external_rsvp_url, 'meetup.com') => 'Meetup',
+			Str::contains($this->external_rsvp_url, 'eventy.io') => 'Eventy',
+			Str::contains($this->external_rsvp_url, 'guild.host') => 'Guild',
+			Str::contains($this->external_rsvp_url, 'lu.ma') => 'luma',
+			default => null,
+		};
+	}
+	
 	protected function startsAt(): Attribute
 	{
 		return Attribute::make(
-			get: fn($value) => $value ? $this->asDateTime($value)->shiftTimezone(config('app.timezone'))->timezone($this->group->timezone) : null,
+			get: fn($value) => $value ? CarbonImmutable::make($value)->timezone($this->group->timezone) : null,
 			set: fn($value) => $this->asDateTime($value)->timezone(config('app.timezone')),
 		);
 	}
@@ -113,7 +130,7 @@ class Meetup extends Model implements Htmlable
 	protected function endsAt(): Attribute
 	{
 		return Attribute::make(
-			get: fn($value) => $this->asDateTime($value)->shiftTimezone(config('app.timezone'))->timezone($this->group->timezone),
+			get: fn($value) => $value ? CarbonImmutable::make($value)->timezone($this->group->timezone) : null,
 			set: fn($value) => $this->asDateTime($value)->timezone(config('app.timezone')),
 		);
 	}
@@ -131,14 +148,16 @@ class Meetup extends Model implements Htmlable
 	protected function openGraphImageUrl(): Attribute
 	{
 		return Attribute::get(function() {
-			$filename = "og/meetups/{$this->getKey()}.png";
-			$path = storage_path("app/public/{$filename}");
-			
-			if (file_exists($path)) {
-				return asset("storage/{$filename}").'?t='.filemtime($path);
+			if ($this->custom_open_graph_image && Storage::disk('public')->exists($this->custom_open_graph_image)) {
+				return Storage::disk('public')->url($this->custom_open_graph_image);
 			}
-			
-			return null;
+
+			$defaultPath = "og/meetups/{$this->getKey()}.png";
+			if (Storage::disk('public')->exists($defaultPath)) {
+				return Storage::disk('public')->url($defaultPath);
+			}
+
+			return $this->group->open_graph_image_url;
 		});
 	}
 	
