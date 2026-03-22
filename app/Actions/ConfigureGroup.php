@@ -24,6 +24,7 @@ class ConfigureGroup
 		string $timezone = 'America/New_York', // One true timezone
 		?string $bsky_url = null,
 		?string $meetup_url = null,
+		?string $youtube_url = null,
 	): Group {
 		$group = Group::updateOrCreate([
 			'domain' => $domain,
@@ -34,6 +35,7 @@ class ConfigureGroup
 			'timezone' => $timezone,
 			'bsky_url' => $bsky_url ?: null,
 			'meetup_url' => $meetup_url ?: null,
+			'youtube_url' => $youtube_url ?: null,
 		]);
 		
 		Cache::clear();
@@ -71,6 +73,7 @@ class ConfigureGroup
 		$timezone = suggest('Timezone', DateTimeZone::listIdentifiers(), default: str($existing->timezone), required: true);
 		$bsky_url = text('Is there a Bluesky URL?', default: str($existing->bsky_url));
 		$meetup_url = text('Is there a Meetup URL?', default: str($existing->meetup_url));
+		$youtube_url = text('Is there a YouTube URL?', default: str($existing->youtube_url));
 		
 		table(['Option', 'Value'], [
 			['Name', $name],
@@ -78,6 +81,7 @@ class ConfigureGroup
 			['Timezone', $timezone],
 			['Bluesky', $bsky_url],
 			['Meetup', $meetup_url],
+			['YouTube', $youtube_url],
 		]);
 		
 		if (confirm('Is this correct?')) {
@@ -89,6 +93,7 @@ class ConfigureGroup
 				timezone: $timezone,
 				bsky_url: $bsky_url,
 				meetup_url: $meetup_url,
+				youtube_url: $youtube_url,
 			);
 			
 			$command->info($group->wasRecentlyCreated
