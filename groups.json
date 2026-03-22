@@ -132,8 +132,8 @@
         "description": "A Sydney, Australia PHP/Laravel meetup for artisans who want to learn and connect.",
         "continent": "Australia",
         "status": "active",
-        "meetup_url": "https://www.meetup.com/sydphp/",
-        "frequency": "bi-monthly(ish)",
+        "meetup_url": "https://eventy.io/ug/php-sydney",
+        "frequency": "quarterly",
         "latitude": -33.8688,
         "longitude": 151.2093
     },
