@@ -51,7 +51,10 @@ class Meetup extends Model implements Htmlable
 	
 	protected static function booted()
 	{
-		static::saved(fn(Meetup $meetup) => Cache::forget("group:{$meetup->group_id}:next-meetup"));
+		static::saved(function(Meetup $meetup) {
+			Cache::forget("group:{$meetup->group_id}:next-meetup");
+			Cache::forget("group:{$meetup->group_id}:upcoming-meetups");
+		});
 	}
 	
 	public function scopeFuture(Builder $query, ?CarbonInterface $at = null): Builder
@@ -82,6 +85,19 @@ class Meetup extends Model implements Htmlable
 		$rsvps = $this->users_count ?? $this->loadCount('users')->users_count;
 		
 		return max(0, $this->capacity - $rsvps);
+	}
+	
+	public function day(): string
+	{
+		if (! $this->starts_at) {
+			return '';
+		}
+		
+		if (now()->isSameYear($this->starts_at)) {
+			return $this->starts_at->format('M jS');
+		}
+		
+		return $this->starts_at->format('M jS, Y');
 	}
 	
 	public function range(): string

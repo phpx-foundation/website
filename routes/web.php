@@ -4,6 +4,7 @@ use App\Enums\RootDomains;
 use App\Http\Controllers\World\HomeController;
 use App\Http\Middleware\SetGroupFromDomainMiddleware;
 use App\Http\Middleware\ShareNextMeetupMiddleware;
+use App\Http\Middleware\ShareUpcomingMeetupsMiddleware;
 use App\Models\Meetup;
 use Illuminate\Support\Facades\Route;
 
@@ -16,7 +17,7 @@ foreach (RootDomains::cases() as $case) {
 }
 
 // Register the individual group routes
-Route::middleware([SetGroupFromDomainMiddleware::class, ShareNextMeetupMiddleware::class])
+Route::middleware([SetGroupFromDomainMiddleware::class, ShareNextMeetupMiddleware::class, ShareUpcomingMeetupsMiddleware::class])
 	->group(function() {
 		Route::view('/', 'welcome');
 		Route::view('/join', 'join');
