@@ -4,11 +4,16 @@ namespace App\Actions\Concerns;
 
 use App\Http\Middleware\SetGroupFromDomainMiddleware;
 use App\Http\Middleware\ShareNextMeetupMiddleware;
+use App\Http\Middleware\ShareUpcomingMeetupsMiddleware;
 
 trait RoutesScopedToGroup
 {
 	public function getControllerMiddleware(): array
 	{
-		return [SetGroupFromDomainMiddleware::class, ShareNextMeetupMiddleware::class];
+		return [
+			SetGroupFromDomainMiddleware::class,
+			ShareNextMeetupMiddleware::class,
+			ShareUpcomingMeetupsMiddleware::class,
+		];
 	}
 }
