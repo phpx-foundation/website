@@ -410,6 +410,19 @@
         "latitude": 43.642567,
         "longitude": -79.387054
     },
+    "gpug.ca": {
+        "external": true,
+        "name": "GPUG PHP User Group",
+        "region": "Kitchener/Waterloo",
+        "continent": "North America",
+        "description": "GPUG is a PHP user group for PHP developers in South Western Ontario.",
+        "timezone": "America/Toronto",
+        "meetup_url": "https://www.meetup.com/_gpug_/",
+        "status": "active",
+        "frequency": "monthly",
+        "latitude": 43.4820,
+        "longitude": -80.5261
+    },
     "phpxdc.com": {
         "external": false,
         "name": "PHP×DC",
