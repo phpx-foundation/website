@@ -42,6 +42,7 @@ class Group extends Model
 		'bsky_did',
 		'twitter_url',
 		'meetup_url',
+		'youtube_url',
 		'custom_open_graph_image',
 		'latitude',
 		'longitude',
@@ -173,6 +174,16 @@ class Group extends Model
 	protected function meetupUrlArray(): Attribute
 	{
 		return Attribute::get(fn() => str($this->meetup_url)
+			->explode(',')
+			->map(fn($url) => trim($url))
+			->filter()
+			->values()
+			->toArray());
+	}
+
+	protected function youtubeUrlArray(): Attribute
+	{
+		return Attribute::get(fn() => str($this->youtube_url)
 			->explode(',')
 			->map(fn($url) => trim($url))
 			->filter()

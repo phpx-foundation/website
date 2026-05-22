@@ -85,6 +85,7 @@ class SyncGroups
 			'timezone',
 			'bsky_url',
 			'meetup_url',
+			'youtube_url',
 			'status',
 			'frequency',
 			'latitude',

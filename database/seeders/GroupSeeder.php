@@ -16,6 +16,7 @@ class GroupSeeder extends Seeder
 			'twitter_url' => 'https://twitter.com/phpxcity',
 			'bsky_url' => 'https://bsky.app/profile/phpxcity.com',
 			'meetup_url' => 'https://www.meetup.com/phpxcity/',
+			'youtube_url' => 'https://www.youtube.com/@phpxcity',
 			'description' => 'A PHP meetup for web artisans who want to learn and connect.',
 			'timezone' => 'America/New_York',
 		]);

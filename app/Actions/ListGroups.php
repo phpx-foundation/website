@@ -47,6 +47,7 @@ class ListGroups
 						'links' => [
 							'bluesky' => $group->bsky_url,
 							'meetup' => $group->meetup_url,
+							'youtube' => $group->youtube_url,
 						],
 						'coords' => ['latitude' => $group->latitude, 'longitude' => $group->longitude],
 						'external' => $group instanceof ExternalGroup,

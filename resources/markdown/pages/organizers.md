@@ -50,6 +50,7 @@ Awesome. You want to start a PHP× group! Here are the basic steps to get starte
 
 - `bsky_url` — if you use Bluesky, you can provide your group's Bluesky profile URL
 - `meetup_url` — if you use Meetup.com, you can provide your group's Meetup URL
+- `youtube_url` - if you use YouTube, you can provide your group's YouTube Channel URL
 - `frequency` — groups show as "bi-monthly" by default, but you can set this to however often you meet (monthly/quarterly/etc)
 
 ## Once you've started
