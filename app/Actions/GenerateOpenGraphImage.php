@@ -5,7 +5,7 @@ namespace App\Actions;
 use App\Actions\Concerns\FetchesModelsForCommands;
 use App\Models\Meetup;
 use Illuminate\Console\Command;
-use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Colors\Rgb\Color;
 use Lorisleiva\Actions\Concerns\AsAction;
 use SimonHamp\TheOg\BorderPosition;
@@ -21,9 +21,7 @@ class GenerateOpenGraphImage
 	
 	public function handle(Meetup $meetup): string
 	{
-		$filename = storage_path("app/public/og/meetups/{$meetup->getKey()}.png");
-		
-		(new Filesystem())->ensureDirectoryExists(dirname($filename));
+		$filename = "og/meetups/{$meetup->getKey()}.png";
 		
 		$font = new class() implements Font {
 			public function path(): string
@@ -50,7 +48,7 @@ class GenerateOpenGraphImage
 			urlFont: $font,
 		);
 		
-		(new Image())
+		$image = (new Image())
 			->theme($theme)
 			->layout(new GitHubBasic())
 			->border(BorderPosition::All, new Color(0, 0, 0, 0), 100)
@@ -58,7 +56,9 @@ class GenerateOpenGraphImage
 			->title("Meetup @ {$meetup->location}")
 			->description($meetup->range())
 			->watermark(new Theme\Picture(resource_path('og/images/phpx.png')))
-			->save($filename);
+			->toString();
+		
+		Storage::disk('public')->put($filename, $image);
 		
 		return $filename;
 	}

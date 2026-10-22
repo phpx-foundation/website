@@ -26,7 +26,7 @@ class SyncGroups
 			->each(fn(Group|ExternalGroup $g) => $g->save());
 		
 		if (App::isProduction()) {
-			SyncDomainsWithForge::run();
+			SyncDomainsWithCloud::run();
 		}
 		
 		return $groups;

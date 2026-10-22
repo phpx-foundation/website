@@ -30,10 +30,10 @@ return [
 		],
 	],
 	
-	'forge' => [
-		'token' => env('FORGE_TOKEN'),
-		'server' => env('FORGE_SERVER_ID'),
-		'site' => env('FORGE_SITE_ID'),
+	'cloud' => [
+		'url' => env('LARAVEL_CLOUD_API_URL', 'https://cloud.laravel.com/api'),
+		'token' => env('LARAVEL_CLOUD_API_TOKEN'),
+		'environment' => env('LARAVEL_CLOUD_ENVIRONMENT_ID'),
 	],
 	
 	'plausible' => [

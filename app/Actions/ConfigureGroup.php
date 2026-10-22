@@ -5,6 +5,7 @@ namespace App\Actions;
 use App\Models\Group;
 use DateTimeZone;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Cache;
 use Lorisleiva\Actions\Concerns\AsAction;
 use function Laravel\Prompts\confirm;
@@ -38,7 +39,9 @@ class ConfigureGroup
 		
 		Cache::clear();
 		
-		SyncDomainsWithForge::run();
+		if (App::isProduction()) {
+			SyncDomainsWithCloud::run();
+		}
 		
 		app()->instance("group:{$domain}", $group);
 		

@@ -19,9 +19,9 @@ Awesome. You want to start a PHP× group! Here are the basic steps to get starte
 2. Get a `phpx(…).com` domain
     - If possible, use a local airport code or similar (e.g. Atlanta is ATL)
     - If local airport code isn't a popular way to reference your region, it's OK to do something else!
-3. Set up SSL via a third party (like Cloudflare)
-    - The easiest way to do this is with a free Cloudflare account, but you can roll your own with nginx or use any service you like
-    - Set it to proxy to the IP address `167.99.10.168`
+3. Set up DNS for your domain with a free [Cloudflare](https://www.cloudflare.com/) account
+    - We host groups on [Laravel Cloud](https://cloud.laravel.com/), which expects your domain to be proxied through Cloudflare
+    - You'll add the exact DNS records once your domain is set up (see below)
 4. Submit a pull request to update [`groups.json`](https://github.com/phpx-foundation/website/blob/main/groups.json)
    with the following data:
 
@@ -56,11 +56,15 @@ Awesome. You want to start a PHP× group! Here are the basic steps to get starte
 
 ### Manual set up
 
-Once your PR is merged, your domain will be automatically added to Forge and your
-site should start working immediately. There are a handful of things that will
-need to happen manually after that. For right now, the best way to do this is to
+Once your PR is merged, your domain will be automatically added to Laravel Cloud.
+Laravel Cloud then gives us a few DNS records (a proxied `CNAME` and one or more
+`_acme-challenge` records for SSL) that you'll need to add in Cloudflare. Your site
+will start working once Laravel Cloud verifies them, which usually takes about
+15 minutes. There are a handful of other things that will need to happen manually
+after that. For right now, the best way to do this is to
 reach out to Chris Morrell on Discord to check in on each of these:
 
+- Get your DNS records
 - Get the "organizer" role on Discord
 - Get an admin account on phpx.world
 - Have a channel created in the Discord

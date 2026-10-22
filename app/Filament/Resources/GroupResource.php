@@ -173,7 +173,8 @@ class GroupResource extends Resource
 						->default('America/New_York'),
 					Forms\Components\FileUpload::make('custom_open_graph_image')
 						->image()
-						->directory('og/custom'),
+						->directory('og/custom')
+						->visibility('private'),
 					Forms\Components\TextInput::make('latitude')
 						->numeric()
 						->required()

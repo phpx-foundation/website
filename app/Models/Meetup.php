@@ -155,9 +155,8 @@ class Meetup extends Model implements Htmlable
 	{
 		return Attribute::get(function() {
 			$filename = "og/meetups/{$this->getKey()}.png";
-			$path = storage_path("app/public/{$filename}");
 			
-			return file_exists($path) ? $path : null;
+			return Storage::disk('public')->exists($filename) ? $filename : null;
 		});
 	}
 	
