@@ -9,8 +9,10 @@ class ForceHttpMiddleware
 {
 	public function handle(Request $request, Closure $next)
 	{
-		$request->server->set('HTTPS', true);
-		
+		if (config('app.force_https')) {
+			$request->server->set('HTTPS', true);
+		}
+
 		return $next($request);
 	}
 }
