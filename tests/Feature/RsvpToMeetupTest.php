@@ -83,4 +83,79 @@ class RsvpToMeetupTest extends TestCase
 		$this->post($group->url("meetups/{$meetup->id}/rsvps"), $payload)
 			->assertSessionHasNoErrors();
 	}
+	
+	public function test_you_cannot_rsvp_to_a_meetup_that_has_ended(): void
+	{
+		$group = Group::factory()->create();
+		app()->instance("group:{$group->domain}", $group);
+		
+		$meetup = Meetup::factory()->for($group)->create([
+			'starts_at' => now()->subHours(3),
+			'ends_at' => now()->subMinute(),
+		]);
+		
+		$payload = [
+			'name' => 'Chris Morrell',
+			'email' => 'chris@phpxphilly.com',
+			'subscribe' => '1',
+			'speaker' => '1',
+		];
+		
+		$this->post($group->url("meetups/{$meetup->id}/rsvps"), $payload)
+			->assertSessionHasErrors('meetup')
+			->assertRedirect();
+		
+		$this->assertDatabaseCount('rsvps', 0);
+		$this->assertDatabaseCount('users', 0);
+		$this->assertDatabaseCount('group_memberships', 0);
+	}
+	
+	public function test_you_can_rsvp_until_the_moment_a_meetup_ends(): void
+	{
+		$this->freezeTime();
+		
+		$group = Group::factory()->create();
+		app()->instance("group:{$group->domain}", $group);
+		
+		$meetup = Meetup::factory()->for($group)->create([
+			'starts_at' => now()->subHours(3),
+			'ends_at' => now()->addMinute(),
+		]);
+		
+		$payload = [
+			'name' => 'Chris Morrell',
+			'email' => 'chris@phpxphilly.com',
+		];
+		
+		$this->post($group->url("meetups/{$meetup->id}/rsvps"), $payload)
+			->assertSessionHasNoErrors();
+		
+		$this->assertCount(1, $meetup->users);
+		
+		$this->travel(1)->minutes();
+		
+		$this->post($group->url("meetups/{$meetup->id}/rsvps"), array_merge($payload, ['email' => 'other@phpxphilly.com']))
+			->assertSessionHasErrors('meetup');
+		
+		$this->assertCount(1, $meetup->fresh()->users);
+	}
+	
+	public function test_the_command_cannot_rsvp_to_a_meetup_that_has_ended(): void
+	{
+		$group = Group::factory()->create();
+		
+		$meetup = Meetup::factory()->for($group)->create([
+			'starts_at' => now()->subHours(3),
+			'ends_at' => now()->subMinute(),
+		]);
+		
+		$this->artisan('meetup:rsvp', [
+			'meetup' => $meetup->id,
+			'name' => 'Chris Morrell',
+			'email' => 'chris@phpxphilly.com',
+		])->assertFailed();
+		
+		$this->assertDatabaseCount('rsvps', 0);
+		$this->assertDatabaseCount('users', 0);
+	}
 }
