@@ -22,18 +22,19 @@ class GetUpcomingMeetups
 		// If we have cached meetups, just use them
 		if (Cache::has($key)) {
 			$factory = new Meetup();
-			return $factory->newCollection(array_map(fn($raw) => $factory->newFromBuilder($raw), Cache::get($key)));
+			return $factory->newCollection(array_map(fn($raw) => $factory->newFromBuilder($raw), Cache::get($key)))
+				->filter(fn(Meetup $meetup) => $meetup->ends_at->isFuture())
+				->values();
 		}
 		
 		$meetups = $group->meetups()->future()->orderBy('starts_at')->take(10)->get();
 		
-		[$raw, $latest_ends_at] = $meetups->reduceSpread(function($raw, $latest_ends_at, Meetup $meetup) {
-			$raw[] = $meetup->getRawOriginal();
-			$latest_ends_at = max($latest_ends_at, $meetup->ends_at);
-			return [$raw, $latest_ends_at];
-		}, [], now()->addDay());
-		
-		Cache::put($key, $raw, $latest_ends_at);
+		// Expire when the first meetup ends so the list never contains a past meetup
+		Cache::put(
+			$key,
+			$meetups->map(fn(Meetup $meetup) => $meetup->getRawOriginal())->all(),
+			$meetups->min('ends_at') ?? now()->addDay()
+		);
 		
 		return $meetups;
 	}
