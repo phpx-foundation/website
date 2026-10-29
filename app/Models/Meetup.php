@@ -62,6 +62,11 @@ class Meetup extends Model implements Htmlable
 		return $query->where('ends_at', '>', $at ?? now());
 	}
 	
+	public function hasEnded(?CarbonInterface $at = null): bool
+	{
+		return $this->ends_at->lte($at ?? now());
+	}
+	
 	public function group(): BelongsTo
 	{
 		return $this->belongsTo(Group::class);
