@@ -56,6 +56,19 @@ return [
 	
 	/*
 	|--------------------------------------------------------------------------
+	| Force HTTPS
+	|--------------------------------------------------------------------------
+	|
+	| When enabled, every request is treated as secure so that generated URLs
+	| use HTTPS. Disable this when serving the app over plain HTTP locally,
+	| such as with Laravel Sail.
+	|
+	*/
+	
+	'force_https' => (bool) env('APP_FORCE_HTTPS', true),
+	
+	/*
+	|--------------------------------------------------------------------------
 	| Application Timezone
 	|--------------------------------------------------------------------------
 	|
