@@ -28,8 +28,10 @@
 	
 	<x-flash-message />
 	
-	{{-- Show the capacity message only if we don't have a flash message --}}
-	@if(session()->has('message'))
+	{{-- Show the capacity message only if the event is open and we don't have a flash message --}}
+	@if($meetup->hasEnded())
+		<x-alert message="This event has ended and is no longer accepting RSVPs." />
+	@elseif(session()->has('message'))
 	@elseif($meetup->remaining() === 1)
 		<x-alert message="There is only 1 spot left!" />
 	@elseif($meetup->remaining() > 0 && $meetup->remaining() < 10)
@@ -42,7 +44,17 @@
 		{{ $meetup }}
 	</div>
 	
-	@empty($meetup->external_rsvp_url)
+	@if($meetup->hasEnded())
+		<h2 class="font-mono font-semibold text-white text-xl sm:text-2xl">
+			Want to hear about the next one?
+		</h2>
+		
+		<p class="mt-2 mb-10 text-xl max-w-3xl">
+			We’ll only ever email you about upcoming events or calls for speakers. Promise.
+		</p>
+		
+		<x-join-form />
+	@elseif(empty($meetup->external_rsvp_url))
 		<form
 			action="/meetups/{{ $meetup->getKey() }}/rsvps"
 			method="post"
@@ -96,6 +108,6 @@
 				</span>
 			</a>
 		</div>
-	@endempty
+	@endif
 
 </x-layout>

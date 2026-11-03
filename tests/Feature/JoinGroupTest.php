@@ -19,7 +19,8 @@ class JoinGroupTest extends TestCase
 		$this->get($group->url('join'))
 			->assertOk()
 			->assertSee($group->name)
-			->assertSee('action="'.$group->url('join').'"', false);
+			->assertSee('action="'.$group->url('join').'"', false)
+			->assertSee('placeholder="you@'.$group->domain.'"', false);
 	}
 	
 	public function test_you_can_join_a_group_and_subscribe_to_updates(): void
