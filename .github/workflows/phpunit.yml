@@ -10,7 +10,12 @@ jobs:
   php-tests:
     runs-on: ubuntu-latest
     timeout-minutes: 10
-    name: "PHP Tests"
+    name: "PHP ${{ matrix.php }} Tests"
+
+    strategy:
+      fail-fast: false
+      matrix:
+        php: [ '8.3', '8.5' ]
 
     steps:
       - name: Checkout code
@@ -19,7 +24,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: 8.3
+          php-version: ${{ matrix.php }}
           extensions: dom, curl, libxml, mbstring, zip, pcntl, bcmath, intl, iconv
           tools: composer:v2
 
@@ -34,9 +39,9 @@ jobs:
           path: |
             vendor
             ${{ steps.composer-cache-files-dir.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('composer.json') }}
+          key: ${{ runner.os }}-php-${{ matrix.php }}-composer-${{ hashFiles('composer.json') }}
           restore-keys: |
-            ${{ runner.os }}-composer-
+            ${{ runner.os }}-php-${{ matrix.php }}-composer-
 
       - name: Install dependencies
         run: composer install
