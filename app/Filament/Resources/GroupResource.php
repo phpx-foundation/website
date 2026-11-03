@@ -207,6 +207,10 @@ class GroupResource extends Resource
 					->url()
 					->label('Meetup')
 					->maxLength(255),
+				Forms\Components\TextInput::make('youtube_url')
+					->url()
+					->label('YouTube')
+					->maxLength(255),
 			]
 		);
 	}
