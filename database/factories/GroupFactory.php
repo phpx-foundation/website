@@ -12,8 +12,9 @@ class GroupFactory extends Factory
 	public function definition(): array
 	{
 		return [
-			'domain' => $this->faker->unique()->word().'.test',
+			'domain' => 'phpx'.substr(str_shuffle('abcdefghijklmnopqrstuvwxyz'), 0, 3).'.test',
 			'name' => $this->faker->unique()->name(),
+			'timezone' => 'America/New_York',
 			'created_at' => now(),
 			'updated_at' => now(),
 		];

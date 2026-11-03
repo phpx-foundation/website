@@ -6,9 +6,12 @@ use App\Actions\Concerns\RoutesScopedToGroup;
 use App\Actions\Emails\SendRsvpReceipt;
 use App\Models\Meetup;
 use App\Models\User;
+use App\Rules\TurnstileRule;
 use Illuminate\Console\Command;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Validation\ValidationException;
+use LogicException;
 use Lorisleiva\Actions\ActionRequest;
 use Lorisleiva\Actions\Concerns\AsAction;
 
@@ -24,6 +27,14 @@ class RsvpToMeetup
 	
 	public function handle(Meetup $meetup, User $user): void
 	{
+		if (null !== $meetup->external_rsvp_url) {
+			throw new LogicException('This meetup uses external RSVPs');
+		}
+		
+		if ($meetup->hasEnded()) {
+			throw new LogicException('This meetup has ended');
+		}
+		
 		$meetup->users()->syncWithoutDetaching($user->getKey());
 		
 		SendRsvpReceipt::run($meetup, $user);
@@ -31,16 +42,22 @@ class RsvpToMeetup
 	
 	public function rules(): array
 	{
-		return [
+		return array_merge([
 			'name' => ['required', 'string', 'max:255'],
 			'email' => ['required', 'string', 'email', 'max:255'],
 			'subscribe' => ['nullable', 'boolean'],
 			'speaker' => ['nullable', 'boolean'],
-		];
+		], TurnstileRule::rules());
 	}
 	
 	public function asController(ActionRequest $request, Meetup $meetup)
 	{
+		if ($meetup->hasEnded()) {
+			throw ValidationException::withMessages([
+				'meetup' => 'This meetup has ended and is no longer accepting RSVPs.',
+			]);
+		}
+		
 		$remaining = $meetup->remaining();
 		
 		$user = JoinGroup::run(
@@ -70,6 +87,11 @@ class RsvpToMeetup
 	public function asCommand(Command $command): int
 	{
 		$meetup = Meetup::findOrFail($command->argument('meetup'));
+		
+		if ($meetup->hasEnded()) {
+			$command->error('This meetup has ended and is no longer accepting RSVPs.');
+			return 1;
+		}
 		
 		$user = JoinGroup::run(
 			group: $meetup->group,

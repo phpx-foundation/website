@@ -62,23 +62,32 @@ need to happen manually after that. For right now, the best way to do this is to
 reach out to Chris Morrell on Discord to check in on each of these:
 
 - Get the "organizer" role on Discord
+- Get an admin account on phpx.world
 - Have a channel created in the Discord
 - Get a logo for social media
 - Get an open graph image created
-- Configure your mailing list
-- Integrate with Bluesky
+
+### `phpx.world` Admin
+
+To set up an admin account, go to `/join` on your PHP× site and sign up with your
+name and email address (for example, as the PHP×Philly admin I would go to `https://phpxphilly.com/join`).
+Once you have signed up, reach out to Chris Morrell on Discord to have your account
+promoted to admin.
+
+Once you have an admin account, you can log in to create meetups and configure
+the Mailcoach, Bluesky, and Cloudflare integrations.
 
 ### Set up Mailcoach
 
 The folks at [Mailcoach](https://www.mailcoach.app/?utm_source=github&utm_medium=website&utm_campaign=phpxworld_organizers) have generously offered free accounts to all
-PHP× organizers. Reach out to Chris Morrell on the Discord to get the coupon code.
+PHP× organizers. Your coupon code will be available once you log in as an admin.
 
 #### Get a free Mailcoach account
 
 Once you have your coupon code, register at [Mailcoach](https://www.mailcoach.app/?utm_source=github&utm_medium=website&utm_campaign=phpxworld_organizers).
 
 - When registering, select "Let us handle sending."
-- Go to Billing and choose the base plan. At checkout, use the PHP× coupon code you received from Chris. This covers the monthly fee and the first 2,000 emails.
+- Go to Billing and choose the base plan. At checkout, use the PHP× coupon code you received from the dashboard. This covers the monthly fee and the first 2,000 emails.
 - You will still need to provide a credit card and will be billed if you send more than 2,000 emails in a given month.
 - **Before you can send emails, you must be approved**. Click the "Test Mode" badge in the upper navigation, then click "Request approval" and fill in the questions. Under "What made you choose Mailcoach?" mention "PHPxWorld" so they can spot your request more easily.
   
@@ -93,16 +102,12 @@ however you choose. A few things you will probably want to do:
 
 #### Connect your account to PHP×
 
-Once your account is set up and you have a mailing list configured, please get in touch
-with Chris Morrell and give him the following information:
+Once your account is set up, and you have a mailing list configured, please log into the
+phpx.world admin portal and add:
 
-- Your sending email addres (eg. `hello@phpx(…).com`)
 - Your Mailcoach list UUID (this can be found on the list's general settings page)
 - Your Mailcoach API token (go to "API Tokens" under your profile menu)
 - Your Mailcoach API URL (shown when creating a token)
-
-Once we have this, we can both configure Mailcoach for your account and sync anyone
-who has already registered for updates to your list.
 
 Eventually, the PHP× platform will automatically trigger transactional emails for things
 like RSVP receipts and announcement/reminder emails, but for now you will need to send

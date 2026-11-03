@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MeetupResource\Pages;
 use App\Filament\Resources\MeetupResource\RelationManagers;
+use App\Models\Group;
 use App\Models\Meetup;
 use App\Rules\CanUpdateGroup;
 use Filament\Forms;
@@ -25,17 +26,14 @@ class MeetupResource extends Resource
 	
 	public static function form(Form $form): Form
 	{
+		$group = app(Group::class);
+		$latest_meetup = $group->meetups()->latest()->first();
+		
 		return $form
 			->schema([
 				Forms\Components\Select::make('group_id')
 					->relationship(name: 'group', titleAttribute: 'name')
-					->default(function() {
-						if ($group = request()->attributes->get('group')) {
-							return (string) $group->getKey();
-						}
-						
-						return null;
-					})
+					->default(fn() => $group->getKey())
 					->searchable()
 					->preload()
 					->label('Group')
@@ -44,24 +42,40 @@ class MeetupResource extends Resource
 					->columnSpanFull(),
 				Forms\Components\TextInput::make('location')
 					->required()
+					->default(fn() => $latest_meetup?->location)
 					->maxLength(255),
 				Forms\Components\TextInput::make('capacity')
 					->required()
+					->default(fn() => $latest_meetup?->capacity)
 					->numeric()
 					->minValue(0),
 				Forms\Components\DateTimePicker::make('starts_at')
 					->label('Start')
 					->required()
+					->default(fn() => $latest_meetup?->starts_at->avoidMutation()->setDateFrom(now()->addWeek()))
+					->timezone(fn(Meetup $meetup) => $meetup->group?->timezone ?? $group->timezone ?? config('app.timezone'))
 					->beforeOrEqual('ends_at')
 					->rules(['required', 'date']),
 				Forms\Components\DateTimePicker::make('ends_at')
 					->label('End')
 					->required()
+					->default(fn() => $latest_meetup?->ends_at->avoidMutation()->setDateFrom(now()->addWeek()))
+					->timezone(fn(Meetup $meetup) => $meetup->group?->timezone ?? $group->timezone ?? config('app.timezone'))
 					->afterOrEqual('starts_at')
 					->rules(['required', 'date']),
 				Forms\Components\MarkdownEditor::make('description')
 					->required()
 					->columnSpanFull(),
+				Forms\Components\FileUpload::make('custom_open_graph_image')
+					->image()
+					->directory('og/custom'),
+				Forms\Components\TextInput::make('external_rsvp_url')
+					->label('External RSVP URL')
+					->columnSpanFull()
+					->url()
+					->helperText('If you provide an external RSVP URL (like Meetup or Eventy), we will link 
+						out to that rather than accepting RSVPs on PHP×. Keep in mind that you will have to manually
+						handle newsletter registrations if you use an external RSVP system.'),
 			]);
 	}
 	

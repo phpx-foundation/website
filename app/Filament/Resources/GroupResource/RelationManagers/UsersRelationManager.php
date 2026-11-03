@@ -2,13 +2,16 @@
 
 namespace App\Filament\Resources\GroupResource\RelationManagers;
 
+use App\Enums\GroupRole;
 use App\Models\User;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\RelationManagers\RelationManager;
+use Filament\Support\Colors\Color;
 use Filament\Tables;
 use Filament\Tables\Table;
 
+/** @property \App\Models\Group $ownerRecord */
 class UsersRelationManager extends RelationManager
 {
 	protected static string $relationship = 'users';
@@ -43,15 +46,36 @@ class UsersRelationManager extends RelationManager
 					->boolean()
 					->sortable(),
 			])
-			->filters([
-				
-			])
+			->filters([])
 			->headerActions([
 				// Tables\Actions\CreateAction::make(),
 			])
 			->actions([
 				// Tables\Actions\EditAction::make(),
 				Tables\Actions\DeleteAction::make()->label('Remove'),
+				Tables\Actions\Action::make('remove-admin')
+					->label('Remove Admin')
+					->icon('heroicon-m-shield-exclamation')
+					->color(Color::Red)
+					->requiresConfirmation()
+					->modalDescription('Are you sure you want to remove this user’s administrative access to the group?')
+					->action(function(User $record) {
+						$record->setGroupRole($this->ownerRecord, GroupRole::Attendee);
+					})
+					->visible(function(User $record) {
+						return $record->isNot(auth()->user()) && $record->isGroupAdmin($this->ownerRecord);
+					}),
+				Tables\Actions\Action::make('make-admin')
+					->label('Make Admin')
+					->icon('heroicon-m-shield-check')
+					->requiresConfirmation()
+					->modalDescription('Are you sure you want to give this user administrative access to the group?')
+					->action(function(User $record) {
+						$record->setGroupRole($this->ownerRecord, GroupRole::Admin);
+					})
+					->visible(function(User $record) {
+						return $record->isNot(auth()->user()) && ! $record->isGroupAdmin($this->ownerRecord);
+					}),
 			])
 			->bulkActions([
 				Tables\Actions\BulkActionGroup::make([

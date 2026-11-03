@@ -93,6 +93,10 @@ return [
 			'processors' => [PsrLogMessageProcessor::class],
 		],
 		
+		'bugsnag' => [
+			'driver' => 'bugsnag',
+		],
+		
 		'stderr' => [
 			'driver' => 'monolog',
 			'level' => env('LOG_LEVEL', 'debug'),

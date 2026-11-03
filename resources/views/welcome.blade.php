@@ -24,7 +24,7 @@
 		<div class="flex gap-4 items-center">
 			@isset($next_meetup)
 				<a href="{{ url("/meetups/{$next_meetup->getKey()}/rsvps") }}" class="bg-white px-4 py-2.5 text-black font-semibold text-lg transform opacity-90 hover:opacity-100 hover:-rotate-2">
-					RSVP<span class="hidden sm:inline"> for {{ $next_meetup->starts_at->format('M jS') }}</span><span class="not-sr-only">_</span>
+					RSVP<span class="hidden sm:inline"> for {{ $next_meetup->day() }}</span><span class="not-sr-only">_</span>
 				</a>
 				<span class="w-2"></span>
 			@endisset
@@ -65,6 +65,22 @@
 				</svg>
 			</a>
 		</div>
+		@if($upcoming_meetups->count() > 1)
+			<div class="mt-8 flex gap-2 items-center">
+				<x-icon.calendar class="size-6" />
+				<span>
+					Can't make {{ $next_meetup->day() }}? How about:
+				</span>
+				@foreach($upcoming_meetups->skip(1) as $upcoming_meetup)
+					<a
+						class="bg-white px-1 py-px text-black font-semibold text-base transform opacity-90 hover:opacity-100 hover:-rotate-2"
+						href="{{ url("/meetups/{$upcoming_meetup->getKey()}/rsvps") }}"
+					>
+						{{ $upcoming_meetup->day() }}
+					</a>
+				@endforeach
+			</div>
+		@endif
 	</div>
 	
 	{{-- Upcoming Meetup --}}
