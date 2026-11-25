@@ -67,6 +67,34 @@ class Meetup extends Model implements Htmlable
 		return $this->ends_at->lte($at ?? now());
 	}
 	
+	/**
+	 * Keeps this meetup's local time-of-day and duration, but moves it to one month
+	 * after the group's latest meetup (past or future), whichever meetup is being duplicated.
+	 *
+	 * @return array{starts_at: CarbonInterface, ends_at: CarbonInterface}
+	 */
+	public function nextMonthDates(): array
+	{
+		return once(function() {
+			$app_timezone = config('app.timezone');
+			$group_timezone = $this->group?->timezone ?? $app_timezone;
+			
+			$latest_meetup = $this->group?->latest_meetup ?? $this;
+			
+			$target_date = $latest_meetup->starts_at->avoidMutation()->timezone($group_timezone)->addMonthNoOverflow();
+			
+			$starts_at = $this->starts_at->avoidMutation()
+				->timezone($group_timezone)
+				->setDate($target_date->year, $target_date->month, $target_date->day)
+				->timezone($app_timezone);
+			
+			return [
+				'starts_at' => $starts_at,
+				'ends_at' => $starts_at->avoidMutation()->addSeconds((int) $this->starts_at->diffInSeconds($this->ends_at)),
+			];
+		});
+	}
+	
 	public function group(): BelongsTo
 	{
 		return $this->belongsTo(Group::class);

@@ -16,6 +16,7 @@ class EditMeetup extends EditRecord
 	protected function getHeaderActions(): array
 	{
 		return [
+			MeetupResource\Actions\DuplicateAction::make(),
 			Actions\DeleteAction::make(),
 			Actions\Action::make('view')
 				->icon('heroicon-o-arrow-top-right-on-square')

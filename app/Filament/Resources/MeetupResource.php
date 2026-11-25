@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Resources\MeetupResource\Actions;
 use App\Filament\Resources\MeetupResource\Pages;
 use App\Filament\Resources\MeetupResource\RelationManagers;
 use App\Models\Group;
@@ -27,7 +28,7 @@ class MeetupResource extends Resource
 	public static function form(Form $form): Form
 	{
 		$group = app(Group::class);
-		$latest_meetup = $group->meetups()->latest()->first();
+		$latest_meetup = $group->latest_meetup;
 		
 		return $form
 			->schema([
@@ -52,14 +53,14 @@ class MeetupResource extends Resource
 				Forms\Components\DateTimePicker::make('starts_at')
 					->label('Start')
 					->required()
-					->default(fn() => $latest_meetup?->starts_at->avoidMutation()->setDateFrom(now()->addWeek()))
+					->default(fn() => $latest_meetup?->nextMonthDates()['starts_at'])
 					->timezone(fn(Meetup $meetup) => $meetup->group?->timezone ?? $group->timezone ?? config('app.timezone'))
 					->beforeOrEqual('ends_at')
 					->rules(['required', 'date']),
 				Forms\Components\DateTimePicker::make('ends_at')
 					->label('End')
 					->required()
-					->default(fn() => $latest_meetup?->ends_at->avoidMutation()->setDateFrom(now()->addWeek()))
+					->default(fn() => $latest_meetup?->nextMonthDates()['ends_at'])
 					->timezone(fn(Meetup $meetup) => $meetup->group?->timezone ?? $group->timezone ?? config('app.timezone'))
 					->afterOrEqual('starts_at')
 					->rules(['required', 'date']),
@@ -119,6 +120,7 @@ class MeetupResource extends Resource
 			->filters([])
 			->actions([
 				Tables\Actions\EditAction::make(),
+				Actions\DuplicateTableAction::make(),
 			])
 			->bulkActions([
 				Tables\Actions\BulkActionGroup::make([

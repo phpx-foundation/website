@@ -32,6 +32,11 @@ class MeetupPolicy
 		return $user->isSuperAdmin() || $user->isGroupAdmin($meetup->group);
 	}
 	
+	public function replicate(User $user, Meetup $meetup): bool
+	{
+		return $this->update($user, $meetup);
+	}
+	
 	public function delete(User $user, Meetup $meetup): bool
 	{
 		return $this->update($user, $meetup);

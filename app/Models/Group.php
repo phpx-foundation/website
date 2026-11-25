@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Routing\UrlGenerator;
 use Illuminate\Support\Facades\Cache;
@@ -122,6 +123,11 @@ class Group extends Model
 	public function meetups(): HasMany
 	{
 		return $this->hasMany(Meetup::class);
+	}
+	
+	public function latest_meetup(): HasOne
+	{
+		return $this->hasOne(Meetup::class)->latestOfMany('starts_at');
 	}
 	
 	public function mailcoach_transactional_emails(): HasMany
